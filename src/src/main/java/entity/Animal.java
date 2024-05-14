@@ -1,11 +1,11 @@
 package entity;
 
 interface EatingStrategy {
-    void eat(AbstractAnimal animal, AbstractProduct food);
+    void eat(AnimalCard animal, AbstractProduct food);
 }
 
 class CarnivoreEatingStrategy implements EatingStrategy {
-    public void eat(AbstractAnimal animal, AbstractProduct food) {
+    public void eat(AnimalCard animal, AbstractProduct food) {
         // Increase weight, only meat
         if (food instanceof NonVeganProduct) {
             animal.currentWeight += food.addedWeight;
@@ -16,7 +16,7 @@ class CarnivoreEatingStrategy implements EatingStrategy {
 }
 
 class HerbivoreEatingStrategy implements EatingStrategy {
-    public void eat(AbstractAnimal animal, AbstractProduct food) {
+    public void eat(AnimalCard animal, AbstractProduct food) {
         // Increase weight, only vegetables
         if (food instanceof VeganProduct) {
             animal.currentWeight += food.addedWeight;
@@ -27,7 +27,7 @@ class HerbivoreEatingStrategy implements EatingStrategy {
 }
 
 class OmnivoreEatingStrategy implements EatingStrategy {
-    public void eat(AbstractAnimal animal, AbstractProduct food) {
+    public void eat(AnimalCard animal, AbstractProduct food) {
         // Increase weight, both meat and vegetables
         if (food instanceof VeganProduct || food instanceof NonVeganProduct) {
             animal.currentWeight += food.addedWeight;
@@ -37,15 +37,18 @@ class OmnivoreEatingStrategy implements EatingStrategy {
     }
 }
 
-abstract class AbstractAnimal {
+abstract class AnimalCard extends Card {
     protected int currentWeight;
     protected int harvestWeight;
+    protected boolean inProtection;
     private EatingStrategy eatingStrategy;
 
-    public AbstractAnimal(int currentWeight, int harvestWeight, EatingStrategy eatingStrategy) {
+    public AnimalCard(int currentWeight, int harvestWeight, EatingStrategy eatingStrategy, Player owner) {
+        super(owner);
         this.currentWeight = currentWeight;
         this.harvestWeight = harvestWeight;
         this.eatingStrategy = eatingStrategy;
+        this.inProtection = false;
     }
 
     public void eat(AbstractProduct food) {
@@ -63,29 +66,45 @@ abstract class AbstractAnimal {
     public int getHarvestWeight() {
         return this.harvestWeight;
     }
-}
 
-abstract class Carnivore extends AbstractAnimal {
-    public Carnivore(int currentWeight, int harvestWeight) {
-        super(currentWeight, harvestWeight, new CarnivoreEatingStrategy());
+    public void addWeight(int weight) {
+        this.currentWeight += weight;
+    }
+
+    public void decrementWeight(int weight) {
+        if (weight > this.currentWeight) {
+            this.currentWeight = 0;
+        } else {
+            this.currentWeight -= weight;
+        }
+    }
+
+    public void setProtection(boolean dest) {
+        this.inProtection = dest;
     }
 }
 
-abstract class Herbivore extends AbstractAnimal {
-    public Herbivore(int currentWeight, int harvestWeight) {
-        super(currentWeight, harvestWeight, new HerbivoreEatingStrategy());
+abstract class Carnivore extends AnimalCard {
+    public Carnivore(int currentWeight, int harvestWeight, Player owner) {
+        super(currentWeight, harvestWeight, new CarnivoreEatingStrategy(), owner);
     }
 }
 
-abstract class Omnivore extends AbstractAnimal {
-    public Omnivore(int currentWeight, int harvestWeight) {
-        super(currentWeight, harvestWeight, new OmnivoreEatingStrategy());
+abstract class Herbivore extends AnimalCard {
+    public Herbivore(int currentWeight, int harvestWeight, Player owner) {
+        super(currentWeight, harvestWeight, new HerbivoreEatingStrategy(), owner);
+    }
+}
+
+abstract class Omnivore extends AnimalCard {
+    public Omnivore(int currentWeight, int harvestWeight, Player owner) {
+        super(currentWeight, harvestWeight, new OmnivoreEatingStrategy(), owner);
     }
 }
 
 class LandShark extends Carnivore {
-    public LandShark() {
-        super(0, 20);
+    public LandShark(Player owner) {
+        super(0, 20, owner);
     }
 
     public SharkFin harvest() {
@@ -94,8 +113,8 @@ class LandShark extends Carnivore {
 }
 
 class Sheep extends Herbivore {
-    public Sheep() {
-        super(0, 12);
+    public Sheep(Player owner) {
+        super(0, 12, owner);
     }
 
     public SheepMeat harvest() {
@@ -104,8 +123,8 @@ class Sheep extends Herbivore {
 }
 
 class Horse extends Herbivore {
-    public Horse() {
-        super(0, 14);
+    public Horse(Player owner) {
+        super(0, 14, owner);
     }
 
     public HorseMeat harvest() {
@@ -114,8 +133,8 @@ class Horse extends Herbivore {
 }
 
 class Cow extends Herbivore {
-    public Cow() {
-        super(0, 10);
+    public Cow(Player owner) {
+        super(0, 10, owner);
     }
 
     public Milk harvest() {
@@ -124,8 +143,8 @@ class Cow extends Herbivore {
 }
 
 class Chicken extends Omnivore {
-    public Chicken() {
-        super(0, 5);
+    public Chicken(Player owner) {
+        super(0, 5, owner);
     }
 
     public Egg harvest() {
@@ -134,8 +153,8 @@ class Chicken extends Omnivore {
 }
 
 class Bear extends Omnivore {
-    public Bear() {
-        super(0, 25);
+    public Bear(Player owner) {
+        super(0, 25, owner);
     }
 
     public BearMeat harvest() {

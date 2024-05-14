@@ -1,12 +1,15 @@
 package entity;
 
-abstract class AbstractPlant {
+abstract class PlantCard extends Card {
     protected int currentAge;
     protected int harvestAge;
+    protected boolean inProtection;
 
-    public AbstractPlant(int currentAge, int harvestAge) {
+    public PlantCard(int currentAge, int harvestAge, Player owner) {
+        super(owner);
         this.currentAge = currentAge;
         this.harvestAge = harvestAge;
+        this.inProtection = false;
     }
 
     public boolean isReadyToHarvest() {
@@ -21,14 +24,26 @@ abstract class AbstractPlant {
         return this.harvestAge;
     }
 
-    public void addAge() {
-        this.currentAge++;
+    public void addAge(int age) {
+        this.currentAge += age;
+    }
+
+    public void decrementAge(int age) {
+        if (age > this.currentAge) {
+            this.currentAge = 0;
+        } else {
+            this.currentAge -= age;
+        }
+    }
+
+    public void setProtection(boolean dest) {
+        this.inProtection = dest;
     }
 }
 
-class CornSeed extends AbstractPlant {
-    public CornSeed() {
-        super(0, 3);
+class CornSeed extends PlantCard {
+    public CornSeed(Player owner) {
+        super(0, 3, owner);
     }
 
     public Corn harvest() {
@@ -36,9 +51,9 @@ class CornSeed extends AbstractPlant {
     }
 }
 
-class PumpkinSeed extends AbstractPlant {
-    public PumpkinSeed() {
-        super(0, 5);
+class PumpkinSeed extends PlantCard {
+    public PumpkinSeed(Player owner) {
+        super(0, 5, owner);
     }
 
     public Pumpkin harvest() {
@@ -46,9 +61,9 @@ class PumpkinSeed extends AbstractPlant {
     }
 }
 
-class StrawberrySeed extends AbstractPlant {
-    public StrawberrySeed() {
-        super(0, 4);
+class StrawberrySeed extends PlantCard {
+    public StrawberrySeed(Player owner) {
+        super(0, 4, owner);
     }
 
     public Strawberry harvest() {
