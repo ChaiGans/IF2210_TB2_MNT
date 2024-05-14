@@ -1,7 +1,5 @@
 package entity;
 
-import entity.*;
-
 class Main {
     public static void main(String[] args) {
         AbstractProduct vegan_food = new Strawberry();
@@ -13,5 +11,10 @@ class Main {
         System.out.println(animal_1.getCurrentWeight());
         animal_1.eat(meat_food);   // LandShark eats meat without problem
         System.out.println(animal_1.getCurrentWeight());
+        
+        AbstractPlant new_plant = new CornSeed();
+        System.out.println(new_plant.getCurrentAge());
+        new_plant.addAge();
+        System.out.println(new_plant.getCurrentAge());
     }
 }

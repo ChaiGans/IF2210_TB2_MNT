@@ -87,11 +87,19 @@ class LandShark extends Carnivore {
     public LandShark() {
         super(0, 20);
     }
+
+    public SharkFin harvest() {
+        return new SharkFin();
+    }
 }
 
 class Sheep extends Herbivore {
     public Sheep() {
         super(0, 12);
+    }
+
+    public SheepMeat harvest() {
+        return new SheepMeat();
     }
 }
 
@@ -99,11 +107,19 @@ class Horse extends Herbivore {
     public Horse() {
         super(0, 14);
     }
+
+    public HorseMeat harvest() {
+        return new HorseMeat();
+    }
 }
 
 class Cow extends Herbivore {
     public Cow() {
         super(0, 10);
+    }
+
+    public Milk harvest() {
+        return new Milk();
     }
 }
 
@@ -111,10 +127,18 @@ class Chicken extends Omnivore {
     public Chicken() {
         super(0, 5);
     }
+
+    public Egg harvest() {
+        return new Egg();
+    }
 }
 
 class Bear extends Omnivore {
     public Bear() {
         super(0, 25);
+    }
+
+    public BearMeat harvest() {
+        return new BearMeat();
     }
 }
