@@ -47,7 +47,7 @@ class CornSeed extends PlantCard {
     }
 
     public Corn harvest() {
-        return new Corn();
+        return new Corn(owner);
     }
     public String getName(){
         return "Corn Seed";
@@ -60,7 +60,7 @@ class PumpkinSeed extends PlantCard {
     }
 
     public Pumpkin harvest() {
-        return new Pumpkin();
+        return new Pumpkin(owner);
     }
     public String getName(){
         return "Pumpkin Seed";
@@ -73,7 +73,7 @@ class StrawberrySeed extends PlantCard {
     }
 
     public Strawberry harvest() {
-        return new Strawberry();
+        return new Strawberry(owner);
     }
     public String getName(){
         return "Strawberry Seed";

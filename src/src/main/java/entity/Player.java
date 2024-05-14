@@ -5,7 +5,7 @@ import java.util.*;
 public class Player {
     private int cash;
     private String name;
-    private ArrayList<Card> deck;
+    private Deck deck;
     private ArrayList<?> field;
     private Hands hands;
     private int cardInHandCount;
@@ -13,7 +13,7 @@ public class Player {
     public Player() {
         this.cash = 0;
         this.name = "default";
-        this.deck = new ArrayList<Card>();
+        this.deck = new Deck(this);
         // Inisialisasi field
         this.hands = new Hands();
         this.cardInHandCount = 0;
@@ -24,7 +24,7 @@ public class Player {
         return this.cash;
     }
 
-    public ArrayList<Card> getDeck() {
+    public Deck getDeck() {
         return this.deck;
     }
 
@@ -48,6 +48,15 @@ public class Player {
     }
     public void useCard(int position){
         this.hands.deleteCard(position);
+    }
+    public void DeckInfo(){
+        this.deck.printCardNames();
+    }
+    public List<Card> draw4(){
+        return this.deck.deal();
+    }
+    public void save(List<Card> draws){
+        this.hands.addSet(draws);
     }
 }
 
