@@ -31,6 +31,9 @@ class AccelerateEffect implements ItemEffect {
     public void applyEffect(AnimalCard animal) {
         animal.addWeight(8);
     }
+    public String getName(){
+        return "Accelerate Effect";
+    }
 }
 
 class DelayEffect implements ItemEffect {
@@ -40,6 +43,9 @@ class DelayEffect implements ItemEffect {
 
     public void applyEffect(AnimalCard animal) {
         animal.decrementWeight(5);
+    }
+    public String getName(){
+        return "Delay Effect";
     }
 }
 
@@ -51,6 +57,9 @@ class InstantHarvestEffect implements ItemEffect {
     public void applyEffect(AnimalCard animal) {
         // Trigger harvest logic
     }
+    public String getName(){
+        return "Instant Harvest Effect";
+    }
 }
 
 class DestroyEffect implements ItemEffect {
@@ -60,6 +69,9 @@ class DestroyEffect implements ItemEffect {
 
     public void applyEffect(AnimalCard animal) {
         // Remove from field
+    }
+    public String getName(){
+        return "Destroy Effect";
     }
 }
 
@@ -71,6 +83,9 @@ class ProtectEffect implements ItemEffect {
     public void applyEffect(AnimalCard animal) {
         animal.setProtection(true);
     }
+    public String getName(){
+        return "Protect Effect";
+    }
 }
 
 class TrapEffect implements ItemEffect {
@@ -80,5 +95,8 @@ class TrapEffect implements ItemEffect {
 
     public void applyEffect(AnimalCard animal) {
         // Transform bear attack logic
+    }
+    public String getName(){
+        return "Trap Effect";
     }
 }
