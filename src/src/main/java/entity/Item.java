@@ -4,9 +4,10 @@ package entity;
 interface ItemEffect {
     void applyEffect(PlantCard plant);
     void applyEffect(AnimalCard animal);
+    String getName();
 }
 
-abstract class ItemCard extends Card {
+class ItemCard extends Card {
     protected ItemEffect effect;
 
     public ItemCard(ItemEffect effect, Player owner) {
@@ -21,6 +22,10 @@ abstract class ItemCard extends Card {
     public void useOn(AnimalCard animal) {
         effect.applyEffect(animal);
     }
+
+    public String getName(){
+        return this.effect.getName();
+    }
 }
 
 class AccelerateEffect implements ItemEffect {
@@ -32,8 +37,9 @@ class AccelerateEffect implements ItemEffect {
         animal.addWeight(8);
     }
     public String getName(){
-        return "Accelerate Effect";
+        return "Accelerate";
     }
+    
 }
 
 class DelayEffect implements ItemEffect {
@@ -45,7 +51,7 @@ class DelayEffect implements ItemEffect {
         animal.decrementWeight(5);
     }
     public String getName(){
-        return "Delay Effect";
+        return "Accelerate";
     }
 }
 
@@ -58,7 +64,7 @@ class InstantHarvestEffect implements ItemEffect {
         // Trigger harvest logic
     }
     public String getName(){
-        return "Instant Harvest Effect";
+        return "Instant Harvest";
     }
 }
 
@@ -71,7 +77,7 @@ class DestroyEffect implements ItemEffect {
         // Remove from field
     }
     public String getName(){
-        return "Destroy Effect";
+        return "Destroy";
     }
 }
 
@@ -84,7 +90,7 @@ class ProtectEffect implements ItemEffect {
         animal.setProtection(true);
     }
     public String getName(){
-        return "Protect Effect";
+        return "Protect";
     }
 }
 
@@ -97,6 +103,6 @@ class TrapEffect implements ItemEffect {
         // Transform bear attack logic
     }
     public String getName(){
-        return "Trap Effect";
+        return "Trap";
     }
 }

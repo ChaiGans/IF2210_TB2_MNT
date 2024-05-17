@@ -108,7 +108,7 @@ class LandShark extends Carnivore {
     }
 
     public SharkFin harvest() {
-        return new SharkFin();
+        return new SharkFin(owner);
     }
 
     public String getName(){
@@ -122,7 +122,7 @@ class Sheep extends Herbivore {
     }
 
     public SheepMeat harvest() {
-        return new SheepMeat();
+        return new SheepMeat(owner);
     }
     public String getName(){
         return "Sheep";
@@ -135,7 +135,7 @@ class Horse extends Herbivore {
     }
 
     public HorseMeat harvest() {
-        return new HorseMeat();
+        return new HorseMeat(owner);
     }
     public String getName(){
         return "Horse";
@@ -148,7 +148,7 @@ class Cow extends Herbivore {
     }
 
     public Milk harvest() {
-        return new Milk();
+        return new Milk(owner);
     }
     public String getName(){
         return "Cow";
@@ -161,7 +161,7 @@ class Chicken extends Omnivore {
     }
 
     public Egg harvest() {
-        return new Egg();
+        return new Egg(owner);
     }
     public String getName(){
         return "Chicken";
@@ -174,7 +174,7 @@ class Bear extends Omnivore {
     }
 
     public BearMeat harvest() {
-        return new BearMeat();
+        return new BearMeat(owner);
     }
     public String getName(){
         return "Bear";
