@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="100.0" prefWidth="136.0" spacing="20.0">
+         <children>
+            <Label text="Player 1 : ">
+               <font>
+                  <Font name="Clarendon BT Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label text="Player 2 : ">
+               <font>
+                  <Font name="Clarendon BT Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets left="20.0" top="20.0" />
+         </padding>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <VBox prefHeight="100.0" prefWidth="149.0" spacing="20.0">
+         <children>
+            <Label text="Razark">
+               <font>
+                  <Font name="Clarendon BT Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label text="MonkeyKing">
+               <font>
+                  <Font name="Clarendon BT Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</HBox>
