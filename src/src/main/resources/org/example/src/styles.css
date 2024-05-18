@@ -1,0 +1,11 @@
+.root {
+    /* Color Definitions */
+    --dark-primary-color: #616161; /* Dark Primary Color */
+    --light-primary-color: #F5F5F5; /* Light Primary Color */
+    --primary-color: #9E9E9E; /* Primary Color */
+    --accent-color: #607D8B; /* Accent Color */
+    --primary-text: #212121; /* Primary Text */
+    --secondary-text: #757575; /* Secondary Text */
+    --divider-color: #BDBDBD; /* Divider Color */
+    --text-icons-color: #212121; /* Text/Icons */
+}
