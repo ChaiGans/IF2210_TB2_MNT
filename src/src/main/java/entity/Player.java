@@ -8,7 +8,6 @@ public class Player {
     private Deck deck;
     private ArrayList<?> field;
     private Hands hands;
-    private int cardInHandCount;
 
     public Player() {
         this.cash = 0;
@@ -16,7 +15,6 @@ public class Player {
         this.deck = new Deck(this);
         // Inisialisasi field
         this.hands = new Hands();
-        this.cardInHandCount = 0;
     }
 
 
@@ -33,7 +31,7 @@ public class Player {
     }
 
     public int getCardInHandCount() {
-        return this.cardInHandCount;
+        return this.hands.getCardCount();
     }
 
     public String getName() {
