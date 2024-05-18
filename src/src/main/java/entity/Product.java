@@ -1,23 +1,33 @@
 package entity;
 
-abstract class AbstractProduct extends Card{
+abstract class ProductCard extends Card{
     protected int productPrice;
     protected int addedWeight;
 
-    public AbstractProduct(int productPrice, int addedWeight,Player owner) {
+    public ProductCard(int productPrice, int addedWeight,Player owner) {
         super(owner);
         this.productPrice = productPrice;
         this.addedWeight = addedWeight;
     }
+
+    abstract public String getName();
+
+    public int getPrice() {
+        return this.productPrice;
+    }
+
+    public int getAddedWeight() {
+        return this.addedWeight;
+    }
 }
 
-abstract class VeganProduct extends AbstractProduct {
+abstract class VeganProduct extends ProductCard {
     public VeganProduct(int productPrice, int addedWeight,Player owner) {
         super(productPrice, addedWeight,owner);
     }
 }
 
-abstract class NonVeganProduct extends AbstractProduct {
+abstract class NonVeganProduct extends ProductCard {
     public NonVeganProduct(int productPrice, int addedWeight,Player owner) {
         super(productPrice, addedWeight,owner);
     }

@@ -1,11 +1,11 @@
 package entity;
 
 interface EatingStrategy {
-    void eat(AnimalCard animal, AbstractProduct food);
+    void eat(AnimalCard animal, ProductCard food);
 }
 
 class CarnivoreEatingStrategy implements EatingStrategy {
-    public void eat(AnimalCard animal, AbstractProduct food) {
+    public void eat(AnimalCard animal, ProductCard food) {
         // Increase weight, only meat
         if (food instanceof NonVeganProduct) {
             animal.currentWeight += food.addedWeight;
@@ -16,7 +16,7 @@ class CarnivoreEatingStrategy implements EatingStrategy {
 }
 
 class HerbivoreEatingStrategy implements EatingStrategy {
-    public void eat(AnimalCard animal, AbstractProduct food) {
+    public void eat(AnimalCard animal, ProductCard food) {
         // Increase weight, only vegetables
         if (food instanceof VeganProduct) {
             animal.currentWeight += food.addedWeight;
@@ -27,7 +27,7 @@ class HerbivoreEatingStrategy implements EatingStrategy {
 }
 
 class OmnivoreEatingStrategy implements EatingStrategy {
-    public void eat(AnimalCard animal, AbstractProduct food) {
+    public void eat(AnimalCard animal, ProductCard food) {
         // Increase weight, both meat and vegetables
         if (food instanceof VeganProduct || food instanceof NonVeganProduct) {
             animal.currentWeight += food.addedWeight;
@@ -51,7 +51,7 @@ abstract class AnimalCard extends Card {
         this.inProtection = false;
     }
 
-    public void eat(AbstractProduct food) {
+    public void eat(ProductCard food) {
         eatingStrategy.eat(this, food);
     }
 

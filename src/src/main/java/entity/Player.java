@@ -6,7 +6,7 @@ public class Player {
     private int cash;
     private String name;
     private Deck deck;
-    private ArrayList<?> field;
+    private Grid field;
     private Hands hands;
 
     public Player() {
@@ -16,7 +16,6 @@ public class Player {
         // Inisialisasi field
         this.hands = new Hands();
     }
-
 
     public int getCash() {
         return this.cash;
@@ -36,6 +35,14 @@ public class Player {
 
     public String getName() {
         return this.name;
+    }
+
+    public void deductCash(int amount) {
+        this.cash -= amount;
+    }
+
+    public void addCash(int amount) {
+        this.cash += amount;
     }
 
     public void AddHand(Card card){
