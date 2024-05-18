@@ -5,40 +5,56 @@ import java.util.*;
 public class Player {
     private int cash;
     private String name;
-    private ArrayList<Card> deck;
+    private Deck deck;
     private ArrayList<?> field;
-    private ArrayList<Card> hand;
-    private int cardInHandCount;
+    private Hands hands;
 
     public Player() {
         this.cash = 0;
         this.name = "default";
-        this.deck = new ArrayList<Card>();
+        this.deck = new Deck(this);
         // Inisialisasi field
-        this.hand = new ArrayList<Card>();
-        this.cardInHandCount = 0;
+        this.hands = new Hands();
     }
-
 
 
     public int getCash() {
         return this.cash;
     }
 
-    public ArrayList<Card> getDeck() {
+    public Deck getDeck() {
         return this.deck;
     }
 
-    public ArrayList<Card> Hand() {
-        return this.hand;
+    public Hands Hand() {
+        return this.hands;
     }
 
     public int getCardInHandCount() {
-        return this.cardInHandCount;
+        return this.hands.getCardCount();
     }
 
     public String getName() {
         return this.name;
+    }
+
+    public void AddHand(Card card){
+        this.hands.addCard(card);
+    }
+    public void ShowHand(){
+        this.hands.printHand();;
+    }
+    public void useCard(int position){
+        this.hands.deleteCard(position);
+    }
+    public void DeckInfo(){
+        this.deck.printCardNames();
+    }
+    public List<Card> draw4(){
+        return this.deck.deal();
+    }
+    public void save(List<Card> draws){
+        this.hands.addSet(draws);
     }
 }
 

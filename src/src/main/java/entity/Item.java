@@ -4,9 +4,10 @@ package entity;
 interface ItemEffect {
     void applyEffect(PlantCard plant);
     void applyEffect(AnimalCard animal);
+    String getName();
 }
 
-abstract class ItemCard extends Card {
+class ItemCard extends Card {
     protected ItemEffect effect;
 
     public ItemCard(ItemEffect effect, Player owner) {
@@ -21,6 +22,10 @@ abstract class ItemCard extends Card {
     public void useOn(AnimalCard animal) {
         effect.applyEffect(animal);
     }
+
+    public String getName(){
+        return this.effect.getName();
+    }
 }
 
 class AccelerateEffect implements ItemEffect {
@@ -31,6 +36,10 @@ class AccelerateEffect implements ItemEffect {
     public void applyEffect(AnimalCard animal) {
         animal.addWeight(8);
     }
+    public String getName(){
+        return "Accelerate";
+    }
+    
 }
 
 class DelayEffect implements ItemEffect {
@@ -40,6 +49,9 @@ class DelayEffect implements ItemEffect {
 
     public void applyEffect(AnimalCard animal) {
         animal.decrementWeight(5);
+    }
+    public String getName(){
+        return "Accelerate";
     }
 }
 
@@ -51,6 +63,9 @@ class InstantHarvestEffect implements ItemEffect {
     public void applyEffect(AnimalCard animal) {
         // Trigger harvest logic
     }
+    public String getName(){
+        return "Instant Harvest";
+    }
 }
 
 class DestroyEffect implements ItemEffect {
@@ -60,6 +75,9 @@ class DestroyEffect implements ItemEffect {
 
     public void applyEffect(AnimalCard animal) {
         // Remove from field
+    }
+    public String getName(){
+        return "Destroy";
     }
 }
 
@@ -71,6 +89,9 @@ class ProtectEffect implements ItemEffect {
     public void applyEffect(AnimalCard animal) {
         animal.setProtection(true);
     }
+    public String getName(){
+        return "Protect";
+    }
 }
 
 class TrapEffect implements ItemEffect {
@@ -80,5 +101,8 @@ class TrapEffect implements ItemEffect {
 
     public void applyEffect(AnimalCard animal) {
         // Transform bear attack logic
+    }
+    public String getName(){
+        return "Trap";
     }
 }
