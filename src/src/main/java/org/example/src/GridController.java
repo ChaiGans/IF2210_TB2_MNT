@@ -29,7 +29,7 @@ public class GridController {
         int cols = 5;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                StackPane cell = new StackPane();  // Using StackPane instead of Pane
+                StackPane cell = new StackPane();  
                 cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;");
                 cell.setPadding(new Insets(10));  // Set padding around the content
                 cell.setMinSize(100, 150);

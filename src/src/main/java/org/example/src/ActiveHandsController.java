@@ -32,8 +32,6 @@ public class ActiveHandsController {
                 cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;");
                 cell.setPadding(new Insets(10));
                 cell.setMinSize(100, 150);
-    
-                // No card is added initially
                 setupDragHandlers(cell);
                 handsGrid.add(cell, col, row);
             }
@@ -42,10 +40,10 @@ public class ActiveHandsController {
 
     private void setupDragHandlers(Pane cell) {
         cell.setOnDragDetected(event -> {
-            if (!cell.getChildren().isEmpty()) { // Only initiate drag if there is a card
+            if (!cell.getChildren().isEmpty()) {
                 Dragboard db = cell.startDragAndDrop(TransferMode.MOVE);
                 ClipboardContent content = new ClipboardContent();
-                content.putString(""); // Optionally add content, possibly include identification data
+                content.putString("");
                 db.setContent(content);
                 DragContext.getInstance().setDragSource(cell);
                 event.consume();
@@ -67,10 +65,8 @@ public class ActiveHandsController {
                 Pane sourcePane = (Pane) dragSource;
                 Pane targetPane = (Pane) cell;
                 try {
-                    // Handle both non-empty source and target or empty target
                     Node sourceCard = sourcePane.getChildren().isEmpty() ? null : sourcePane.getChildren().get(0);
                     Node targetCard = targetPane.getChildren().isEmpty() ? null : targetPane.getChildren().get(0);
-    
                     if (sourceCard != null) {
                         if (targetCard != null) {
                             sourcePane.getChildren().remove(sourceCard);
