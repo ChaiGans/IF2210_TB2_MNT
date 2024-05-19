@@ -103,8 +103,10 @@ abstract class Omnivore extends AnimalCard {
 }
 
 class LandShark extends Carnivore {
+    private String name;
     public LandShark(Player owner) {
         super(0, 20, owner);
+        this.name = "Land Shark";
     }
 
     public SharkFin harvest() {
@@ -112,71 +114,81 @@ class LandShark extends Carnivore {
     }
 
     public String getName(){
-        return "Land Shark";
+        return name;
     }
 }
 
 class Sheep extends Herbivore {
+    private String name;
     public Sheep(Player owner) {
         super(0, 12, owner);
+        this.name = "Sheep";
     }
 
     public SheepMeat harvest() {
         return new SheepMeat(owner);
     }
     public String getName(){
-        return "Sheep";
+        return name;
     }
 }
 
 class Horse extends Herbivore {
+    private String name;
     public Horse(Player owner) {
         super(0, 14, owner);
+        this.name = "Horse";
     }
 
     public HorseMeat harvest() {
         return new HorseMeat(owner);
     }
     public String getName(){
-        return "Horse";
+        return name;
     }
 }
 
 class Cow extends Herbivore {
+    private String name;
     public Cow(Player owner) {
         super(0, 10, owner);
+        this.name = "Cow";
     }
 
     public Milk harvest() {
         return new Milk(owner);
     }
     public String getName(){
-        return "Cow";
+        return name;
     }
 }
 
 class Chicken extends Omnivore {
+    private String name;
     public Chicken(Player owner) {
         super(0, 5, owner);
+        this.name = "Chicken";
     }
 
     public Egg harvest() {
         return new Egg(owner);
     }
     public String getName(){
-        return "Chicken";
+        return name;
     }
 }
 
 class Bear extends Omnivore {
+    private String name = "Bear";
     public Bear(Player owner) {
         super(0, 25, owner);
+        this.name = "Bear";
     }
 
     public BearMeat harvest() {
         return new BearMeat(owner);
     }
     public String getName(){
-        return "Bear";
+        return name;
     }
 }

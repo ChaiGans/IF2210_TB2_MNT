@@ -29,6 +29,7 @@ class ItemCard extends Card {
 }
 
 class AccelerateEffect implements ItemEffect {
+    private String name = "Accelerate";
     public void applyEffect(PlantCard plant) {
         plant.addAge(2);
     }
@@ -37,12 +38,13 @@ class AccelerateEffect implements ItemEffect {
         animal.addWeight(8);
     }
     public String getName(){
-        return "Accelerate";
+        return name;
     }
     
 }
 
 class DelayEffect implements ItemEffect {
+    private String name = "Delay";
     public void applyEffect(PlantCard plant) {
         plant.decrementAge(2);
     }
@@ -51,11 +53,12 @@ class DelayEffect implements ItemEffect {
         animal.decrementWeight(5);
     }
     public String getName(){
-        return "Accelerate";
+        return name;
     }
 }
 
 class InstantHarvestEffect implements ItemEffect {
+    private String name = "Instant Harvest";
     public void applyEffect(PlantCard plant) {
         // Trigger harvest logic
     }
@@ -64,11 +67,12 @@ class InstantHarvestEffect implements ItemEffect {
         // Trigger harvest logic
     }
     public String getName(){
-        return "Instant Harvest";
+        return name;
     }
 }
 
 class DestroyEffect implements ItemEffect {
+    private String name = "Destroy";
     public void applyEffect(PlantCard plant) {
         // Remove from field
     }
@@ -77,11 +81,12 @@ class DestroyEffect implements ItemEffect {
         // Remove from field
     }
     public String getName(){
-        return "Destroy";
+        return name;
     }
 }
 
 class ProtectEffect implements ItemEffect {
+    private String name = "Protect";
     public void applyEffect(PlantCard plant) {
         plant.setProtection(true);
     }
@@ -90,11 +95,12 @@ class ProtectEffect implements ItemEffect {
         animal.setProtection(true);
     }
     public String getName(){
-        return "Protect";
+        return name;
     }
 }
 
 class TrapEffect implements ItemEffect {
+    private String name = "Trap";
     public void applyEffect(PlantCard plant) {
         // Transform bear attack logic
     }
@@ -103,6 +109,6 @@ class TrapEffect implements ItemEffect {
         // Transform bear attack logic
     }
     public String getName(){
-        return "Trap";
+        return name;
     }
 }
