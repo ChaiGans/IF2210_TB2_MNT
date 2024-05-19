@@ -1,6 +1,6 @@
 package entity;
 
-abstract class Card {
+public abstract class Card {
     protected Player owner;
     public Card(Player owner) {
         this.owner = owner;
