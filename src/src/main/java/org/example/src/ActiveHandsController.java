@@ -4,44 +4,38 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.Node;
-import javafx.scene.input.*;
 
-public class GridController {
+public class ActiveHandsController {
     @FXML
-    private GridPane grid;
+    private GridPane handsGrid;
 
     @FXML
     public void initialize() {
         try {
-            populateGrid();
-            printCellStatus();
+            populateHandsGrid();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void populateGrid() throws Exception {
-        int rows = 4;
-        int cols = 5;
+    private void populateHandsGrid() throws Exception {
+        int rows = 1;
+        int cols = 6;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                StackPane cell = new StackPane();  // Using StackPane instead of Pane
+                StackPane cell = new StackPane();
                 cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;");
-                cell.setPadding(new Insets(10));  // Set padding around the content
+                cell.setPadding(new Insets(10));
                 cell.setMinSize(100, 150);
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Card.fxml"));
-                Node card = loader.load();
-
-                StackPane.setAlignment(card, Pos.CENTER);  // Ensure the card is centered
-                cell.getChildren().add(card);
-
+    
+                // No card is added initially
                 setupDragHandlers(cell);
-                grid.add(cell, col, row);
+                handsGrid.add(cell, col, row);
             }
         }
     }
@@ -98,18 +92,5 @@ public class GridController {
             DragContext.getInstance().setDragSource(null);
             event.consume();
         });
-    }
-
-    private void printCellStatus() {
-        for (Node child : grid.getChildren()) {
-            if (child instanceof Pane) {
-                Pane cell = (Pane) child;
-                if (cell.getChildren().isEmpty()) {
-                    System.out.println("Cell is empty.");
-                } else {
-                    System.out.println("Cell has children.");
-                }
-            }
-        }
     }
 }

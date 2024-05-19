@@ -55,7 +55,8 @@
             <HBox prefHeight="632.0" prefWidth="1500.0">
                <VBox prefHeight="603.0" prefWidth="1091.0">
                   <children>
-                        <fx:include fx:id="Player" source="GridField.fxml" />
+                        <fx:include fx:id="GridField" source="GridField.fxml" />
+                     <fx:include fx:id="GridField" source="ActiveHands.fxml" />
                   </children>
                </VBox>
                <VBox prefHeight="603.0" prefWidth="934.0">
@@ -63,7 +64,6 @@
                      <Insets right="50.0" />
                   </HBox.margin>
                   <children>
-                     <HBox prefHeight="229.0" prefWidth="511.0" />
                      <HBox prefHeight="361.0" prefWidth="631.0" />
                   </children>
                </VBox>
