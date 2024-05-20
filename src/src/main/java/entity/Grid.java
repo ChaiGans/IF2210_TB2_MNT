@@ -42,4 +42,12 @@ public class Grid {
         }
         matrix.get(y).set(x, card);
     }
+
+    public void removeCard(int x, int y) {
+        if (x >= 0 && x < width && y >= 0 && y < height) {
+            matrix.get(y).set(x, null);
+        } else {
+            throw new IndexOutOfBoundsException("Coordinates out of bounds");
+        }
+    }
 }

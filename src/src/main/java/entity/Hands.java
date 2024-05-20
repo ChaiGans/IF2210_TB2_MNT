@@ -1,7 +1,6 @@
 package entity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,9 +28,17 @@ public class Hands {
         return this.cards;
     }
 
+    public int length(){
+        return this.active;
+    }
+
     public void addCard(Card card) {
-        cards.add(card);
-        active++;
+        if (active < 6) {
+            cards.add(card);
+            active++;
+        } else {
+            System.out.println("Hand is full, cannot add more cards.");
+        }
     }
 
     public void addCardByLocation(Card card, String location) {
@@ -43,15 +50,21 @@ public class Hands {
     }
     
     public void deleteCard(int index) {
-        index ++;
         if (index >= 0 && index < cards.size()) {
             cards.set(index, null);
             active--;
         } else {
             System.out.println("Index out of bounds.");
         }
+    }
 
-
+    public Card getCard(int index) {
+        if (index >= 0 && index < cards.size()) {
+            return cards.get(index);
+        } else {
+            System.out.println("Index out of bounds.");
+            return null;
+        }
     }
 
     public int getCardCount() {
