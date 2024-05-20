@@ -94,6 +94,7 @@ public class ActiveHandsController {
             Dragboard db = event.getDragboard();
             boolean success = false;
             Node dragSource = DragContext.getInstance().getDragSource();
+            System.out.println("hands before: " + hands.getCards());
             if (db.hasString() && dragSource != null) {
                 String[] parts = db.getString().split(",");
                 int sourceIndex = Integer.parseInt(parts[1]);
@@ -105,7 +106,7 @@ public class ActiveHandsController {
         
                 Card card = hands.getCard(sourceIndex);
                 if (card != null) {
-                    hands.deleteCard(sourceIndex);
+                    hands.moveCard(sourceIndex, targetCol);
         
                     Node cardNode = sourcePane.getChildren().remove(0);
                     if (targetPane.getChildren().isEmpty()) {
@@ -117,6 +118,7 @@ public class ActiveHandsController {
                 }
                 validateHands();
             }
+            System.out.println("hands after: " + hands.getCards());
         
             event.setDropCompleted(success);
             event.consume();
