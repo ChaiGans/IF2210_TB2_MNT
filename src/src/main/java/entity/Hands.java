@@ -20,10 +20,13 @@ public class Hands {
         locationIndexMap.put("A06", 5);
     }
 
-
     public Hands() {
-        this.cards = new ArrayList<>(Collections.nCopies(6, null));
+        cards = new ArrayList<>();
         active = 0;
+    }
+
+    public ArrayList<Card> getCards() {
+        return this.cards;
     }
 
     public void addCard(Card card) {
@@ -47,6 +50,8 @@ public class Hands {
         } else {
             System.out.println("Index out of bounds.");
         }
+
+
     }
 
     public int getCardCount() {
