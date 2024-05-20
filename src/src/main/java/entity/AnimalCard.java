@@ -37,7 +37,7 @@ class OmnivoreEatingStrategy implements EatingStrategy {
     }
 }
 
-abstract class AnimalCard extends Card {
+abstract public class AnimalCard extends Card {
     protected int currentWeight;
     protected int harvestWeight;
     protected boolean inProtection;
@@ -69,6 +69,10 @@ abstract class AnimalCard extends Card {
 
     public void addWeight(int weight) {
         this.currentWeight += weight;
+    }
+
+    public void setWeight(int weight) {
+        this.currentWeight = weight;
     }
 
     public void decrementWeight(int weight) {

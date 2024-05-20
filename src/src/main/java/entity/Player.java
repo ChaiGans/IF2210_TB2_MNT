@@ -13,6 +13,7 @@ public class Player {
         this.cash = 0;
         this.name = "default";
         this.deck = new Deck(this);
+        this.field = new Grid(5,4);
         this.hands = new Hands();
     }
 
@@ -20,8 +21,16 @@ public class Player {
         return this.cash;
     }
 
+    public Hands getHands() {
+        return this.hands;
+    }
+
     public Deck getDeck() {
         return this.deck;
+    }
+
+    public Grid getField() {
+        return this.field;
     }
 
     public Hands Hand() {
@@ -42,6 +51,14 @@ public class Player {
 
     public void addCash(int amount) {
         this.cash += amount;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCash(int cash) {
+        this.cash = cash;
     }
 
     public void AddHand(Card card){

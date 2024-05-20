@@ -1,7 +1,7 @@
 package entity;
 
 import java.util.*;
-
+ 
 public class GameState {
     private List<Player> players;
     private int currentTurn;
@@ -13,6 +13,13 @@ public class GameState {
         this.store = new Store();
         players = new ArrayList<>();
         settings = new GameSettings();
+    }
+
+    public GameState(int currentTurn, Store store, List<Player> players, GameSettings settings) {
+        this.currentTurn = currentTurn;
+        this.store = store;
+        this.players = players;
+        this.settings = settings;
     }
 
     // Getters and setters for each field

@@ -42,6 +42,10 @@ public class Deck {
         return dealtCards;
     }
 
+    public List<Card> getCards() {
+        return this.cards;
+    }
+
     public int getSize() {
         return cards.size();
     }

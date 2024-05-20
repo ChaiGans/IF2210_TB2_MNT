@@ -1,14 +1,28 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Hands {
     private ArrayList<Card> cards;
     private int active;
+    private static final Map<String, Integer> locationIndexMap = new HashMap<>();
+
+    static {
+        locationIndexMap.put("A01", 0);
+        locationIndexMap.put("A02", 1);
+        locationIndexMap.put("A03", 2);
+        locationIndexMap.put("A04", 3);
+        locationIndexMap.put("A05", 4);
+        locationIndexMap.put("A06", 5);
+    }
+
 
     public Hands() {
-        cards = new ArrayList<>();
+        this.cards = new ArrayList<>(Collections.nCopies(6, null));
         active = 0;
     }
 
@@ -17,6 +31,14 @@ public class Hands {
         active++;
     }
 
+    public void addCardByLocation(Card card, String location) {
+        Integer index = locationIndexMap.get(location);
+        if (index == null) {
+            throw new IndexOutOfBoundsException("Invalid location: " + location);
+        }
+        this.cards.set(index, card);
+    }
+    
     public void deleteCard(int index) {
         index ++;
         if (index >= 0 && index < cards.size()) {
@@ -26,9 +48,7 @@ public class Hands {
             System.out.println("Index out of bounds.");
         }
     }
-    public ArrayList<Card> getCards(){
-        return this.cards;
-    }
+
     public int getCardCount() {
         int count = 0;
         for (Card card : cards) {
@@ -53,7 +73,6 @@ public class Hands {
     }
     
     public void printHand() {
-        System.out.println("Your hands:");
         for (Card card : cards) {
             if (card != null) {
                 System.out.println(card.getName());

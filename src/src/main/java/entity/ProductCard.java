@@ -1,6 +1,6 @@
 package entity;
 
-abstract class ProductCard extends Card{
+public abstract class ProductCard extends Card{
     protected int productPrice;
     protected int addedWeight;
 

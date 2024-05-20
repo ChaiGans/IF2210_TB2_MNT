@@ -1,6 +1,6 @@
 package entity;
 
-abstract class PlantCard extends Card {
+abstract public class PlantCard extends Card {
     protected int currentAge;
     protected int harvestAge;
     protected boolean inProtection;
@@ -26,6 +26,10 @@ abstract class PlantCard extends Card {
 
     public void addAge(int age) {
         this.currentAge += age;
+    }
+
+    public void setAge(int age) {
+        this.harvestAge =age;
     }
 
     public void decrementAge(int age) {
