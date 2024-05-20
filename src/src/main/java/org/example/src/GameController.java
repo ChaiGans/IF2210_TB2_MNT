@@ -25,8 +25,8 @@ public class GameController {
         PlayerManager manager = PlayerManager.getInstance();
         counter++;
         counterLabel.setText(String.valueOf(counter));
-        List<Card> draws = manager.getCurrentPlayer().draw4();
-        manager.getCurrentPlayer().save(draws);
+        // List<Card> draws = manager.getCurrentPlayer().draw4();
+        // manager.getCurrentPlayer().save(draws);
         manager.switchPlayer(); // Switch to the next player
         GameApp.openNewWindow("None", "Draws.fxml");
     }

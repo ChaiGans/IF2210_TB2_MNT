@@ -1,6 +1,8 @@
 package org.example.src;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -12,6 +14,8 @@ public class CardController {
     private ImageView cardImage;
     private double xOffset = 0;
     private double yOffset = 0;
+    @FXML
+    private Label cardLabel;
     @FXML
     public void initialize() {
         // makeDraggable();
@@ -35,5 +39,10 @@ public class CardController {
     }
     public ImageView getCardImage() {
         return cardImage;
+    }
+    public void setCardInfo(String imageName, String cardName) {
+        Image image = new Image(getClass().getResourceAsStream("/org/example/src/assets/" + imageName));
+        cardImage.setImage(image);
+        cardLabel.setText(cardName);
     }
 }

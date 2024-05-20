@@ -12,7 +12,7 @@ public class PlayerManager {
     private PlayerManager() {
         player1 = new Player();
         player2 = new Player();
-        currentPlayer = player1;  // Initially set to player1
+        currentPlayer = player1;
     }
 
     public static PlayerManager getInstance() {

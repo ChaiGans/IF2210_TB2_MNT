@@ -1,10 +1,14 @@
 package org.example.src;
 
+import entity.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -17,6 +21,7 @@ public class ActiveHandsController {
     @FXML
     public void initialize() {
         try {
+            UIUpdateService.getInstance().setHandsController(this);
             populateHandsGrid();
         } catch (Exception e) {
             e.printStackTrace();
@@ -38,6 +43,30 @@ public class ActiveHandsController {
         }
     }
 
+    public void updateGrid(Hands hands) {
+        handsGrid.getChildren().clear();
+        int maxColumns = 6;
+    
+        for (int i = 0; i < maxColumns; i++) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Card.fxml"));
+                Node cardNode = loader.load();
+                CardController controller = loader.getController();
+                if (i < hands.getCardCount() && hands.getCards().get(i) != null) {
+                    Card card = hands.getCards().get(i);
+                    controller.setCardInfo(card.getName() + ".png", card.getName());
+                }
+                StackPane cell = new StackPane();
+                cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;");
+                cell.setPrefSize(100, 150);
+                cell.getChildren().add(cardNode);  
+                setupDragHandlers(cell);
+                handsGrid.add(cell, i, 0);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
     private void setupDragHandlers(Pane cell) {
         cell.setOnDragDetected(event -> {
             if (!cell.getChildren().isEmpty()) {

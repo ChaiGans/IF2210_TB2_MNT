@@ -13,7 +13,6 @@ public class Player {
         this.cash = 0;
         this.name = "default";
         this.deck = new Deck(this);
-        // Inisialisasi field
         this.hands = new Hands();
     }
 

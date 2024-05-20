@@ -26,7 +26,9 @@ public class Hands {
             System.out.println("Index out of bounds.");
         }
     }
-
+    public ArrayList<Card> getCards(){
+        return this.cards;
+    }
     public int getCardCount() {
         int count = 0;
         for (Card card : cards) {
@@ -51,6 +53,7 @@ public class Hands {
     }
     
     public void printHand() {
+        System.out.println("Your hands:");
         for (Card card : cards) {
             if (card != null) {
                 System.out.println(card.getName());

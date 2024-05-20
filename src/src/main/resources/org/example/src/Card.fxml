@@ -18,7 +18,7 @@
             <Insets bottom="10.0" />
          </VBox.margin>
       </ImageView>
-      <Label text="Clock">
+      <Label text="Clock" fx:id="cardLabel">
          <font>
             <Font name="Clarendon BT Bold" size="16.0" />
          </font>
