@@ -35,4 +35,9 @@ public class GameState {
     public int getCurrentTurn() {
         return this.currentTurn;
     }
+
+    @Override
+    public String toString() {
+        return "In this game, there is two players " + this.getPlayers().get(0).getName() + " and " + this.getPlayers().get(1).getName() + " current turn is " + this.getCurrentTurn();
+    }
 }

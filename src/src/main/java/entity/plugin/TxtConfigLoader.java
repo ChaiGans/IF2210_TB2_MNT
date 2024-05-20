@@ -17,6 +17,11 @@ public class TxtConfigLoader extends BasePlugin implements PluginInterface {
     }
 
     @Override
+    public String getName() {
+        return "TXT";
+    }
+
+    @Override
     public boolean verifyDirectory(String directoryPath) throws IOException {
         File directory = new File(directoryPath);
         if (!directory.exists() || !directory.isDirectory()) {
