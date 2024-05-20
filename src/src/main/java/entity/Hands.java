@@ -60,6 +60,18 @@ public class Hands {
         }
     }
 
+    public void moveCard(int fromIndex, int toIndex) {
+        if (fromIndex < 0 || fromIndex >= cards.size() || toIndex < 0 || toIndex >= cards.size() || fromIndex == toIndex) {
+            return; 
+        }
+    
+        Card cardToMove = cards.get(fromIndex);
+        if (cardToMove != null) {
+            cards.remove(fromIndex); 
+            cards.add(toIndex, cardToMove);  
+        }
+    }
+    
     public Card getCard(int index) {
         if (index >= 0 && index < cards.size()) {
             return cards.get(index);
