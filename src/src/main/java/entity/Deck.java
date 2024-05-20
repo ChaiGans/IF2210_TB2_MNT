@@ -25,6 +25,25 @@ public class Deck {
         }
     }
 
+    // To init player deck with defined size
+    void initializeDeckBySize(int size) {
+        for (int i = 0; i < size; i++) {
+            cards.add(CardFactory.createRandomCard(owner));
+        } 
+    }
+
+    // To know current count of card in deck
+    public int getCurrentDeckCardCount() {
+        return this.cards.size();
+    }
+
+    // To empty deck by removing all cards
+    public void emptyDeck() {
+        for (int i = 0; i < this.cards.size(); i++) {
+            cards.remove(i);
+        }
+    }
+
     public void shuffle() {
         Collections.shuffle(cards);
     }
@@ -36,7 +55,6 @@ public class Deck {
         for (int i = 0; i < DEAL_SIZE; i++) {
             int index = random.nextInt(cards.size());
             dealtCards.add(cards.remove(index));
-            cards.add(CardFactory.createRandomCard(owner));
         }
 
         return dealtCards;

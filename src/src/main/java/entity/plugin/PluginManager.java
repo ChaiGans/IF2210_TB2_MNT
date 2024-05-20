@@ -12,7 +12,7 @@ public class PluginManager {
 
     public PluginManager() {
         // Register the default loader
-        loaders.put("txt", new TxtConfigLoader());
+        // loaders.put("txt", new TxtConfigLoader());
     }
 
     public void loadPlugin(String jarPath, String className, String fileType) {

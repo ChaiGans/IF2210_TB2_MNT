@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +51,7 @@ public class Hands {
     }
     
     public void deleteCard(int index) {
+        index ++;
         if (index >= 0 && index < cards.size()) {
             cards.set(index, null);
             active--;
@@ -65,6 +67,15 @@ public class Hands {
             System.out.println("Index out of bounds.");
             return null;
         }
+    }
+    
+    public String findCardLocation(Card card) {
+        for (int i = 0; i < this.getCardCount(); i++) {
+            if (this.cards.get(i) == card) {
+                return String.format("A%02d", i + 1);
+            }
+        }
+        throw new IllegalArgumentException("Card not found in the player's deck");
     }
 
     public int getCardCount() {

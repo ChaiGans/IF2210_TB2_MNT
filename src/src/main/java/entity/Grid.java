@@ -8,6 +8,36 @@ public class Grid {
     private int height;
     private List<List<Card>> matrix;
 
+    public static int[] convertLocation(String location) {
+        if (location == null || location.length() < 3) {
+            throw new IllegalArgumentException("Invalid location format: " + location);
+        }
+
+        // Extract the row part ('A', 'B', etc.)
+        char rowChar = location.charAt(0);
+        // Extract the column part ('01', '02', etc.)
+        String columnStr = location.substring(1);
+
+        // Convert rowChar ('A' -> 0, 'B' -> 1, etc.)
+        int rowIndex = rowChar - 'A';
+
+        // Convert columnStr to a zero-based index
+        int columnIndex = Integer.parseInt(columnStr) - 1;
+
+        return new int[]{rowIndex, columnIndex};
+    }
+
+    public static String convertIndicesToLocation(int i, int j) {
+        // Convert the row index to a letter
+        char row = (char) ('A' + i);
+        
+        // Convert the column index to a two-digit number
+        String column = String.format("%02d", j + 1);
+        
+        // Combine row and column to form the location string
+        return row + column;
+    }
+
     public Grid(int width, int height) {
         this.width = width;
         this.height = height;
@@ -29,18 +59,23 @@ public class Grid {
         return height;
     }
 
+    public int countCardInField() {
+        int count = 0;
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (this.matrix.get(i).get(j) != null) {
+                    count += 1;
+                }
+            }
+        }
+        return count;
+    }
+
     public Card getCard(int x, int y) {
         if (x < 0 || x >= width || y < 0 || y >= height) {
             throw new IndexOutOfBoundsException("Coordinates out of bounds");
         }
         return matrix.get(y).get(x);
-    }
-
-    public void setCard(int x, int y, Card card) {
-        if (x < 0 || x >= width || y < 0 || y >= height) {
-            throw new IndexOutOfBoundsException("Coordinates out of bounds");
-        }
-        matrix.get(y).set(x, card);
     }
 
     public void removeCard(int x, int y) {
@@ -50,4 +85,12 @@ public class Grid {
             throw new IndexOutOfBoundsException("Coordinates out of bounds");
         }
     }
+
+    public void setCard(int x, int y, Card card) {
+        if (x < 0 || x >= width || y < 0 || y >= height) {
+            throw new IndexOutOfBoundsException("Coordinates out of bounds");
+        }
+        matrix.get(y).set(x, card);
+    }
 }
+

@@ -5,7 +5,7 @@ import java.io.IOException;
 import entity.*;
 
 public abstract class BasePlugin {
-    private Map<String, String> keyToValueMap = new HashMap<>();
+    protected Map<String, String> keyToValueMap = new HashMap<>();
 
     public BasePlugin() {
         this.keyToValueMap.put("SIRIP_HIU", "Shark Fin");    
@@ -26,5 +26,17 @@ public abstract class BasePlugin {
         this.keyToValueMap.put("Pumpkin", "LABU");    
         this.keyToValueMap.put("JAGUNG", "Corn");    
         this.keyToValueMap.put("Corn", "JAGUNG");    
+        this.keyToValueMap.put("ACCELERATE", "Accelerate");    
+        this.keyToValueMap.put("DELAY", "Delay");    
+        this.keyToValueMap.put("PROTECT", "Protect");    
+        this.keyToValueMap.put("DESTROY", "Destroy");    
+        this.keyToValueMap.put("TRAP", "Trap");    
+        this.keyToValueMap.put("INSTANT_HARVEST", "Instant Harvest");    
+        this.keyToValueMap.put("Accelerate", "ACCELERATE");    
+        this.keyToValueMap.put("Delay", "DELAY");    
+        this.keyToValueMap.put("Protect", "PROTECT");    
+        this.keyToValueMap.put("Destroy", "DESTROY");    
+        this.keyToValueMap.put("Trap", "TRAP");    
+        this.keyToValueMap.put("Instant Harvest", "INSTANT_HARVEST");    
     }
 }

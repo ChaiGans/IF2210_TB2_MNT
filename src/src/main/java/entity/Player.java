@@ -17,6 +17,17 @@ public class Player {
         this.hands = new Hands();
     }
 
+    public void reshuffleDeck(int size) {
+        this.deck.emptyDeck();
+        this.deck.initializeDeckBySize(size);
+    }
+
+    // location is based on state like 'A01', 'B01', etc.
+    public void addCardToField(String location, Card card) {
+        int[] xy = Grid.convertLocation(location);
+        this.field.setCard(xy[0], xy[1], null);
+    }
+
     public int getCash() {
         return this.cash;
     }
