@@ -4,11 +4,7 @@ import entity.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -17,17 +13,21 @@ import javafx.scene.layout.StackPane;
 public class ActiveHandsController {
     @FXML
     private GridPane handsGrid;
+    private Hands hands;
+    private Grid gridData;
 
     @FXML
     public void initialize() {
         try {
+            hands = GameData.getInstance().getHands();
+            gridData = GameData.getInstance().getGridData();
             UIUpdateService.getInstance().setHandsController(this);
             populateHandsGrid();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    
     private void populateHandsGrid() throws Exception {
         int rows = 1;
         int cols = 6;
@@ -37,8 +37,9 @@ public class ActiveHandsController {
                 cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;");
                 cell.setPadding(new Insets(10));
                 cell.setMinSize(100, 150);
-                setupDragHandlers(cell);
-                handsGrid.add(cell, col, row);
+            
+                setupDragHandlers(cell, col, 0);
+                handsGrid.add(cell, col, 0);
             }
         }
     }
@@ -60,21 +61,24 @@ public class ActiveHandsController {
                 cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;");
                 cell.setPrefSize(100, 150);
                 cell.getChildren().add(cardNode);  
-                setupDragHandlers(cell);
+                
+                setupDragHandlers(cell,i,0);
                 handsGrid.add(cell, i, 0);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-    private void setupDragHandlers(Pane cell) {
+    
+    private void setupDragHandlers(Pane cell, int col, int row) {
         cell.setOnDragDetected(event -> {
             if (!cell.getChildren().isEmpty()) {
                 Dragboard db = cell.startDragAndDrop(TransferMode.MOVE);
                 ClipboardContent content = new ClipboardContent();
-                content.putString("");
+                content.putString("hands," + handsGrid.getChildren().indexOf(cell));
                 db.setContent(content);
                 DragContext.getInstance().setDragSource(cell);
+                System.out.println("Drag detected at col: " + col);
                 event.consume();
             }
         });
@@ -91,31 +95,50 @@ public class ActiveHandsController {
             boolean success = false;
             Node dragSource = DragContext.getInstance().getDragSource();
             if (db.hasString() && dragSource != null) {
+                String[] parts = db.getString().split(",");
+                int sourceIndex = Integer.parseInt(parts[1]);
+        
                 Pane sourcePane = (Pane) dragSource;
-                Pane targetPane = (Pane) cell;
-                try {
-                    Node sourceCard = sourcePane.getChildren().isEmpty() ? null : sourcePane.getChildren().get(0);
-                    Node targetCard = targetPane.getChildren().isEmpty() ? null : targetPane.getChildren().get(0);
-                    if (sourceCard != null) {
-                        if (targetCard != null) {
-                            sourcePane.getChildren().remove(sourceCard);
-                            targetPane.getChildren().remove(targetCard);
-                            sourcePane.getChildren().add(targetCard);
-                        }
-                        targetPane.getChildren().add(sourceCard);
-                        success = true;
+                Pane targetPane = (Pane) event.getGestureTarget();
+        
+                int targetCol = GridPane.getColumnIndex(targetPane);
+        
+                Card card = hands.getCard(sourceIndex);
+                if (card != null) {
+                    hands.deleteCard(sourceIndex);
+        
+                    Node cardNode = sourcePane.getChildren().remove(0);
+                    if (targetPane.getChildren().isEmpty()) {
+                        targetPane.getChildren().add(cardNode);  
+                        success = true; 
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+        
+                    System.out.println("Moved card from hands index " + sourceIndex + " to grid column " + targetCol);
                 }
+                validateHands();
             }
+        
             event.setDropCompleted(success);
             event.consume();
         });
+        
     
         cell.setOnDragDone(event -> {
             DragContext.getInstance().setDragSource(null);
             event.consume();
         });
+    }
+
+    private void validateHands() {
+        System.out.println("Ini dari hands");
+        System.out.println("Current hands state:");
+        System.out.println(hands.length());
+        for (int i = 0; i < hands.length(); i++) {
+            if (hands.getCard(i) != null) {
+                System.out.println("Hand " + i + ": " + hands.getCard(i).getName());
+            } else {
+                System.out.println("Hand " + i + " is empty.");
+            }
+        }
     }
 }

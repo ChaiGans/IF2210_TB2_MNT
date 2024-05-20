@@ -1,5 +1,6 @@
 package org.example.src;
 
+import entity.GameData;
 import javafx.application.Platform;
 
 public class UIUpdateService {
@@ -20,7 +21,7 @@ public class UIUpdateService {
         // System.out.println("Wanted to Save:"+PlayerManager.getInstance().getCurrentPlayer().Hand());
         if (handsController != null) {
             Platform.runLater(() -> {
-                handsController.updateGrid(PlayerManager.getInstance().getCurrentPlayer().Hand());
+                handsController.updateGrid(GameData.getInstance().getHands());
             });
         }
         else{

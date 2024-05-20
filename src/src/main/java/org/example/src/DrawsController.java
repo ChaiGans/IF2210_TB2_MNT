@@ -9,16 +9,20 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import java.util.List;
 import entity.Card;
+import entity.GameData;
+import entity.Hands;
 import javafx.event.ActionEvent;
 import entity.Player;
 
 public class DrawsController {
     @FXML
     private GridPane cardGrid;
+    private Hands hands;
     private List<Card> draws;
     String name;
 
     public void initialize() {
+        hands = GameData.getInstance().getHands();
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         System.out.println("Before:");
         PlayerManager.getInstance().getCurrentPlayer().ShowHand();
@@ -56,6 +60,9 @@ public class DrawsController {
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         currentPlayer.save(draws);
         System.out.println("After");
+        for (Card card : draws) {
+            hands.addCard(card);
+        }
         PlayerManager.getInstance().getCurrentPlayer().ShowHand();
         UIUpdateService.getInstance().updateHandsGrid();
         Node source = (Node) event.getSource();
