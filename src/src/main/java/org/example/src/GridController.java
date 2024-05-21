@@ -1,5 +1,7 @@
 package org.example.src;
 
+import java.io.IOException;
+
 import entity.AnimalCard;
 import entity.Card;
 import entity.Grid;
@@ -17,6 +19,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.input.*;
 
 public class GridController {
@@ -57,7 +60,22 @@ public class GridController {
     private void setupDragHandlers(Pane cell, int col, int row) {
         cell.setOnMouseClicked(event -> {
             System.out.println("This is clicked");
+            Card targetCard = gridData.getCard(col, row);
+            if (targetCard != null) {
+                System.out.println("Card at (" + col + ", " + row + "): " + targetCard.getName());
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Card.fxml"));
+                    Parent root = loader.load();
+                    CardController controller = loader.getController();
+                    controller.showCardDetails(targetCard);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("No card at (" + col + ", " + row + ")");
+            }
         });
+    
         cell.setOnDragDetected(event -> {
             if (!cell.getChildren().isEmpty()) {
                 Dragboard db = cell.startDragAndDrop(TransferMode.MOVE);
