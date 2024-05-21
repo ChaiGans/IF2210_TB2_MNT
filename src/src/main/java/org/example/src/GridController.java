@@ -27,10 +27,8 @@ public class GridController {
 
     @FXML
     public void initialize() {
-        gridData = GameData.getInstance().getGridData();
-        hands = GameData.getInstance().getHands();
-        hands.printHand();
         try {
+            gridData = GameData.getInstance().getGridData();
             populateGrid();
             printCellStatus();
         } catch (Exception e) {
@@ -76,6 +74,7 @@ public class GridController {
         });
     
         cell.setOnDragDropped(event -> {
+            hands = GameData.getInstance().getHands();
             Dragboard db = event.getDragboard();
             boolean success = false;
             if (db.hasString()) {

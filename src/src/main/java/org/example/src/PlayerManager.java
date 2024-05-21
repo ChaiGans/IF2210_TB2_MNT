@@ -1,5 +1,6 @@
 package org.example.src;
 
+import entity.GameData;
 import entity.Player;
 
 public class PlayerManager {
@@ -26,10 +27,14 @@ public class PlayerManager {
     public void switchPlayer() {
         if (isFirstTurn) {
             currentPlayer = player1;
+            System.out.println("Pemain saat ini : player 1");
             isFirstTurn = false;
+            GameData.getInstance().switchSavedData();
         } else {
+            System.out.println("player 2");
             currentPlayer = (currentPlayer == player1) ? player2 : player1;
             isFirstTurn = true;
+            GameData.getInstance().switchSavedData();
         }
     }
 

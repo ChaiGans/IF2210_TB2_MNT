@@ -2,6 +2,8 @@ package entity;
 
 import java.io.IOException;
 
+import org.example.src.PlayerManager;
+
 import entity.plugin.PluginInterface;
 import entity.plugin.PluginManager;
 
@@ -89,6 +91,15 @@ public class GameData {
             plugin.saveGameState(gameState, directoryPath + "/gamestate.txt",  directoryPath + "/player1.txt",  directoryPath + "/player2.txt");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void switchSavedData(){
+        if (PlayerManager.getInstance().getCurrentPlayer() == PlayerManager.getInstance().getPlayer1() ){
+            System.out.println("Mengambil dari player 1");
+            hands = PlayerManager.getInstance().getPlayer1().getHands();
+        }else{
+            hands = PlayerManager.getInstance().getPlayer2().getHands();
         }
     }
 
