@@ -86,6 +86,18 @@ abstract public class AnimalCard extends Card {
     public void setProtection(boolean dest) {
         this.inProtection = dest;
     }
+
+    public boolean isCarnivore() {
+        return eatingStrategy instanceof CarnivoreEatingStrategy;
+    }
+
+    public boolean isHerbivore() {
+        return eatingStrategy instanceof HerbivoreEatingStrategy;
+    }
+
+    public boolean isOmnivore() {
+        return eatingStrategy instanceof OmnivoreEatingStrategy;
+    }
 }
 
 abstract class Carnivore extends AnimalCard {

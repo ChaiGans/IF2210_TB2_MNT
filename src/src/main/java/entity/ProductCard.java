@@ -19,6 +19,14 @@ public abstract class ProductCard extends Card{
     public int getAddedWeight() {
         return this.addedWeight;
     }
+
+    public boolean isVeganProduct() {
+        return this instanceof VeganProduct;
+    }
+
+    public boolean isNonVeganProduct() {
+        return this instanceof NonVeganProduct;
+    }
 }
 
 abstract class VeganProduct extends ProductCard {
