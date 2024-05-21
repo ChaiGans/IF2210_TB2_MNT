@@ -1,0 +1,14 @@
+{
+  "gulden": 300,
+  "active_deck_count": 28,
+  "active_hand": [
+    ["A01", "BERUANG"],
+    ["A02", "KUDA"]
+  ],
+  "in_field_card": [
+    ["A01", "KUDA", 3, { "skills": ["ACCELERATE", "PROTECT"] }],
+    ["A03", "LABU", 5, { "skills": ["PROTECT"] }],
+    ["B03", "JAGUNG", 3, { "skills": ["ACCELERATE", "DELAY", "PROTECT"] }],
+    ["D03", "BERUANG", 4, { "skills": [] }]
+  ]
+}
