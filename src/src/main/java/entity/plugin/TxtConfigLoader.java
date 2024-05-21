@@ -103,7 +103,7 @@ public class TxtConfigLoader extends BasePlugin implements PluginInterface {
             String[] parts = myReader.nextLine().split(" ");
             String cardName = this.keyToValueMap.get(parts[1]);
             Card card = CardFactory.createCard(cardName, player);
-            player.getHands().addCard(card);
+            player.getHands().addCardByLocation(card, parts[0]);
         }
 
         int farmCardCount = Integer.parseInt(myReader.nextLine());
@@ -145,10 +145,13 @@ public class TxtConfigLoader extends BasePlugin implements PluginInterface {
             writer.println(activeHands.getCardCount());
 
             for (Card card : activeHands.getCards()) {
-                writer.println(activeHands.findCardLocation(card) + " " + this.keyToValueMap.get(card.getName()));
+                if (card != null) {
+                    writer.println(activeHands.findCardLocation(card) + " " + this.keyToValueMap.get(card.getName()));
+                }
             }
 
             Grid field = player.getField();
+            field.printInformation();
             writer.println(field.countCardInField());
 
             for (int i = 0; i < field.getWidth(); i++) {
