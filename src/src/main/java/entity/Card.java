@@ -23,9 +23,8 @@ public abstract class Card {
         return this.owner.getName();
     }
 
-    @Override
-    public String toString() {
-        return "This card is owned by " + this.owner + " and have these effects " + this.activeEffect.toString();
+    public void printInformation() {
+        System.out.println("This card named " + this.getName() + " is owned by " + this.owner.getName() + " and have these effects " + this.activeEffect.toString());
     }
 
     public abstract String getName();

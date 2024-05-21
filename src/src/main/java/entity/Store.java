@@ -56,4 +56,13 @@ public class Store {
     public Map<ProductCard, Integer> getStoreInformation() {
         return this.item_list;
     }
+
+    public void printStoreInformation() {
+        System.out.println("Store Inventory:");
+        for (Map.Entry<ProductCard, Integer> entry : item_list.entrySet()) {
+            ProductCard product = entry.getKey();
+            int quantity = entry.getValue();
+            System.out.println(product.toString() + " - Quantity: " + quantity);
+        }
+    }
 }

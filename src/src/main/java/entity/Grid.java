@@ -92,5 +92,16 @@ public class Grid {
         }
         matrix.get(y).set(x, card);
     }
+
+    public void printInformation() {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (this.matrix.get(i).get(j) != null) {
+                    System.out.println(convertIndicesToLocation(i, j));
+                    this.matrix.get(i).get(j).printInformation();
+                }
+            }
+        }
+    }
 }
 

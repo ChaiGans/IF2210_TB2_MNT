@@ -10,18 +10,21 @@ import java.util.Set;
 public class Deck {
     private List<Card> cards;
     private Player owner;
+    private int countCard;
     private static final int DECK_SIZE = 40;
     private static final int DEAL_SIZE = 4;
 
     public Deck(Player owner) {
         this.owner = owner;
         this.cards = new ArrayList<>();
+        this.countCard = 0;
         initializeDeck();
     }
 
     private void initializeDeck() {
         for (int i = 0; i < DECK_SIZE; i++) {
             cards.add(CardFactory.createRandomCard(owner));
+            this.countCard++;
         }
     }
 
@@ -29,18 +32,20 @@ public class Deck {
     void initializeDeckBySize(int size) {
         for (int i = 0; i < size; i++) {
             cards.add(CardFactory.createRandomCard(owner));
+            this.countCard++;
         } 
     }
 
     // To know current count of card in deck
     public int getCurrentDeckCardCount() {
-        return this.cards.size();
+        return this.countCard;
     }
 
     // To empty deck by removing all cards
     public void emptyDeck() {
         for (int i = 0; i < this.cards.size(); i++) {
-            cards.remove(i);
+            cards.remove(0);
+            this.countCard = 0;
         }
     }
 
@@ -55,6 +60,7 @@ public class Deck {
         for (int i = 0; i < DEAL_SIZE; i++) {
             int index = random.nextInt(cards.size());
             dealtCards.add(cards.remove(index));
+            this.countCard++;
         }
 
         return dealtCards;
