@@ -23,9 +23,9 @@ public class Hands {
     public Hands() {
         cards = new ArrayList<>();
         active = 0;
-        // for (int i = 0; i < 6; i++) { 
-        //     this.cards.add(null);
-        // }
+        for (int i = 0; i < 6; i++) { 
+            this.cards.add(null);
+        }
     }
 
     public ArrayList<Card> getCards() {
@@ -38,11 +38,28 @@ public class Hands {
 
     public void addCard(Card card) {
         if (active < 6) {
-            cards.add(card);
+            int index = findNullIndex();
+            this.cards.set(index, card);
             active++;
         } else {
             System.out.println("Hand is full, cannot add more cards.");
         }
+    }
+
+    public int findNullIndex() {
+        for(int i = 0; i < cards.size(); i++){
+            if(cards.get(i) == null){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void addbyFirstNull(Card card) {
+        int index = findNullIndex();
+        // System.out.println("Sistem disi:"+index);
+        this.cards.set(index, card);
+        // System.out.println(this.cards);
     }
 
     public void addCardByLocation(Card card, String location) {
@@ -52,10 +69,11 @@ public class Hands {
         }
         this.cards.set(index, card);
     }
-    
+
     public void deleteCard(int index) {
         if (index >= 0 && index < cards.size() && cards.get(index) != null) {
-            cards.remove(index);
+            cards.set(index, null);
+            // cards.remove(index);
             active--;
         } else {
             System.out.println("Index out of bounds.");
@@ -129,7 +147,8 @@ public class Hands {
     public void addSet(List<Card> cardSet) {
         for (Card card : cardSet) {
             if (active < 6) {
-                cards.add(card);
+                int index = findNullIndex();
+                this.cards.set(index, card);
                 active++;
             } else {
                 System.out.println("Hand is full, cannot add more cards.");

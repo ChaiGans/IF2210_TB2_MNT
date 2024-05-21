@@ -66,7 +66,9 @@ public class DrawsController {
         for (Card card : draws) {
             System.out.println("after " + card);
             if (hands.getCardCount() < 6) {  
-                hands.addCard(card);
+                int index = hands.findNullIndex();
+                System.out.println("index:"+index);
+                hands.addbyFirstNull(card);
             } else {
                 System.out.println("Hands are full. Cannot add more cards.");
                 break;
