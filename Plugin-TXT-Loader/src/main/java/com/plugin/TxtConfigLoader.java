@@ -1,4 +1,4 @@
-package entity.plugin;
+package com.plugin;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.List;
 import java.util.Scanner;
 
+import entity.plugin.BasePlugin;
+import entity.plugin.PluginInterface;
 import entity.*;
 
 public class TxtConfigLoader extends BasePlugin implements PluginInterface {

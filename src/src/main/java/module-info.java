@@ -13,4 +13,6 @@ module org.example.src {
 
     opens org.example.src to javafx.fxml;
     exports org.example.src;
+    exports entity.plugin;
+    exports entity;
 }

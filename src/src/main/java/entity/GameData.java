@@ -115,7 +115,7 @@ public class GameData {
         try {
             GameData game = new GameData();
             String jarPath = "path/to/plugin.jar";
-            String className = "entity.plugin.TxtConfigLoader";
+            String className = "com.plugin.TxtConfigLoader";
             game.loadPlugins(jarPath, className);
 
             String directoryPath = "path/to/directory";
