@@ -90,6 +90,14 @@ public class Player {
     public void save(List<Card> draws){
         this.hands.addSet(draws);
     }
+
+    public void setField(Grid field){
+        this.field = field;
+    }
+
+    public void setHands(Hands hands) {
+        this.hands = hands;
+    }
 }
 
 

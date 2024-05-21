@@ -26,6 +26,7 @@ public class GridController {
     public void initialize() {
         gridData = GameData.getInstance().getGridData();
         hands = GameData.getInstance().getHands();
+        hands.printHand();
         try {
             populateGrid();
             printCellStatus();
@@ -42,19 +43,10 @@ public class GridController {
                 StackPane cell = new StackPane();  
                 cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;");
                 cell.setPadding(new Insets(10));  // Set padding around the content
-                cell.setMinSize(100, 150);
-
-                if(row < 3){
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Card.fxml"));
-                    Node card = loader.load();
-    
-                    StackPane.setAlignment(card, Pos.CENTER);  // Ensure the card is centered
-                    cell.getChildren().add(card);
-                    
+                cell.setMinSize(100, 150);       
                     Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
                     Card cards = new StandardCard(currentPlayer, "Cardname" + row + " " +  col);
                     gridData.setCard(col, row, cards);
-                }
                 setupDragHandlers(cell, col, row);
                 grid.add(cell, col, row);
             }
@@ -84,6 +76,7 @@ public class GridController {
             Dragboard db = event.getDragboard();
             boolean success = false;
             if (db.hasString()) {
+                Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
                 String[] dragData = db.getString().split(",");
                 String sourceType = dragData[0];
                 int sourceIndex = Integer.parseInt(dragData[1]);
@@ -95,7 +88,7 @@ public class GridController {
                 int targetCol = GridPane.getColumnIndex(targetPane);
                 int targetRow = GridPane.getRowIndex(targetPane);
                 
-                System.out.println("hai " + hands.getCards());
+                System.out.println("list of hands:  " + hands.getCards());
                 if ("hands".equals(sourceType)) {
                     System.out.println("ini source index: " + sourceIndex);
                     System.out.println("panjang hands: " + hands.length());
@@ -103,6 +96,8 @@ public class GridController {
                     if (card != null && targetCol >= 0 && targetCol < gridData.getWidth() && targetRow >= 0 && targetRow < gridData.getHeight()) {
                         hands.deleteCard(sourceIndex); 
                         gridData.setCard(targetCol, targetRow, card);
+
+                        GameData.getInstance().uploadGridData(currentPlayer);
         
                         Node cardNode = sourcePane.getChildren().remove(0);
                         targetPane.getChildren().add(cardNode);
@@ -113,17 +108,20 @@ public class GridController {
                     if (card != null && (sourceIndex != targetCol || sourceRow != targetRow)) {
                         gridData.removeCard(sourceIndex, sourceRow); 
                         gridData.setCard(targetCol, targetRow, card); 
+
+                        GameData.getInstance().uploadGridData(currentPlayer);
         
                         Node cardNode = sourcePane.getChildren().remove(0);
                         targetPane.getChildren().add(cardNode);
                         success = true;
                     }
                 }
-                System.out.println("hai " + hands.getCards());
+                GameData.getInstance().printPlayerStateInfo(currentPlayer);
+                System.out.println("list of hands:  " + hands.getCards());
             }
-        
-            validateGrid();
-            validateHands();
+            
+            // validateGrid();
+            // validateHands();
             event.setDropCompleted(success);
             event.consume();
         });

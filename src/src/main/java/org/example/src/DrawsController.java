@@ -59,11 +59,22 @@ public class DrawsController {
     private void handleGoBack(ActionEvent event) {
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         currentPlayer.save(draws);
-        System.out.println("After");
+        // System.out.println("Yang disimpan:");
+        // currentPlayer.ShowHand();
+        // System.out.println("After adding draws to saved data.");
+        // System.out.println("After");
         for (Card card : draws) {
-            hands.addCard(card);
+            System.out.println("after " + card);
+            if (hands.getCardCount() < 6) {  
+                hands.addCard(card);
+            } else {
+                System.out.println("Hands are full. Cannot add more cards.");
+                break;
+            }
         }
-        PlayerManager.getInstance().getCurrentPlayer().ShowHand();
+
+        // System.out.println("Current hands state after adding new cards:");
+        // PlayerManager.getInstance().getCurrentPlayer().ShowHand();
         UIUpdateService.getInstance().updateHandsGrid();
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();

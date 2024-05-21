@@ -24,6 +24,54 @@ public class GameData {
         plugin = pluginManager.getPlugin(className);
     }
 
+    public void uploadGridData(Player currPlayer) {
+        if (currPlayer != null) {
+            currPlayer.setHands(this.hands);  
+            currPlayer.setField(this.gridData);
+        }
+    }
+
+    public void printPlayerStateInfo(Player player) {
+        if (player == null) {
+            System.out.println("No player data available.");
+            return;
+        }
+    
+        Hands playerHands = player.getHands();
+        if (playerHands != null) {
+            System.out.println("Player Hands:");
+            int handIndex = 0;
+            for (Card card : playerHands.getCards()) {
+                if (card != null) {
+                    System.out.println("Hand " + (handIndex++) + ": " + card.getName() + " (Owner: " + card.getOwnerName() + ")");
+                } else {
+                    System.out.println("Hand " + (handIndex++) + ": Empty");
+                }
+            }
+        } else {
+            System.out.println("Player hands are empty or not initialized.");
+        }
+    
+        // Print player's grid information
+        Grid playerGrid = player.getField();
+        if (playerGrid != null) {
+            System.out.println("Player Grid:");
+            for (int i = 0; i < playerGrid.getHeight(); i++) {
+                for (int j = 0; j < playerGrid.getWidth(); j++) {
+                    Card card = playerGrid.getCard(j, i);
+                    if (card != null) {
+                        System.out.println("Grid Position [" + i + "," + j + "]: " + card.getName() + " (Owner: " + card.getOwnerName() + ")");
+                    } else {
+                        System.out.println("Grid Position [" + i + "," + j + "]: Empty");
+                    }
+                }
+            }
+        } else {
+            System.out.println("Player grid is empty or not initialized.");
+        }
+    }
+
+    
     public void loadGame(String directoryPath) {
         try {
             if (plugin.verifyDirectory(directoryPath)) {

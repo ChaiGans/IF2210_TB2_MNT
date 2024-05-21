@@ -23,6 +23,9 @@ public class Hands {
     public Hands() {
         cards = new ArrayList<>();
         active = 0;
+        // for (int i = 0; i < 6; i++) { 
+        //     this.cards.add(null);
+        // }
     }
 
     public ArrayList<Card> getCards() {
@@ -51,9 +54,8 @@ public class Hands {
     }
     
     public void deleteCard(int index) {
-        index ++;
-        if (index >= 0 && index < cards.size()) {
-            cards.set(index, null);
+        if (index >= 0 && index < cards.size() && cards.get(index) != null) {
+            cards.remove(index);
             active--;
         } else {
             System.out.println("Index out of bounds.");
@@ -98,6 +100,10 @@ public class Hands {
             }
         }
         return count;
+    }
+
+    public void clearCards() {
+        cards.clear(); 
     }
 
     @Override

@@ -91,6 +91,7 @@ public class ActiveHandsController {
         });
     
         cell.setOnDragDropped(event -> {
+            Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
             Dragboard db = event.getDragboard();
             boolean success = false;
             Node dragSource = DragContext.getInstance().getDragSource();
@@ -106,8 +107,8 @@ public class ActiveHandsController {
         
                 Card card = hands.getCard(sourceIndex);
                 if (card != null) {
-                    hands.moveCard(sourceIndex, targetCol);
-        
+                    hands.moveCard(sourceIndex, targetCol);  
+                    GameData.getInstance().uploadGridData(currentPlayer);
                     Node cardNode = sourcePane.getChildren().remove(0);
                     if (targetPane.getChildren().isEmpty()) {
                         targetPane.getChildren().add(cardNode);  
@@ -124,6 +125,7 @@ public class ActiveHandsController {
             event.consume();
         });
         
+
     
         cell.setOnDragDone(event -> {
             DragContext.getInstance().setDragSource(null);

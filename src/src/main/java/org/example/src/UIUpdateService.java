@@ -18,10 +18,12 @@ public class UIUpdateService {
         this.drawsController = controller;
     }
     public void updateHandsGrid() {
-        // System.out.println("Wanted to Save:"+PlayerManager.getInstance().getCurrentPlayer().Hand());
+        System.out.println("Wanted to Save:"+PlayerManager.getInstance().getCurrentPlayer().getHands());
+        // System.out.println("Tes hertz:");
+        // PlayerManager.getInstance().getCurrentPlayer().ShowHand();
         if (handsController != null) {
             Platform.runLater(() -> {
-                handsController.updateGrid(GameData.getInstance().getHands());
+                handsController.updateGrid(PlayerManager.getInstance().getCurrentPlayer().getHands());
             });
         }
         else{
