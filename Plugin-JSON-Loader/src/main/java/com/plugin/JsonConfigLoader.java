@@ -1,22 +1,19 @@
-package entity.plugin;
+package com.plugin;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
-import java.util.Scanner;
+
+import entity.plugin.*;
+import entity.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
-
-import entity.*;
 
 public class JsonConfigLoader extends BasePlugin implements PluginInterface {
     public JsonConfigLoader() {
@@ -128,7 +125,7 @@ public class JsonConfigLoader extends BasePlugin implements PluginInterface {
             String cardName = this.keyToValueMap.get(parts.get(1).textValue());
             int weightOrAge = parts.get(2).intValue();
             Card card = CardFactory.createCard(cardName, player);
-            
+
             if (card instanceof AnimalCard) {
                 AnimalCard animalCard = (AnimalCard) card;
                 animalCard.setWeight(weightOrAge); // Assuming setCurrentWeight method exists
@@ -197,62 +194,5 @@ public class JsonConfigLoader extends BasePlugin implements PluginInterface {
         }
         jsonNode.put("in_field_card", globalFieldCard);
         objectMapper.writeValue(new File(filePath), jsonNode);
-    }
-
-    public static void main(String[] args) {
-        try {
-            JsonConfigLoader loader = new JsonConfigLoader();
-            String directoryPath = "src/src/main/java/entity/plugin/statefiles";
-
-            // Verify the directory contains the necessary files
-            if (!loader.verifyDirectory(directoryPath)) {
-                System.out.println("Required files are missing in the directory.");
-                return;
-            }
-
-            // Create sample game state
-            // Store store = new Store();
-            
-            // Player player2 = new Player();
-
-            GameState game = loader.loadGameState("src/src/main/java/entity/plugin/statefiles/gamestate.json", "src/src/main/java/entity/plugin/statefiles/player1.json", "src/src/main/java/entity/plugin/statefiles/player2.json");
-            loader.saveGameState(game, "src/src/main/java/entity/plugin/statefiles/gamestate.txt", "src/src/main/java/entity/plugin/statefiles/player1.txt", "src/src/main/java/entity/plugin/statefiles/player2.txt");
-            // System.out.println(game.toString());
-            // game.getStore().printStoreInformation();
-            // store.addItem(product1, 5);
-            // store.addItem(product2, 10);
-
-            // GameState gameState = new GameState(1, store, null, null);
-
-            // Save game state to file
-            // loader.saveGameState(gameState, directoryPath + "/gamestate.txt");
-
-            // Save players to file
-            // List<Player> players = new ArrayList<>();
-            // players.add(player1);
-            // players.add(player2);
-            // Player player1 = loader.loadPlayer(directoryPath + "/player1.txt");
-            // Player player2 = loader.loadPlayer(directoryPath + "/player2.txt");
-            
-
-            // Load game state from file
-            // GameState loadedGameState = loader.loadGameState(directoryPath + "/gamestate.txt");
-
-            // // Load players from file
-            // List<Player> loadedPlayers = loader.loadPlayers(directoryPath + "/player1.txt");
-
-            // // Verify the loaded game state
-            // System.out.println("Original GameState: " + gameState);
-            // System.out.println("Loaded GameState: " + loadedGameState);
-
-            // // Verify the loaded players
-            // System.out.println("Original Players: " + players);
-            // System.out.println("Loaded Players: " + loadedPlayers);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

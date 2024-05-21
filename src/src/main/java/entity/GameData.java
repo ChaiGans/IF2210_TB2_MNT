@@ -77,7 +77,13 @@ public class GameData {
     public void loadGame(String directoryPath) {
         try {
             if (plugin.verifyDirectory(directoryPath)) {
-                gameState = plugin.loadGameState(directoryPath + "/gamestate.txt", directoryPath + "/player1.txt", directoryPath + "/player2.txt");
+                if (plugin.getName() == "com.plugin.TxtConfigLoader") {
+                    gameState = plugin.loadGameState(directoryPath + "/gamestate.txt", directoryPath + "/player1.txt", directoryPath + "/player2.txt");
+                } else if (plugin.getName() == "com.plugin.JsonConfigLoader") {
+                    gameState = plugin.loadGameState(directoryPath + "/gamestate.json", directoryPath + "/player1.json", directoryPath + "/player2.json");
+                } else if (plugin.getName() == "com.plugin.XamlConfigLoader") {
+                    // Implementation
+                }
             } else {
                 System.out.println("Required files are missing in the directory.");
             }
@@ -88,7 +94,13 @@ public class GameData {
 
     public void saveGame(String directoryPath) {
         try {
-            plugin.saveGameState(gameState, directoryPath + "/gamestate.txt",  directoryPath + "/player1.txt",  directoryPath + "/player2.txt");
+            if (plugin.getName() == "com.plugin.TxtConfigLoader") {
+                plugin.saveGameState(gameState, directoryPath + "/gamestate.txt",  directoryPath + "/player1.txt",  directoryPath + "/player2.txt");
+            } else if (plugin.getName() == "com.plugin.JsonConfigLoader") {
+                plugin.saveGameState(gameState, directoryPath + "/gamestate.json",  directoryPath + "/player1.json",  directoryPath + "/player2.json");
+            } else if (plugin.getName() == "com.plugin.XamlConfigLoader") {
+                // Implementation
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -125,8 +137,8 @@ public class GameData {
      public static void main(String[] args) {
         try {
             GameData game = new GameData();
-            String jarPath = "Plugin-TXT-Loader/target/Plugin-TXT-Loader-1.0-SNAPSHOT.jar";
-            String className = "com.plugin.TxtConfigLoader";
+            String jarPath = "Plugin-JSON-Loader/target/Plugin-JSON-Loader-1.0-SNAPSHOT.jar";
+            String className = "com.plugin.JsonConfigLoader";
             game.loadPlugins(jarPath, className);
 
             String directoryPath = "src/src/main/java/entity/plugin/statefiles";
