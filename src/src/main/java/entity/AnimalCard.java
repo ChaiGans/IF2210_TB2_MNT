@@ -98,6 +98,15 @@ abstract public class AnimalCard extends Card {
     public boolean isOmnivore() {
         return eatingStrategy instanceof OmnivoreEatingStrategy;
     }
+
+    public void eat(AnimalCard animal, ProductCard food){
+        System.out.println(animal.getCurrentWeight());
+        System.out.println(food.getAddedWeight());
+        int food_weight = food.getAddedWeight();
+        int animal_weight = animal.getCurrentWeight();
+        animal_weight = animal_weight + food_weight;
+        animal.setWeight(animal_weight);
+    }
 }
 
 abstract class Carnivore extends AnimalCard {

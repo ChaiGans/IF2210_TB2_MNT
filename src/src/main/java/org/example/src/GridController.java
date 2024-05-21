@@ -109,26 +109,39 @@ public class GridController {
                             }
                         } else {
                             Card targetCard = gridData.getCard(targetCol, targetRow);
+                            System.out.println("target card" + targetCard);
                             if (targetCard instanceof AnimalCard && card instanceof ProductCard) {
                                 AnimalCard targetAnimalCard = (AnimalCard) targetCard;
                                 ProductCard sourcePlantCard = (ProductCard) card;
                                 if (targetAnimalCard.isCarnivore() && sourcePlantCard.isNonVeganProduct()) {
                                     hands.deleteCard(sourceIndex);
-                                    gridData.setCard(targetCol, targetRow, card);
+                                    // gridData.setCard(targetCol, targetRow, card);
+                                    System.out.println("sebelum makan: " + targetAnimalCard.getCurrentWeight());
+                                    targetAnimalCard.eat(targetAnimalCard, sourcePlantCard);
+                                    System.out.println("sesudah makan: " + targetAnimalCard.getCurrentWeight());
+
                                     GameData.getInstance().uploadGridData(currentPlayer);
     
                                     sourcePane.getChildren().remove(0);
                                     success = true;
                                 } else if (targetAnimalCard.isHerbivore() && sourcePlantCard.isVeganProduct()) {
                                     hands.deleteCard(sourceIndex);
-                                    gridData.setCard(targetCol, targetRow, card);
+                                    // gridData.setCard(targetCol, targetRow, card);
+                                    System.out.println("sebelum makan: " + targetAnimalCard.getCurrentWeight());
+                                    targetAnimalCard.eat(targetAnimalCard, sourcePlantCard);
+                                    System.out.println("sesudah makan: " + targetAnimalCard.getCurrentWeight());
+                                    
                                     GameData.getInstance().uploadGridData(currentPlayer);
     
                                     sourcePane.getChildren().remove(0);
                                     success = true;
                                 } else if (targetAnimalCard.isOmnivore() && card instanceof ProductCard) {
                                     hands.deleteCard(sourceIndex);
-                                    gridData.setCard(targetCol, targetRow, card);
+                                    // gridData.setCard(targetCol, targetRow, card);
+                                    System.out.println("sebelum makan: " + targetAnimalCard.getCurrentWeight());
+                                    targetAnimalCard.eat(targetAnimalCard, sourcePlantCard);
+                                    System.out.println("sesudah makan: " + targetAnimalCard.getCurrentWeight());
+
                                     GameData.getInstance().uploadGridData(currentPlayer);
     
                                     sourcePane.getChildren().remove(0);
