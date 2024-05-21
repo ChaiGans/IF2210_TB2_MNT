@@ -1,6 +1,9 @@
 package org.example.src;
 
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -30,24 +33,30 @@ public class DrawsController {
         System.out.println("Before:");
         PlayerManager.getInstance().getCurrentPlayer().ShowHand();
         draws = currentPlayer.draw4();
-        // System.out.println("Gacga"+draws);
-        // System.out.println("isi:");
-        // PlayerManager.getInstance().getCurrentPlayer().ShowHand();
-        // System.out.println("==============");
         updateCardGrid(draws);
     }
 
+
+    public void shuffle(){
+        draws = PlayerManager.getInstance().getCurrentPlayer().draw4();
+        updateCardGrid(draws);
+    }
     public void updateCardGrid(List<Card> draws) {
         cardGrid.getChildren().clear(); 
         int col = 0;
         int row = 0;
 
         for (Card card : draws) {
-            name = card.getName();
+            String name = card.getName(); 
             ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/org/example/src/assets/" + name + ".png")));
             imageView.setFitHeight(100);
             imageView.setFitWidth(100);
+            GridPane.setHalignment(imageView, HPos.CENTER);
+            GridPane.setValignment(imageView, VPos.CENTER); 
+
             Label label = new Label(name);
+            label.setMaxWidth(Double.MAX_VALUE); 
+            GridPane.setHalignment(label, HPos.CENTER);
             cardGrid.add(imageView, col, row);
             cardGrid.add(label, col, row + 1); 
             col++;
@@ -56,6 +65,7 @@ public class DrawsController {
                 row += 2; 
             }
         }
+        cardGrid.setAlignment(Pos.CENTER); 
     }
 
     @FXML
@@ -65,9 +75,6 @@ public class DrawsController {
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         currentPlayer.save(draws);
         System.out.println("Hands adalah:"+hands);
-
-        // System.out.println("Current hands state after adding new cards:");
-        // PlayerManager.getInstance().getCurrentPlayer().ShowHand();
         UIUpdateService.getInstance().updateHandsGrid();
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();

@@ -30,7 +30,7 @@ public class GridController {
         try {
             gridData = GameData.getInstance().getGridData();
             populateGrid();
-            printCellStatus();
+            // printCellStatus();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,7 +43,7 @@ public class GridController {
             for (int col = 0; col < cols; col++) {
                 StackPane cell = new StackPane();  
                 cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;");
-                cell.setPadding(new Insets(10));  // Set padding around the content
+                cell.setPadding(new Insets(10)); 
                 cell.setMinSize(100, 150);       
                     Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
                     Card cards = new StandardCard(currentPlayer, "Cardname" + row + " " +  col);
@@ -55,6 +55,9 @@ public class GridController {
     }
 
     private void setupDragHandlers(Pane cell, int col, int row) {
+        cell.setOnMouseClicked(event -> {
+            System.out.println("This is clicked");
+        });
         cell.setOnDragDetected(event -> {
             if (!cell.getChildren().isEmpty()) {
                 Dragboard db = cell.startDragAndDrop(TransferMode.MOVE);
@@ -115,7 +118,6 @@ public class GridController {
                                 ProductCard sourcePlantCard = (ProductCard) card;
                                 if (targetAnimalCard.isCarnivore() && sourcePlantCard.isNonVeganProduct()) {
                                     hands.deleteCard(sourceIndex);
-                                    // gridData.setCard(targetCol, targetRow, card);
                                     System.out.println("sebelum makan: " + targetAnimalCard.getCurrentWeight());
                                     targetAnimalCard.eat(targetAnimalCard, sourcePlantCard);
                                     System.out.println("sesudah makan: " + targetAnimalCard.getCurrentWeight());

@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -17,6 +18,7 @@ public class GameApp extends Application {
         primaryStage = stage;
         primaryStage.setTitle("Game Scene");
         primaryStage.setScene(createScene("Game.fxml"));
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
     }
 
@@ -25,20 +27,22 @@ public class GameApp extends Application {
         Parent root = loader.load();
         return new Scene(root);
     }
-
+    
     public static void openNewWindow(String title, String fxmlFile) {
         try {
             Scene scene = createScene(fxmlFile);
             Stage newStage = new Stage();
             newStage.setTitle(title);
+            newStage.initStyle(StageStyle.UNDECORATED); 
             newStage.setScene(scene);
+            newStage.setAlwaysOnTop(true);
             newStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
+    
     public static void main(String[] args) {
         launch(args);
-    }
+    }    
 }
