@@ -125,15 +125,14 @@ public class GameData {
      public static void main(String[] args) {
         try {
             GameData game = new GameData();
-            String jarPath = "path/to/plugin.jar";
+            String jarPath = "Plugin-TXT-Loader/target/Plugin-TXT-Loader-1.0-SNAPSHOT.jar";
             String className = "com.plugin.TxtConfigLoader";
             game.loadPlugins(jarPath, className);
 
-            String directoryPath = "path/to/directory";
+            String directoryPath = "src/src/main/java/entity/plugin/statefiles";
             game.loadGame(directoryPath);
-            game.printInformation();
             // Perform game operations...
-            // game.saveGame(directoryPath);
+            game.saveGame(directoryPath);
         } catch (Exception e) {
             e.printStackTrace();
         }
