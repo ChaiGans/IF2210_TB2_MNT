@@ -10,6 +10,7 @@ module org.example.src {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires com.fasterxml.jackson.databind;
 
     opens org.example.src to javafx.fxml;
     exports org.example.src;
