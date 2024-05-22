@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -32,6 +33,7 @@
                   <Insets right="80.0" />
                </VBox.margin>
             </Label>
+            <Button mnemonicParsing="false" text="Panen" visible="false" fx:id="Panen"/>
          </children>
       </VBox>
       <ImageView fx:id="cardImageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />

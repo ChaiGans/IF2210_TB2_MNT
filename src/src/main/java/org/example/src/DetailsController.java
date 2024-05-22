@@ -36,5 +36,6 @@ public class DetailsController {
             System.out.println("Error loading image: " + e.getMessage());
             cardImageView.setImage(new Image(getClass().getResourceAsStream("/org/example/src/assets/default.png")));
         }
+        if (card instanceof AnimalCard && card instanceof PlantCard);
     }
 }

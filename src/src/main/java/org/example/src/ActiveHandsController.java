@@ -35,16 +35,14 @@ public class ActiveHandsController {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 StackPane cell = new StackPane();
-                cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;");
+                cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;-fx-border-radius:10");
                 cell.setPadding(new Insets(10));
-                cell.setMinSize(100, 150);
-            
+                cell.setMinSize(80, 100);
                 setupDragHandlers(cell, col, 0);
                 handsGrid.add(cell, col, 0);
             }
         }
     }
-
     public void updateGrid(Hands hands) {
         handsGrid.getChildren().clear();
         int maxColumns = 6;
@@ -52,8 +50,8 @@ public class ActiveHandsController {
         for (int i = 0; i < maxColumns; i++) {
             try {
                 StackPane cell = new StackPane();
-                cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;");
-                cell.setPrefSize(100, 150);
+                cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;-fx-border-radius:10");
+                cell.setMinSize(80, 100);
                 Card cards = hands.getCard(i);
                 if(cards != null){
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Card.fxml"));

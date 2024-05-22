@@ -5,12 +5,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+
 import java.util.List;
 
 public class GameController {
 
     @FXML
-    private ImageView arrowImageView; 
+    private StackPane arrowImageView; 
     @FXML
     private Label counterLabel;
     private int counter = 1; 

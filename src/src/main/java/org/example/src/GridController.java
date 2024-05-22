@@ -47,9 +47,9 @@ public class GridController {
             for(int col = 0; col < cols; col++){
                 try {
                     StackPane cell = new StackPane();
-                    cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;");
+                    cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0; -fx-border-radius:10");
                     cell.setPadding(new Insets(10));
-                    cell.setMinSize(100, 150); 
+                    cell.setMinSize(80, 100); 
     
                     Card card = gridData.getCard(col, row);
                     if (card != null) {

@@ -8,15 +8,12 @@
 <?import javafx.scene.text.Font?>
 
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="80.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: #e0e0e0"  fx:controller="org.example.src.CardController"  fx:id="card">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="60.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.src.CardController"  fx:id="card">
    <children>
       <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" fx:id="cardImage">
          <image>
             <Image url="@../public/Clock.png" fx:id="ImageView"/>
          </image>
-         <VBox.margin>
-            <Insets bottom="10.0" />
-         </VBox.margin>
       </ImageView>
       <Label text="Clock" fx:id="cardLabel">
          <font>
