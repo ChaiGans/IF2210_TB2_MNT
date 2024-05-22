@@ -31,6 +31,7 @@ public class GameController {
         manager.switchPlayer(); // Switch to the next player
         counter++;
         counterLabel.setText(String.valueOf(counter));
+        UIUpdateService.getInstance().updateRealGrid();
         // List<Card> draws = manager.getCurrentPlayer().draw4();
         // manager.getCurrentPlayer().save(draws);
         GameApp.openNewWindow("None", "Draws.fxml");

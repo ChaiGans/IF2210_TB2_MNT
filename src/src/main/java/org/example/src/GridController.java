@@ -31,41 +31,56 @@ public class GridController {
     @FXML
     public void initialize() {
         try {
-            gridData = GameData.getInstance().getGridData();
-            populateGrid();
-            // printCellStatus();
+            gridData = PlayerManager.getInstance().getCurrentPlayer().getField();
+            UIUpdateService.getInstance().setGridsController(this);
+            updateGrids(gridData);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void populateGrid() throws Exception {
+    public void updateGrids(Grid gridData) {
+        grid.getChildren().clear();
         int rows = 4;
         int cols = 5;
         for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                StackPane cell = new StackPane();  
-                cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;");
-                cell.setPadding(new Insets(10)); 
-                cell.setMinSize(100, 150);       
-                    Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-                    Card cards = new StandardCard(currentPlayer, "Cardname" + row + " " +  col);
-                    gridData.setCard(col, row, cards);
-                setupDragHandlers(cell, col, row);
-                grid.add(cell, col, row);
+            for(int col = 0; col < cols; col++){
+                try {
+                    StackPane cell = new StackPane();
+                    cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;");
+                    cell.setPadding(new Insets(10));
+                    cell.setMinSize(100, 150); 
+    
+                    Card card = gridData.getCard(col, row);
+                    if (card != null) {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Card.fxml"));
+                        Node cardNode = loader.load();
+                        CardController controller = loader.getController();
+                        controller.setCardInfo(card.getName() + ".png", card.getName());  
+                        cell.getChildren().add(cardNode); 
+                    }
+    
+                    setupDragHandlers(cell, col, row);
+                    grid.add(cell, col, row);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
     private void setupDragHandlers(Pane cell, int col, int row) {
+        gridData = PlayerManager.getInstance().getCurrentPlayer().getField();
         cell.setOnMouseClicked(event -> {
             System.out.println("This is clicked");
             Card targetCard = gridData.getCard(col, row);
+            gridData.printInformation();
             if (targetCard != null) {
                 System.out.println("Card at (" + col + ", " + row + "): " + targetCard.getName());
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Card.fxml"));
                     Parent root = loader.load();
+                    System.out.println("Namanya adalah"+targetCard.getName());
                     CardController controller = loader.getController();
                     controller.showCardDetails(targetCard);
                 } catch (IOException e) {
@@ -95,11 +110,12 @@ public class GridController {
         });
     
         cell.setOnDragDropped(event -> {
-            hands = GameData.getInstance().getHands();
+            Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+            gridData = currentPlayer.getField();
+            hands = currentPlayer.getHands();
             Dragboard db = event.getDragboard();
             boolean success = false;
             if (db.hasString()) {
-                Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
                 String[] dragData = db.getString().split(",");
                 String sourceType = dragData[0];
                 int sourceIndex = Integer.parseInt(dragData[1]);
@@ -122,7 +138,7 @@ public class GridController {
 
                                 hands.deleteCard(sourceIndex);
                                 gridData.setCard(targetCol, targetRow, card);
-                                GameData.getInstance().uploadGridData(currentPlayer);
+                                // GameData.getInstance().uploadGridData(currentPlayer);
     
                                 Node cardNode = sourcePane.getChildren().remove(0);
                                 targetPane.getChildren().add(cardNode);
@@ -140,7 +156,7 @@ public class GridController {
                                     targetAnimalCard.eat(targetAnimalCard, sourcePlantCard);
                                     System.out.println("sesudah makan: " + targetAnimalCard.getCurrentWeight());
 
-                                    GameData.getInstance().uploadGridData(currentPlayer);
+                                    // GameData.getInstance().uploadGridData(currentPlayer);
     
                                     sourcePane.getChildren().remove(0);
                                     success = true;
@@ -151,7 +167,7 @@ public class GridController {
                                     targetAnimalCard.eat(targetAnimalCard, sourcePlantCard);
                                     System.out.println("sesudah makan: " + targetAnimalCard.getCurrentWeight());
                                     
-                                    GameData.getInstance().uploadGridData(currentPlayer);
+                                    // GameData.getInstance().uploadGridData(currentPlayer);
     
                                     sourcePane.getChildren().remove(0);
                                     success = true;
@@ -162,7 +178,7 @@ public class GridController {
                                     targetAnimalCard.eat(targetAnimalCard, sourcePlantCard);
                                     System.out.println("sesudah makan: " + targetAnimalCard.getCurrentWeight());
 
-                                    GameData.getInstance().uploadGridData(currentPlayer);
+                                    // GameData.getInstance().uploadGridData(currentPlayer);
     
                                     sourcePane.getChildren().remove(0);
                                     success = true;
@@ -190,21 +206,21 @@ public class GridController {
                                 if (targetAnimalCard.isCarnivore() && sourcePlantCard.isNonVeganProduct()) {
                                     gridData.removeCard(sourceIndex, sourceRow);
                                     gridData.setCard(targetCol, targetRow, card);
-                                    GameData.getInstance().uploadGridData(currentPlayer);
+                                    // GameData.getInstance().uploadGridData(currentPlayer);
     
                                     sourcePane.getChildren().remove(0);
                                     success = true;
                                 } else if (targetAnimalCard.isHerbivore() && sourcePlantCard.isVeganProduct()) {
                                     gridData.removeCard(sourceIndex, sourceRow);
                                     gridData.setCard(targetCol, targetRow, card);
-                                    GameData.getInstance().uploadGridData(currentPlayer);
+                                    // GameData.getInstance().uploadGridData(currentPlayer);
     
                                     sourcePane.getChildren().remove(0);
                                     success = true;
                                 } else if (targetAnimalCard.isOmnivore() && card instanceof ProductCard) {
                                     gridData.removeCard(sourceIndex, sourceRow);
                                     gridData.setCard(targetCol, targetRow, card);
-                                    GameData.getInstance().uploadGridData(currentPlayer);
+                                    // GameData.getInstance().uploadGridData(currentPlayer);
     
                                     sourcePane.getChildren().remove(0);
                                     success = true;
@@ -213,9 +229,12 @@ public class GridController {
                         }
                     }
                 }
-                GameData.getInstance().printPlayerStateInfo(currentPlayer);
+                // validateGrid();
+                // GameData.getInstance().printPlayerStateInfo(currentPlayer);
             }
             System.out.println("list of hands:  " + hands.getCards());
+            System.out.println("list of grids: " );
+            currentPlayer.getField().printInformation();
     
             event.setDropCompleted(success);
             event.consume();

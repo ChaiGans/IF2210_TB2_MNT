@@ -19,8 +19,9 @@ public class ActiveHandsController {
     @FXML
     public void initialize() {
         try {
-            hands = GameData.getInstance().getHands();
-            gridData = GameData.getInstance().getGridData();
+            Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+            hands = currentPlayer.getHands();
+            gridData = currentPlayer.getField();
             UIUpdateService.getInstance().setHandsController(this);
             populateHandsGrid();
         } catch (Exception e) {
@@ -78,7 +79,6 @@ public class ActiveHandsController {
                 content.putString("hands," + handsGrid.getChildren().indexOf(cell));
                 db.setContent(content);
                 DragContext.getInstance().setDragSource(cell);
-                System.out.println("Drag detected at col: " + col);
                 event.consume();
             }
         });
