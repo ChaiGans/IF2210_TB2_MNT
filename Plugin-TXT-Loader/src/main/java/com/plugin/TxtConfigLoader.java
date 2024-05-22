@@ -60,6 +60,8 @@ public class TxtConfigLoader extends BasePlugin implements PluginInterface {
             tempStore.addItem(itemCard, itemQuantity);
         }
 
+        tempStore.printStoreInformation();
+
         List<Player> listPlayers = new ArrayList<>();
         Player player1 = this.loadPlayer(player1FilePath);
         Player player2 = this.loadPlayer(player2FilePath);

@@ -5,7 +5,16 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/src/pom.xml" />
+        <option value="$PROJECT_DIR$/Plugin-XAML-Loader/pom.xml" />
+        <option value="$PROJECT_DIR$/Plugin-XML-Loader/pom.xml" />
+        <option value="$PROJECT_DIR$/Plugin-JSON-Loader/pom.xml" />
+        <option value="$PROJECT_DIR$/Plugin-TXT-Loader/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/Plugin-XAML-Loader/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">

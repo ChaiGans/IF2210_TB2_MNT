@@ -30,7 +30,7 @@ public class GameApp extends Application {
     
     public static void openNewWindow(String title, String fxmlFile) {
         try {
-            Scene scene = createScene(fxmlFile);
+            Scene scene = createScene   (fxmlFile);
             Stage newStage = new Stage();
             newStage.setTitle(title);
             newStage.initStyle(StageStyle.UNDECORATED); 
