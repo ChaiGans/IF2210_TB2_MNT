@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -36,6 +37,12 @@ public class GameApp extends Application {
             newStage.initStyle(StageStyle.UNDECORATED); 
             newStage.setScene(scene);
             newStage.setAlwaysOnTop(true);
+            newStage.setOnShown(event -> {
+                double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
+                double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
+                newStage.setX((screenWidth - newStage.getWidth()) / 2);
+                newStage.setY((screenHeight - newStage.getHeight()) / 2);
+            });
             newStage.show();
         } catch (IOException e) {
             e.printStackTrace();

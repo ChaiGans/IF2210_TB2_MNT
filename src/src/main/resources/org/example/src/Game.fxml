@@ -179,26 +179,58 @@
                      <Insets top="30.0" />
                   </padding>
                </VBox>
-               <HBox prefHeight="561.0" prefWidth="1056.0">
+               <VBox prefHeight="200.0" prefWidth="100.0">
                   <children>
-                     <fx:include fx:id="GridField" source="ActiveHands.fxml" />
-                     <StackPane fx:id="arrowImageView" maxHeight="70.0" maxWidth="200.0" minHeight="60.0" minWidth="200.0" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #99582a; -fx-background-radius: 10;">
+                     <HBox prefHeight="366.0" prefWidth="1056.0">
                         <children>
-                           <Label text="Next Turn" textFill="#ffe6a7">
-                              <font>
-                                 <Font name="Cooper Black" size="25.0" />
-                              </font>
-                              <StackPane.margin>
-                                 <Insets />
-                              </StackPane.margin>
-                           </Label>
+                           <fx:include fx:id="GridField1" source="ActiveHands.fxml" />
+                           <StackPane fx:id="arrowImageView" maxHeight="70.0" maxWidth="200.0" minHeight="60.0" minWidth="200.0" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #99582a; -fx-background-radius: 10;">
+                              <children>
+                                 <Label text="Next Turn" textFill="#ffe6a7">
+                                    <font>
+                                       <Font name="Cooper Black" size="25.0" />
+                                    </font>
+                                    <StackPane.margin>
+                                       <Insets />
+                                    </StackPane.margin>
+                                 </Label>
+                              </children>
+                              <HBox.margin>
+                                 <Insets top="30.0" />
+                              </HBox.margin>
+                           </StackPane>
                         </children>
-                        <HBox.margin>
-                           <Insets top="30.0" />
-                        </HBox.margin>
-                     </StackPane>
+                     </HBox>
+                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                        <children>
+                           <StackPane fx:id="ShowEnemy" maxHeight="70.0" maxWidth="200.0" minHeight="60.0" minWidth="200.0" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #99582a; -fx-background-radius: 10;" onMouseClicked="#ShowEnemy">
+                              <children>
+                                 <Label text="Enemy" textFill="#ffe6a7">
+                                    <font>
+                                       <Font name="Cooper Black" size="25.0" />
+                                    </font>
+                                    <StackPane.margin>
+                                       <Insets />
+                                    </StackPane.margin>
+                                 </Label>
+                              </children>
+                           </StackPane>
+                           <StackPane fx:id="CurrentButton" maxHeight="70.0" maxWidth="200.0" minHeight="60.0" minWidth="200.0" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #99582a; -fx-background-radius: 10;" onMouseClicked="#ShowCurrent">
+                              <children>
+                                 <Label text="Sendiri" textFill="#ffe6a7">
+                                    <font>
+                                       <Font name="Cooper Black" size="25.0" />
+                                    </font>
+                                    <StackPane.margin>
+                                       <Insets />
+                                    </StackPane.margin>
+                                 </Label>
+                              </children>
+                           </StackPane>
+                        </children>
+                     </HBox>
                   </children>
-               </HBox>
+               </VBox>
                <VBox.margin>
                   <Insets />
                </VBox.margin>

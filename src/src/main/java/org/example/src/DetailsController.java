@@ -74,7 +74,7 @@ public class DetailsController {
         currentPlayer.AddHand(card);
         UIUpdateService.getInstance().updateHandsGrid();
         UIUpdateService.getInstance().updateRealGrid();
-        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) PanenButton.getScene().getWindow();
         stage.close();
     }
 

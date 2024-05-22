@@ -54,6 +54,16 @@ public class UIUpdateService {
             System.out.println("grid is null");
         }
     }
+    public void updateEnemyGrid() {
+        if (gridController != null) {
+            Platform.runLater(() -> {
+                gridController.updateGrids(PlayerManager.getInstance().getEnemyPlayer().getField());
+            });
+        }
+        else{
+            System.out.println("grid is null");
+        }
+    }
     
     public void updateDrawsGrid() {
         if (drawsController != null) {

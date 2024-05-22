@@ -40,4 +40,12 @@ public class GameController {
         // manager.getCurrentPlayer().save(draws);
         GameApp.openNewWindow("None", "Draws.fxml");
     }
+    @FXML
+    public void ShowEnemy(MouseEvent event){
+        UIUpdateService.getInstance().updateEnemyGrid();
+    }
+    @FXML
+    public void ShowCurrent(MouseEvent event){
+        UIUpdateService.getInstance().updateRealGrid();
+    }
 }
