@@ -35,6 +35,7 @@ public class GameController {
         counter++;
         counterLabel.setText(String.valueOf(counter));
         UIUpdateService.getInstance().updateRealGrid();
+        UIUpdateService.getInstance().updateHandsGrid();
         // List<Card> draws = manager.getCurrentPlayer().draw4();
         // manager.getCurrentPlayer().save(draws);
         GameApp.openNewWindow("None", "Draws.fxml");
