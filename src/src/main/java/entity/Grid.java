@@ -87,12 +87,23 @@ public class Grid {
     }
 
     public void setCard(int x, int y, Card card) {
+        System.out.println("Koordinat:"+x+","+y);
         if (x < 0 || x >= width || y < 0 || y >= height) {
             throw new IndexOutOfBoundsException("Coordinates out of bounds");
         }
-        matrix.get(y).set(x, card);
+        this.matrix.get(y).set(x, card);
     }
 
+    public void nextDay(){
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (this.matrix.get(i).get(j) != null  && this.matrix.get(i).get(j) instanceof PlantCard) {
+                    PlantCard card = (PlantCard) this.matrix.get(i).get(j);
+                    card.addAge(1);
+                }
+            }
+        } 
+    }
     public void printInformation() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {

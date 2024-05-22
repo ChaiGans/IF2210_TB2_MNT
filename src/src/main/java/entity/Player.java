@@ -104,6 +104,10 @@ public class Player {
     public void setHands(Hands hands) {
         this.hands = hands;
     }
+
+    public void nextDay(){
+        this.field.nextDay();
+    }
 }
 
 

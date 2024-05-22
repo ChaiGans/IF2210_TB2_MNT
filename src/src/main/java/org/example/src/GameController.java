@@ -28,6 +28,7 @@ public class GameController {
 
     private void nextTurn() {
         PlayerManager manager = PlayerManager.getInstance();
+        PlayerManager.getInstance().getCurrentPlayer().nextDay();
         manager.switchPlayer(); // Switch to the next player
         counter++;
         counterLabel.setText(String.valueOf(counter));
