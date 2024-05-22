@@ -108,6 +108,9 @@ public class Player {
     public void nextDay(){
         this.field.nextDay();
     }
+    public Card Panen(int col,int row){
+        return this.field.Panen(col,row);
+    }
 }
 
 

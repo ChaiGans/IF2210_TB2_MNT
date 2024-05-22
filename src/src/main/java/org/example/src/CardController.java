@@ -10,7 +10,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 public class CardController {
@@ -56,6 +58,13 @@ public class CardController {
             Stage detailStage = new Stage();
             Scene scene = new Scene(root);
             detailStage.setScene(scene);
+            detailStage.setOnShown(event -> {
+                double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
+                double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
+                detailStage.setX((screenWidth - detailStage.getWidth()) / 2);
+                detailStage.setY((screenHeight - detailStage.getHeight()) / 2);
+            });
+            detailStage.initStyle(StageStyle.UNDECORATED); 
             detailStage.setTitle("Card Details");
             detailStage.show();
         } catch (IOException e) {

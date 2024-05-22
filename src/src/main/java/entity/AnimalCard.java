@@ -107,6 +107,7 @@ abstract public class AnimalCard extends Card {
         animal_weight = animal_weight + food_weight;
         animal.setWeight(animal_weight);
     }
+    public abstract ProductCard harvest();
 }
 
 abstract class Carnivore extends AnimalCard {

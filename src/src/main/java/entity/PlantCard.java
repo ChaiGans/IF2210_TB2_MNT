@@ -23,7 +23,7 @@ abstract public class PlantCard extends Card {
     public int getHarvestAge() {
         return this.harvestAge;
     }
-
+    public abstract ProductCard harvest();
     public void addAge(int age) {
         this.currentAge += age;
     }

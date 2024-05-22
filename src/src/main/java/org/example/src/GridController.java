@@ -72,6 +72,7 @@ public class GridController {
     private void setupDragHandlers(Pane cell, int col, int row) {
         gridData = PlayerManager.getInstance().getCurrentPlayer().getField();
         cell.setOnMouseClicked(event -> {
+            GameData.getInstance().getCoordinates(col, row);
             System.out.println("This is clicked");
             Card targetCard = gridData.getCard(col, row);
             gridData.printInformation();

@@ -85,6 +85,26 @@ public class Grid {
             throw new IndexOutOfBoundsException("Coordinates out of bounds");
         }
     }
+    public ProductCard Panen(int x, int y) {
+        if (x >= 0 && x < width && y >= 0 && y < height) {
+            Card card = this.matrix.get(y).get(x);
+            if (card instanceof AnimalCard){
+                AnimalCard animalCard = (AnimalCard) card;
+                ProductCard product = animalCard.harvest();
+                matrix.get(y).set(x, null);
+                return product;
+            }
+            else if (card instanceof PlantCard){
+                PlantCard plantCard = (PlantCard) card;
+                ProductCard product = plantCard.harvest();
+                matrix.get(y).set(x, null);
+                return product;
+            }
+            throw new IndexOutOfBoundsException("Not any of the type");
+        } else {
+            throw new IndexOutOfBoundsException("Coordinates out of bounds");
+        }
+    }
 
     public void setCard(int x, int y, Card card) {
         System.out.println("Koordinat:"+x+","+y);

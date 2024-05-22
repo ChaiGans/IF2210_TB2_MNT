@@ -14,6 +14,8 @@ public class GameData {
     private static GameData instance;
     private Hands hands;
     private Grid gridData;
+    private int currentClickedRow;
+    private int currentClickedCol;
 
     private GameData() {
         pluginManager = new PluginManager();
@@ -91,7 +93,16 @@ public class GameData {
             e.printStackTrace();
         }
     }
-
+    public void getCoordinates(int col,int row){
+        this.currentClickedCol = col;
+        this.currentClickedRow = row;
+    }
+    public int ColClicked(){
+        return this.currentClickedCol;
+    }
+    public int rowClciked(){
+        return this.currentClickedRow;
+    }
     public void saveGame(String directoryPath) {
         try {
             if (plugin.getName() == "com.plugin.TxtConfigLoader") {
