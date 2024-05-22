@@ -51,17 +51,23 @@ public class ActiveHandsController {
     
         for (int i = 0; i < maxColumns; i++) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Card.fxml"));
-                Node cardNode = loader.load();
-                CardController controller = loader.getController();
-                if (i < hands.getCardCount() && hands.getCards().get(i) != null) {
-                    Card card = hands.getCards().get(i);
-                    controller.setCardInfo(card.getName() + ".png", card.getName());
-                }
                 StackPane cell = new StackPane();
                 cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;");
                 cell.setPrefSize(100, 150);
-                cell.getChildren().add(cardNode);  
+                Card cards = hands.getCard(i);
+                if(cards != null){
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Card.fxml"));
+                    Node cardNode = loader.load();
+                    CardController controller = loader.getController();
+                    if (i < hands.getCardCount() && hands.getCards().get(i) != null) {
+                        Card card = hands.getCards().get(i);
+                        controller.setCardInfo(card.getName() + ".png", card.getName());
+                        cell.getChildren().add(cardNode);  
+                    }
+                }
+                
+                
+                
                 
                 setupDragHandlers(cell,i,0);
                 handsGrid.add(cell, i, 0);

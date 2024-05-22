@@ -138,7 +138,6 @@ public class GridController {
 
                                 hands.deleteCard(sourceIndex);
                                 gridData.setCard(targetCol, targetRow, card);
-                                // GameData.getInstance().uploadGridData(currentPlayer);
     
                                 Node cardNode = sourcePane.getChildren().remove(0);
                                 targetPane.getChildren().add(cardNode);
@@ -156,7 +155,7 @@ public class GridController {
                                     targetAnimalCard.eat(targetAnimalCard, sourcePlantCard);
                                     System.out.println("sesudah makan: " + targetAnimalCard.getCurrentWeight());
 
-                                    // GameData.getInstance().uploadGridData(currentPlayer);
+
     
                                     sourcePane.getChildren().remove(0);
                                     success = true;
@@ -167,7 +166,7 @@ public class GridController {
                                     targetAnimalCard.eat(targetAnimalCard, sourcePlantCard);
                                     System.out.println("sesudah makan: " + targetAnimalCard.getCurrentWeight());
                                     
-                                    // GameData.getInstance().uploadGridData(currentPlayer);
+
     
                                     sourcePane.getChildren().remove(0);
                                     success = true;
@@ -178,7 +177,7 @@ public class GridController {
                                     targetAnimalCard.eat(targetAnimalCard, sourcePlantCard);
                                     System.out.println("sesudah makan: " + targetAnimalCard.getCurrentWeight());
 
-                                    // GameData.getInstance().uploadGridData(currentPlayer);
+
     
                                     sourcePane.getChildren().remove(0);
                                     success = true;
@@ -206,21 +205,21 @@ public class GridController {
                                 if (targetAnimalCard.isCarnivore() && sourcePlantCard.isNonVeganProduct()) {
                                     gridData.removeCard(sourceIndex, sourceRow);
                                     gridData.setCard(targetCol, targetRow, card);
-                                    // GameData.getInstance().uploadGridData(currentPlayer);
+
     
                                     sourcePane.getChildren().remove(0);
                                     success = true;
                                 } else if (targetAnimalCard.isHerbivore() && sourcePlantCard.isVeganProduct()) {
                                     gridData.removeCard(sourceIndex, sourceRow);
                                     gridData.setCard(targetCol, targetRow, card);
-                                    // GameData.getInstance().uploadGridData(currentPlayer);
+
     
                                     sourcePane.getChildren().remove(0);
                                     success = true;
                                 } else if (targetAnimalCard.isOmnivore() && card instanceof ProductCard) {
                                     gridData.removeCard(sourceIndex, sourceRow);
                                     gridData.setCard(targetCol, targetRow, card);
-                                    // GameData.getInstance().uploadGridData(currentPlayer);
+
     
                                     sourcePane.getChildren().remove(0);
                                     success = true;
@@ -229,8 +228,6 @@ public class GridController {
                         }
                     }
                 }
-                // validateGrid();
-                // GameData.getInstance().printPlayerStateInfo(currentPlayer);
             }
             System.out.println("list of hands:  " + hands.getCards());
             System.out.println("list of grids: " );
@@ -246,7 +243,6 @@ public class GridController {
         });
     }
     
-
     private void validateGrid() {
         System.out.println("ini dari grid");
         for (int row = 0; row < gridData.getHeight(); row++) {
