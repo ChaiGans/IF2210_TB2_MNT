@@ -27,6 +27,10 @@ public abstract class Card {
         System.out.println("This card named " + this.getName() + " is owned by " + this.owner.getName() + " and have these effects " + this.activeEffect.toString());
     }
 
+    public boolean isProtected() {
+        return activeEffect.contains("Protect");
+    }    
+
     public abstract String getName();
 
 }

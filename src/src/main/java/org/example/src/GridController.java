@@ -4,13 +4,13 @@ import java.io.IOException;
 
 import entity.AnimalCard;
 import entity.Card;
+import entity.GameData;
 import entity.Grid;
 import entity.Hands;
+import entity.IItemEffect;
 import entity.PlantCard;
 import entity.Player;
 import entity.ProductCard;
-import entity.StandardCard;
-import entity.GameData;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -25,20 +25,31 @@ import javafx.scene.input.*;
 public class GridController {
     @FXML
     private GridPane grid;
-    private Grid gridData;
+    private Grid currentGrid;
     private Hands hands;
 
     @FXML
     public void initialize() {
         try {
-            gridData = PlayerManager.getInstance().getCurrentPlayer().getField();
+            currentGrid = PlayerManager.getInstance().getCurrentPlayer().getField();
             UIUpdateService.getInstance().setGridsController(this);
-            updateGrids(gridData);
+            updateGrids(currentGrid);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public void toggleGridDisplay(boolean enemy) {
+        if (enemy == false) {
+            currentGrid = PlayerManager.getInstance().getCurrentPlayer().getField();
+            updateGrids(currentGrid);
+
+        } else {
+            currentGrid = PlayerManager.getInstance().getEnemyPlayer().getField();
+            updateGrids(currentGrid);
+        }
+    }
+    
     public void updateGrids(Grid gridData) {
         grid.getChildren().clear();
         int rows = 4;
@@ -70,12 +81,12 @@ public class GridController {
     }
 
     private void setupDragHandlers(Pane cell, int col, int row) {
-        gridData = PlayerManager.getInstance().getCurrentPlayer().getField();
+        // currentGrid = PlayerManager.getInstance().getCurrentPlayer().getField();
         cell.setOnMouseClicked(event -> {
             GameData.getInstance().getCoordinates(col, row);
             System.out.println("This is clicked");
-            Card targetCard = gridData.getCard(col, row);
-            gridData.printInformation();
+            Card targetCard = currentGrid.getCard(col, row);
+            currentGrid.printInformation();
             if (targetCard != null) {
                 System.out.println("Card at (" + col + ", " + row + "): " + targetCard.getName());
                 try {
@@ -112,7 +123,7 @@ public class GridController {
     
         cell.setOnDragDropped(event -> {
             Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-            gridData = currentPlayer.getField();
+            // currentGrid = currentPlayer.getField();
             hands = currentPlayer.getHands();
             Dragboard db = event.getDragboard();
             boolean success = false;
@@ -132,108 +143,89 @@ public class GridController {
                     System.out.println("masuk");
                     Card card = hands.getCard(sourceIndex);
                     System.out.println("source index: " +  sourceIndex);
-                    if (card != null && targetCol >= 0 && targetCol < gridData.getWidth() && targetRow >= 0 && targetRow < gridData.getHeight()) {
+                    if (card != null && targetCol >= 0 && targetCol < currentGrid.getWidth() && targetRow >= 0 && targetRow < currentGrid.getHeight()) {
                         if (targetPane.getChildren().isEmpty()) {
                             if (card instanceof AnimalCard || card instanceof PlantCard) {
                                 System.out.println("this is plant or animal");
 
                                 hands.deleteCard(sourceIndex);
-                                gridData.setCard(targetCol, targetRow, card);
+                                currentGrid.setCard(targetCol, targetRow, card);
     
                                 Node cardNode = sourcePane.getChildren().remove(0);
                                 targetPane.getChildren().add(cardNode);
                                 success = true;
                             }
                         } else {
-                            Card targetCard = gridData.getCard(targetCol, targetRow);
-                            System.out.println("target card" + targetCard);
+                            Card targetCard = currentGrid.getCard(targetCol, targetRow);
+                            System.out.println("target card: " + targetCard);
                             if (targetCard instanceof AnimalCard && card instanceof ProductCard) {
                                 AnimalCard targetAnimalCard = (AnimalCard) targetCard;
                                 ProductCard sourcePlantCard = (ProductCard) card;
                                 if (targetAnimalCard.isCarnivore() && sourcePlantCard.isNonVeganProduct()) {
                                     hands.deleteCard(sourceIndex);
-                                    System.out.println("sebelum makan: " + targetAnimalCard.getCurrentWeight());
                                     targetAnimalCard.eat(targetAnimalCard, sourcePlantCard);
-                                    System.out.println("sesudah makan: " + targetAnimalCard.getCurrentWeight());
-
-
-    
+                                    System.out.println("tes 1");
+                                    System.out.println("sesudah makan " + targetAnimalCard.getCurrentWeight());
                                     sourcePane.getChildren().remove(0);
-                                    success = true;
+                                    success = true;  
                                 } else if (targetAnimalCard.isHerbivore() && sourcePlantCard.isVeganProduct()) {
                                     hands.deleteCard(sourceIndex);
-                                    // gridData.setCard(targetCol, targetRow, card);
-                                    System.out.println("sebelum makan: " + targetAnimalCard.getCurrentWeight());
                                     targetAnimalCard.eat(targetAnimalCard, sourcePlantCard);
-                                    System.out.println("sesudah makan: " + targetAnimalCard.getCurrentWeight());
-                                    
-
-    
+                                    System.out.println("tes 2");
+                                    System.out.println("sesudah makan " + targetAnimalCard.getCurrentWeight());
                                     sourcePane.getChildren().remove(0);
-                                    success = true;
+                                    success = true;  
                                 } else if (targetAnimalCard.isOmnivore() && card instanceof ProductCard) {
                                     hands.deleteCard(sourceIndex);
-                                    // gridData.setCard(targetCol, targetRow, card);
-                                    System.out.println("sebelum makan: " + targetAnimalCard.getCurrentWeight());
                                     targetAnimalCard.eat(targetAnimalCard, sourcePlantCard);
-                                    System.out.println("sesudah makan: " + targetAnimalCard.getCurrentWeight());
-
-
-    
+                                    System.out.println("tes 3");
+                                    System.out.println("sesudah makan " + targetAnimalCard.getCurrentWeight());
                                     sourcePane.getChildren().remove(0);
-                                    success = true;
+                                    success = true;  
                                 }
+                                                              
+                            }else if (card instanceof IItemEffect){
+                                IItemEffect itemCard = (IItemEffect) card;
+                        
+                                if (targetCard instanceof PlantCard) {
+                                    itemCard.useOn((PlantCard) targetCard, currentGrid, targetCol, targetRow, currentPlayer);
+                                } else if (targetCard instanceof AnimalCard) {
+                                    itemCard.useOn((AnimalCard) targetCard, currentGrid, targetCol, targetRow, currentPlayer);
+                                }
+                                
+                                hands.deleteCard(sourceIndex);
+                                sourcePane.getChildren().remove(0);
+                                success = true;
                             }
                         }
                     }
                 } else if ("grid".equals(sourceType)) {
-                    Card card = gridData.getCard(sourceIndex, sourceRow);
+                    Card card = currentGrid.getCard(sourceIndex, sourceRow);
                     if (card != null && (sourceIndex != targetCol || sourceRow != targetRow)) {
                         if (targetPane.getChildren().isEmpty()) {
-                            gridData.removeCard(sourceIndex, sourceRow);
-                            gridData.setCard(targetCol, targetRow, card);
-    
-                            GameData.getInstance().uploadGridData(currentPlayer);
-    
+                            currentGrid.removeCard(sourceIndex, sourceRow);
+                            currentGrid.setCard(targetCol, targetRow, card);
                             Node cardNode = sourcePane.getChildren().remove(0);
                             targetPane.getChildren().add(cardNode);
                             success = true;
-                        } else {
-                            Card targetCard = gridData.getCard(targetCol, targetRow);
-                            if (targetCard instanceof AnimalCard && card instanceof PlantCard) {
-                                AnimalCard targetAnimalCard = (AnimalCard) targetCard;
-                                ProductCard sourcePlantCard = (ProductCard) card;
-                                if (targetAnimalCard.isCarnivore() && sourcePlantCard.isNonVeganProduct()) {
-                                    gridData.removeCard(sourceIndex, sourceRow);
-                                    gridData.setCard(targetCol, targetRow, card);
-
-    
-                                    sourcePane.getChildren().remove(0);
-                                    success = true;
-                                } else if (targetAnimalCard.isHerbivore() && sourcePlantCard.isVeganProduct()) {
-                                    gridData.removeCard(sourceIndex, sourceRow);
-                                    gridData.setCard(targetCol, targetRow, card);
-
-    
-                                    sourcePane.getChildren().remove(0);
-                                    success = true;
-                                } else if (targetAnimalCard.isOmnivore() && card instanceof ProductCard) {
-                                    gridData.removeCard(sourceIndex, sourceRow);
-                                    gridData.setCard(targetCol, targetRow, card);
-
-    
-                                    sourcePane.getChildren().remove(0);
-                                    success = true;
-                                }
-                            }
-                        }
+                        } 
                     }
                 }
             }
-            System.out.println("list of hands:  " + hands.getCards());
-            System.out.println("list of grids: " );
+            if(currentPlayer == PlayerManager.getInstance().getPlayer1()){
+                System.out.println("inii sekarang masih player 1");
+            }else{
+                System.out.println("sekarang player 2");
+            }
+            System.out.println("list of hands player:  " + hands.getCards());
+            System.out.println("list of grids current player: " );
             currentPlayer.getField().printInformation();
-    
+            System.out.println("=================================");
+            System.out.println("grids musuh");
+            PlayerManager.getInstance().getEnemyPlayer().getField().printInformation();
+            System.out.println("hands musuh");
+            PlayerManager.getInstance().getEnemyPlayer().getHands().getCards();
+
             event.setDropCompleted(success);
             event.consume();
         });
@@ -242,44 +234,5 @@ public class GridController {
             DragContext.getInstance().setDragSource(null);
             event.consume();
         });
-    }
-    
-    private void validateGrid() {
-        System.out.println("ini dari grid");
-        for (int row = 0; row < gridData.getHeight(); row++) {
-            for (int col = 0; col < gridData.getWidth(); col++) {
-                if (gridData.getCard(col, row) != null) {
-                    System.out.println("Card at row " + row + ", dan col " + col + " name: " +gridData.getCard(col, row).getName());
-                } else {
-                    System.out.println("No card at " + row + "," + col);
-                }
-            }
-        }
-    }
-
-    private void validateHands() {
-        System.out.println("Ini dari grid");
-        System.out.println("Current hands state:");
-        System.out.println(hands.length());
-        for (int i = 0; i < hands.length(); i++) {
-            if (hands.getCard(i) != null) {
-                System.out.println("Hand " + i + ": " + hands.getCard(i).getName());
-            } else {
-                System.out.println("Hand " + i + " is empty.");
-            }
-        }
-    }
-    
-    private void printCellStatus() {
-        for (Node child : grid.getChildren()) {
-            if (child instanceof Pane) {
-                Pane cell = (Pane) child;
-                if (cell.getChildren().isEmpty()) {
-                    System.out.println("Cell is empty.");
-                } else {
-                    System.out.println("Cell has children.");
-                }
-            }
-        }
     }
 }

@@ -47,7 +47,7 @@ public class Hands {
     }
 
     public int findNullIndex() {
-        for(int i = 0; i < cards.size(); i++){
+        for(int i = 0; i < 6; i++){
             if(cards.get(i) == null){
                 return i;
             }
@@ -70,6 +70,14 @@ public class Hands {
         this.cards.set(index, card);
     }
 
+    public void setCard(int index, Card card) {
+        if (index >= 0 && index < cards.size()) {
+            cards.set(index, card);
+        } else {
+            throw new IndexOutOfBoundsException("Index " + index + " out of bounds for hand size " + cards.size());
+        }
+    }
+
     public void deleteCard(int index) {
         if (index >= 0 && index < cards.size() && cards.get(index) != null) {
             cards.set(index, null);
@@ -82,15 +90,14 @@ public class Hands {
 
     public void moveCard(int fromIndex, int toIndex) {
         if (fromIndex < 0 || fromIndex >= cards.size() || toIndex < 0 || toIndex >= cards.size() || fromIndex == toIndex) {
-            return; 
+            return;
         }
     
-        Card cardToMove = cards.get(fromIndex);
-        if (cardToMove != null) {
-            cards.remove(fromIndex); 
-            cards.add(toIndex, cardToMove);  
-        }
+        Card temp = cards.get(toIndex); 
+        cards.set(toIndex, cards.get(fromIndex)); 
+        cards.set(fromIndex, temp); 
     }
+    
     
     public Card getCard(int index) {
         if (index >= 0 && index < cards.size()) {

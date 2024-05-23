@@ -39,6 +39,7 @@ public class UIUpdateService {
             System.out.println("Hands is null");
         }
     }
+    
 
     public void updateRealGrid() {
         System.out.println("updating grid: ");
@@ -47,7 +48,7 @@ public class UIUpdateService {
         System.out.println("col ui" + PlayerManager.getInstance().getCurrentPlayer().getField().getWidth());
         if (gridController != null) {
             Platform.runLater(() -> {
-                gridController.updateGrids(PlayerManager.getInstance().getCurrentPlayer().getField());
+                gridController.toggleGridDisplay(false);
             });
         }
         else{
@@ -57,7 +58,7 @@ public class UIUpdateService {
     public void updateEnemyGrid() {
         if (gridController != null) {
             Platform.runLater(() -> {
-                gridController.updateGrids(PlayerManager.getInstance().getEnemyPlayer().getField());
+                gridController.toggleGridDisplay(true);
             });
         }
         else{

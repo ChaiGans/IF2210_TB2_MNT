@@ -67,7 +67,7 @@ public class PlayerManager {
     private void printHands(Player player) {
         Hands hands = player.getHands();
         System.out.println("Hands:");
-        for (int i = 0; i < hands.getCardCount(); i++) {
+        for (int i = 0; i < 6; i++) {
             Card card = hands.getCard(i);
             if (card == null) {
                 System.out.println("  - " + "Null");

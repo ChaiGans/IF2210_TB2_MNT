@@ -54,18 +54,16 @@ public class ActiveHandsController {
                 cell.setMinSize(80, 100);
                 Card cards = hands.getCard(i);
                 if(cards != null){
+                    System.out.println("JALANNNNNNNNNNNNNNNNN");
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Card.fxml"));
                     Node cardNode = loader.load();
                     CardController controller = loader.getController();
-                    if (i < hands.getCardCount() && hands.getCards().get(i) != null) {
+                    if (hands.getCards().get(i) != null) {
                         Card card = hands.getCards().get(i);
                         controller.setCardInfo(card.getName() + ".png", card.getName());
                         cell.getChildren().add(cardNode);  
                     }
                 }
-                
-                
-                
                 
                 setupDragHandlers(cell,i,0);
                 handsGrid.add(cell, i, 0);
@@ -95,7 +93,6 @@ public class ActiveHandsController {
         });
     
         cell.setOnDragDropped(event -> {
-            Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
             Dragboard db = event.getDragboard();
             boolean success = false;
             Node dragSource = DragContext.getInstance().getDragSource();
@@ -103,31 +100,42 @@ public class ActiveHandsController {
             if (db.hasString() && dragSource != null) {
                 String[] parts = db.getString().split(",");
                 int sourceIndex = Integer.parseInt(parts[1]);
-        
+                
                 Pane sourcePane = (Pane) dragSource;
                 Pane targetPane = (Pane) event.getGestureTarget();
+                
+                int targetIndex = GridPane.getColumnIndex(targetPane);
+                if (sourceIndex != targetIndex) {
+                    Card sourceCard = hands.getCard(sourceIndex);
+                    Card targetCard = hands.getCard(targetIndex);
+                    if (sourceCard != null) {
+                        if (targetCard != null) {
+                            hands.setCard(targetIndex, sourceCard);
+                            hands.setCard(sourceIndex, targetCard);
+                        } else {
+                            hands.moveCard(sourceIndex, targetIndex);
+                        }
         
-                int targetCol = GridPane.getColumnIndex(targetPane);
+                        Node sourceNode = sourcePane.getChildren().remove(0);
+                        Node targetNode = targetPane.getChildren().isEmpty() ? null : targetPane.getChildren().remove(0);
+                        
+                        targetPane.getChildren().add(sourceNode);
+                        if (targetNode != null) {
+                            sourcePane.getChildren().add(targetNode);
+                        }
         
-                Card card = hands.getCard(sourceIndex);
-                if (card != null) {
-                    hands.moveCard(sourceIndex, targetCol);  
-                    GameData.getInstance().uploadGridData(currentPlayer);
-                    Node cardNode = sourcePane.getChildren().remove(0);
-                    if (targetPane.getChildren().isEmpty()) {
-                        targetPane.getChildren().add(cardNode);  
-                        success = true; 
+                        success = true;
+                        System.out.println("Swapped card from index " + sourceIndex + " to index " + targetIndex);
                     }
-        
-                    System.out.println("Moved card from hands index " + sourceIndex + " to grid column " + targetCol);
                 }
-                validateHands();
             }
             System.out.println("hands after: " + hands.getCards());
         
             event.setDropCompleted(success);
             event.consume();
         });
+        
+        
         
 
     
