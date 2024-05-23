@@ -1,5 +1,7 @@
 package org.example.src;
 
+import entity.*;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -11,11 +13,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import java.util.List;
-import entity.Card;
-import entity.GameData;
-import entity.Hands;
+
 import javafx.event.ActionEvent;
-import entity.Player;
+import java.util.Random;
 
 public class DrawsController {
     @FXML
@@ -36,6 +36,40 @@ public class DrawsController {
         updateCardGrid(draws);
     }
 
+    public synchronized void startBearAttack(BearAttack bearAttack, Grid field) {
+        if (!bearAttack.isBearAttackHappening() && bearAttack.getRandom().nextBoolean()) {
+            bearAttack.setBearAttackHappening(true);
+            bearAttack.setSubgridPosition(bearAttack.determineSubgridPosition(field));
+            int duration = bearAttack.getRandom().nextInt(bearAttack.maxDuration - bearAttack.minDuration + 1) + bearAttack.minDuration;
+            startTimer(duration, bearAttack);
+            System.out.println("Bear attack started! Duration: " + duration + " seconds");
+        }
+    }
+
+    public void startTimer(int duration, BearAttack bearAttack) {
+        Thread timerThread = new Thread(() -> {
+            int remainingTime = duration * 10; // Convert seconds to tenths of a second
+            while (remainingTime > 0) {
+                try {
+                    Thread.sleep(100); // Sleep for 0.1 seconds
+                    remainingTime--;
+                    float remainingTimeInSeconds = remainingTime / 10.0f;
+                    Platform.runLater(() -> GameController.getInstance().updateCounterLabel1(remainingTimeInSeconds));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            bearAttack.setBearAttackHappening(false);
+            if (!PlayerManager.getInstance().getCurrentPlayer().getField().isAreaTrap(bearAttack.getTargetSubgrid())) {
+                PlayerManager.getInstance().getCurrentPlayer().getField().removeCardArea(bearAttack.getTargetSubgrid());
+            } else {
+                PlayerManager.getInstance().getCurrentPlayer().getHands().addCard(CardFactory.createCard("Bear", PlayerManager.getInstance().getCurrentPlayer()));
+            }
+            UIUpdateService.getInstance().updateRealGrid();
+            UIUpdateService.getInstance().updateHandsGrid();
+        });
+        timerThread.start();
+    }
 
     public void shuffle(){
         draws = PlayerManager.getInstance().getCurrentPlayer().draw4();
@@ -79,5 +113,10 @@ public class DrawsController {
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
+        BearAttack bearAttack = new BearAttack();
+        this.startBearAttack(bearAttack, PlayerManager.getInstance().getCurrentPlayer().getField());
+        if (bearAttack.isBearAttackHappening()) {
+            UIUpdateService.getInstance().updateGridColorAttack(bearAttack.getTargetSubgrid());
+        }
     }
 }
