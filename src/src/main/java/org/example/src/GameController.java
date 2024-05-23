@@ -1,4 +1,5 @@
 package org.example.src;
+import entity.Store;
 import javafx.scene.Scene;
 import entity.Card;
 import javafx.application.Platform;
@@ -19,6 +20,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.util.List;
 
 public class GameController {
@@ -52,8 +54,11 @@ public class GameController {
         return instance;
     }
 
+    public Store store;
+
     @FXML
     public void initialize() {
+        this.store = new Store();
         this.manager = PlayerManager.getInstance();
         updateMoneyDisplay();
         manager.switchPlayer();
@@ -116,19 +121,36 @@ public class GameController {
         UIUpdateService.getInstance().updateHandsGrid();
     }
 
-    @FXML
-    private void viewToko(MouseEvent event) {
+//    @FXML
+//    private void viewToko(MouseEvent event) {
+//        try {
+//            System.out.println("Dioteklan");
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Store.fxml"));
+//            Parent root = fxmlLoader.load();
+//            Stage stage = new Stage();
+//            stage.initModality(Modality.APPLICATION_MODAL);
+//            stage.initStyle(StageStyle.UNDECORATED);
+//            stage.setTitle("Toko");
+//            stage.setScene(new Scene(root));
+//            stage.show();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public void viewToko(MouseEvent event) {
         try {
-            System.out.println("Dioteklan");
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Store.fxml"));
-            Parent root = fxmlLoader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Store.fxml"));
+            Parent root = loader.load();
+
+            StoreController controller = loader.getController();
+            controller.setStore(store);
+
             Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setTitle("Toko");
+            stage.setTitle("Store");
             stage.setScene(new Scene(root));
             stage.show();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -126,7 +126,6 @@ public class CardDetailController {
 
     @FXML
     private void handleBackButtonAction() {
-        // Close the current window
         backButton31.getScene().getWindow().hide();
     }
 
