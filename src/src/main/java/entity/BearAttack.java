@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BearAttack {
-    public final int minDuration = 10; // 30 seconds
-    public final int maxDuration = 20; // 60 seconds
+    public final int minDuration = 30; // 30 seconds
+    public final int maxDuration = 60; // 60 seconds
     private final Random random = new Random();
     private boolean bearAttackHappening = false;
     private List<List<Integer>> subgridPosition; // Position of the subgrid being attacked
@@ -86,14 +86,23 @@ public class BearAttack {
                     }
                 }
                 break;
-            case 6: // 3x3 subgrid
+            case 6: // 2x3 or 3x2 subgrid
                 int row6 = random.nextInt(rows - 2);
                 int col6 = random.nextInt(cols - 2);
-                for (int i = 0; i < 3; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        positions.add(List.of(row6 + i, col6 + j));
+                if (random.nextBoolean()) { // 2x3
+                    for (int i = 0; i < 2; i++) {
+                        for (int j = 0; j < 3; j++) {
+                            positions.add(List.of(row6 + i, col6 + j));
+                        }
+                    }
+                } else { //3x2
+                    for (int i = 0; i < 3; i++) {
+                        for (int j = 0; j < 2; j++) {
+                            positions.add(List.of(row6 + i, col6 + j));
+                        }
                     }
                 }
+
                 break;
         }
         return positions;
