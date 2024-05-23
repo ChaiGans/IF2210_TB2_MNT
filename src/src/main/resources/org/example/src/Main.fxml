@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="655.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.src.GameController">
+    <children>
+        <VBox prefHeight="611.0" prefWidth="1000.0" style="-fx-background-color: faedcd;">
+            <children>
+                <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="1000.0" spacing="10.0" style="-fx-background-color: #6B6458;">
+                    <children>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #FDFFEC; -fx-background-radius: 10;">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Store" textAlignment="CENTER">
+                           <font>
+                              <Font name="Cooper Black" size="20.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </StackPane>
+                           <StackPane fx:id="ShowEnemy" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#ShowEnemy" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #99582a; -fx-background-radius: 10;">
+                               <children>
+                                   <Label text="Enemy's Field" textFill="#ffe6a7">
+                                       <font>
+                                           <Font name="Cooper Black" size="20.0" />
+                                       </font>
+                                       <StackPane.margin>
+                                           <Insets />
+                                       </StackPane.margin>
+                                   </Label>
+                               </children>
+                           </StackPane>
+                           <StackPane fx:id="CurrentButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#ShowCurrent" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #99582a; -fx-background-radius: 10;">
+                               <children>
+                                   <Label text="My Field" textFill="#ffe6a7">
+                                       <font>
+                                           <Font name="Cooper Black" size="20.0" />
+                                       </font>
+                                       <StackPane.margin>
+                                           <Insets />
+                                       </StackPane.margin>
+                                   </Label>
+                               </children>
+                           </StackPane>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #312D27; -fx-background-radius: 10;">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Load Plugin" textAlignment="CENTER">
+                           <font>
+                              <Font name="Cooper Black" size="20.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </StackPane>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #312D27; -fx-background-radius: 10;">
+                     <children>
+                        <Text fx:id="LoadState" fill="WHITE" onMouseClicked="#LoadState" strokeType="OUTSIDE" strokeWidth="0.0" text="Load State" textAlignment="CENTER">
+                           <font>
+                              <Font name="Cooper Black" size="20.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </StackPane>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #312D27; -fx-background-radius: 10;">
+                     <children>
+                        <Text fx:id="SaveState" fill="WHITE" onMouseClicked="#SaveState" strokeType="OUTSIDE" strokeWidth="0.0" text="SaveState" textAlignment="CENTER">
+                           <font>
+                              <Font name="Cooper Black" size="20.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </StackPane>
+                    </children>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <padding>
+                        <Insets bottom="40.0" left="20.0" top="40.0" />
+                    </padding>
+                </HBox>
+            <HBox fx:id="Title" alignment="CENTER" prefHeight="474.0" prefWidth="725.0">
+               <children>
+                   <fx:include fx:id="GridField" source="GridField.fxml" />
+                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="0.0" spacing="20.0">
+                            <children>
+                                <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #b23a48; -fx-background-radius: 5;">
+                                    <children>
+                                        <Label fx:id="counterLabel" text="Turn: 1" textFill="#fcb9b2">
+                                            <font>
+                                                <Font name="Cooper Black" size="20.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                        </StackPane>
+                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="180.0">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="110.0" text="Player 1" textFill="#bb9457">
+                                 <font>
+                                    <Font name="Cooper Black" size="24.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../public/farmer.png" />
+                                 </image>
+                              </ImageView>
+                              <HBox alignment="TOP_CENTER" prefHeight="38.0" prefWidth="261.0" spacing="15.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../public/money.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Text fx:id="Player1Money" fill="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="\$ money">
+                                       <font>
+                                          <Font name="Cooper Black" size="20.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="3.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <opaqueInsets>
+                              <Insets left="10.0" />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="20.0" top="30.0" />
+                           </padding>
+                        </VBox>
+                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="180.0">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="110.0" text="Player 2" textFill="#bb9457">
+                                 <font>
+                                    <Font name="Cooper Black" size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets right="-15.0" />
+                                 </VBox.margin>
+                              </Label>
+                                    <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../public/farmer2.png" />
+                                        </image>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                    </ImageView>
+                              <HBox alignment="TOP_CENTER" prefHeight="38.0" prefWidth="261.0" spacing="15.0">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../public/money.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets right="15.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Text fx:id="Player2Money" fill="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="\$ money" textAlignment="RIGHT">
+                                       <font>
+                                          <Font name="Cooper Black" size="20.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="3.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets top="30.0" />
+                           </padding>
+                           <opaqueInsets>
+                              <Insets top="10.0" />
+                           </opaqueInsets>
+                        </VBox>
+                                <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #fcb9b2; -fx-background-radius: 5;">
+                                    <children>
+                                        <Label fx:id="counterLabel1" text="Time:" textFill="#b23a48">
+                                            <font>
+                                                <Font name="Cooper Black" size="20.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </StackPane>
+                                 <StackPane fx:id="arrowImageView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #99582a; -fx-background-radius: 10;">
+                                     <children>
+                                         <Label text="Next Turn" textFill="#ffe6a7">
+                                             <font>
+                                                 <Font name="Cooper Black" size="25.0" />
+                                             </font>
+                                             <StackPane.margin>
+                                                 <Insets />
+                                             </StackPane.margin>
+                                         </Label>
+                                     </children>
+                                 </StackPane>
+                            </children>
+                            <HBox.margin>
+                                <Insets left="20.0" />
+                            </HBox.margin>
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                        </VBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets right="100.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="20.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+                     <fx:include fx:id="GridField1" source="ActiveHands.fxml" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

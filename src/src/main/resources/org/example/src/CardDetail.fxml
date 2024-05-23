@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="426.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.src.CardDetailController">
+    <AnchorPane prefHeight="438.0" prefWidth="623.0" style="-fx-background-color: #F7F5F0;">
+        <Button fx:id="backButton31" layoutX="14.0" layoutY="13.0" onAction="#handleBackButtonAction" prefHeight="36.0" prefWidth="65.0" style="-fx-background-color: #3F3B33;">
+            <graphic>
+                <ImageView fitHeight="24.0" fitWidth="69.0">
+                    <image>
+                        <Image url="@detail/back.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <ImageView fx:id="cardImageView" fitHeight="120.0" fitWidth="120.0" layoutY="49.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="260.0" />
+
+        <Text fx:id="cardNameText" layoutX="99.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" textAlignment="CENTER" AnchorPane.leftAnchor="99.0">
+            <font>
+                <Font name="Segoe UI Semibold" size="25.0" />
+            </font>
+        </Text>
+        <Button fx:id="panenButton11" layoutX="268.0" layoutY="382.0" onAction="#handleBackButtonAction" prefHeight="20.0" prefWidth="104.0" style="-fx-background-color: #3F3B33;" text="PANEN" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+            <font>
+                <Font name="Segoe UI Black" size="15.0" />
+            </font>
+        </Button>
+        <ImageView fitHeight="67.0" fitWidth="443.0" layoutX="98.0" layoutY="263.0">
+            <image>
+                <Image url="@./detail/ItemDetails.png" />
+            </image>
+        </ImageView>
+
+        <Text fx:id="infoText" layoutX="99.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="now">
+            <font>
+                <Font name="Segoe UI Semibold" size="18.0" />
+            </font>
+        </Text>
+      <Text fx:id="Accelerate" layoutX="126.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font name="Segoe UI Semibold" size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="Protect" layoutX="201.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font name="Segoe UI Semibold" size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="Destroy" layoutX="276.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font name="Segoe UI Semibold" size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="InstantHarvest" layoutX="353.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font name="Segoe UI Semibold" size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="Trap" layoutX="428.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font name="Segoe UI Semibold" size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="Delay" layoutX="504.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
+         <font>
+            <Font name="Segoe UI Semibold" size="16.0" />
+         </font>
+      </Text>
+    </AnchorPane>
+</AnchorPane>

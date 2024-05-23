@@ -6,6 +6,8 @@ import entity.Grid;
 import entity.Hands;
 import entity.Player;
 
+import java.util.List;
+
 public class PlayerManager {
     private static final PlayerManager instance = new PlayerManager();
     private Player player1;
@@ -90,4 +92,18 @@ public class PlayerManager {
             System.out.println();
         }
     }
+
+    public void setPlayers(List<Player> players) {
+        if (players.size() != 2) {
+            throw new IllegalArgumentException("Player list must contain exactly two players.");
+        }
+
+        player1 = players.get(0);
+        player2 = players.get(1);
+
+        currentPlayer = player1;
+        isFirstTurn = true;
+        playerInformation();
+    }
+
 }

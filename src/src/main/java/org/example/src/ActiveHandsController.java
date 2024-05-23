@@ -60,6 +60,7 @@ public class ActiveHandsController {
                     CardController controller = loader.getController();
                     if (hands.getCards().get(i) != null) {
                         Card card = hands.getCards().get(i);
+                        controller.setCard(card);
                         controller.setCardInfo(card.getName() + ".png", card.getName());
                         cell.getChildren().add(cardNode);  
                     }

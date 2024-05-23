@@ -33,4 +33,15 @@ public abstract class Card {
 
     public abstract String getName();
 
+    public int getEffectCount(String effect) {
+        int count = 0;
+        for (String active : activeEffect) {
+            if (active.equals(effect)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+
 }

@@ -14,12 +14,19 @@ public class GameApp extends Application {
 
     private static Stage primaryStage; // Primary stage
 
+//    @Override
+//    public void start(Stage stage) throws IOException {
+//        primaryStage = stage;
+//        primaryStage.setTitle("Game Scene");
+//        primaryStage.setScene(createScene("Main.fxml"));
+//        primaryStage.initStyle(StageStyle.UNDECORATED);
+//        primaryStage.show();
+//    }
     @Override
-    public void start(Stage stage) throws IOException {
-        primaryStage = stage;
-        primaryStage.setTitle("Game Scene");
-        primaryStage.setScene(createScene("Game.fxml"));
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+        primaryStage.setTitle("MNT Farming Game");
+        primaryStage.setScene(new Scene(root, 1000, 700)); // Adjust the width and height as needed
         primaryStage.show();
     }
 

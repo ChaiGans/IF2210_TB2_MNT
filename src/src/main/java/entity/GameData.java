@@ -17,7 +17,7 @@ public class GameData {
     private int currentClickedRow;
     private int currentClickedCol;
 
-    private GameData() {
+    public GameData() {
         pluginManager = new PluginManager();
         hands = new Hands();
         gridData = new Grid(5, 4);
@@ -26,6 +26,10 @@ public class GameData {
     public void loadPlugins(String jarPath, String className) throws Exception {
         pluginManager.loadPlugin(jarPath, className);
         plugin = pluginManager.getPlugin(className);
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 
     public void uploadGridData(Player currPlayer) {
@@ -75,16 +79,16 @@ public class GameData {
         }
     }
 
-    
+
     public void loadGame(String directoryPath) {
         try {
             if (plugin.verifyDirectory(directoryPath)) {
-                if (plugin.getName() == "com.plugin.TxtConfigLoader") {
+                if (plugin.getName().equals("com.plugin.TxtConfigLoader")) {
                     gameState = plugin.loadGameState(directoryPath + "/gamestate.txt", directoryPath + "/player1.txt", directoryPath + "/player2.txt");
-                } else if (plugin.getName() == "com.plugin.JsonConfigLoader") {
+                } else if (plugin.getName().equals("com.plugin.JsonConfigLoader")) {
                     gameState = plugin.loadGameState(directoryPath + "/gamestate.json", directoryPath + "/player1.json", directoryPath + "/player2.json");
-                } else if (plugin.getName() == "com.plugin.XamlConfigLoader") {
-                    // Implementation
+                } else if (plugin.getName().equals("com.plugin.XamlConfigLoader")) {
+                    gameState = plugin.loadGameState(directoryPath + "/gamestate.xml", directoryPath + "/player1.xml", directoryPath + "/player2.xml");
                 }
             } else {
                 System.out.println("Required files are missing in the directory.");
@@ -103,14 +107,15 @@ public class GameData {
     public int rowClciked(){
         return this.currentClickedRow;
     }
+
     public void saveGame(String directoryPath) {
         try {
-            if (plugin.getName() == "com.plugin.TxtConfigLoader") {
-                plugin.saveGameState(gameState, directoryPath + "/gamestate.txt",  directoryPath + "/player1.txt",  directoryPath + "/player2.txt");
-            } else if (plugin.getName() == "com.plugin.JsonConfigLoader") {
-                plugin.saveGameState(gameState, directoryPath + "/gamestate.json",  directoryPath + "/player1.json",  directoryPath + "/player2.json");
-            } else if (plugin.getName() == "com.plugin.XamlConfigLoader") {
-                // Implementation
+            if (plugin.getName().equals("com.plugin.TxtConfigLoader")) {
+                plugin.saveGameState(gameState, directoryPath + "/gamestate.txt", directoryPath + "/player1.txt", directoryPath + "/player2.txt");
+            } else if (plugin.getName().equals("com.plugin.JsonConfigLoader")) {
+                plugin.saveGameState(gameState, directoryPath + "/gamestate.json", directoryPath + "/player1.json", directoryPath + "/player2.json");
+            } else if (plugin.getName().equals("com.plugin.XmlConfigLoader")) {
+                plugin.saveGameState(gameState, directoryPath + "/gamestate.xml", directoryPath + "/player1.xml", directoryPath + "/player2.xml");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -137,6 +142,10 @@ public class GameData {
         return hands;
     }
 
+    public GameState getGameState() {
+        return gameState;
+    }
+
     public Grid getGridData() {
         return gridData;
     }
@@ -160,4 +169,7 @@ public class GameData {
             e.printStackTrace();
         }
     }
+
+
+
 }

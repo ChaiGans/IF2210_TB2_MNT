@@ -17,7 +17,7 @@
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
       <children>
           <Button onAction="#handleGoBack" text="Done" />
-         <ImageView fitHeight="24.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#shuffle">
+         <ImageView fitHeight="24.0" fitWidth="30.0" onMouseClicked="#shuffle" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../public/refresh.png" />
             </image>

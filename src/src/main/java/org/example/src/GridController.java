@@ -67,6 +67,7 @@ public class GridController {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Card.fxml"));
                         Node cardNode = loader.load();
                         CardController controller = loader.getController();
+                        controller.setCard(card);
                         controller.setCardInfo(card.getName() + ".png", card.getName());  
                         cell.getChildren().add(cardNode); 
                     }
@@ -94,7 +95,9 @@ public class GridController {
                     Parent root = loader.load();
                     System.out.println("Namanya adalah"+targetCard.getName());
                     CardController controller = loader.getController();
-                    controller.showCardDetails(targetCard);
+                    controller.openCardDetailWindow(targetCard);
+//                    CardController controller = loader.getController();
+//                    controller.showCardDetails(targetCard);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
