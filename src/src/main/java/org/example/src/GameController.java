@@ -100,6 +100,11 @@ public class GameController {
         GameApp.openNewWindow("LoadState", "LoadState.fxml");
     }
 
+    @FXML
+    public void LoadPlugin(MouseEvent event){
+        GameApp.openNewWindow("LoadPlugin", "LoadPlugin.fxml");
+    }
+
     private void updateMoneyDisplay() {
         Player1Money.setText("$ " + manager.getCurrentPlayer().getCash());
         Player2Money.setText("$ " + manager.getEnemyPlayer().getCash());

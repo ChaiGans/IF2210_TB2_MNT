@@ -52,7 +52,7 @@
                            </StackPane>
                   <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #312D27; -fx-background-radius: 10;">
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Load Plugin" textAlignment="CENTER">
+                        <Text fx:id="LoadPlugin" onMouseClicked="#LoadPlugin" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Load Plugin" textAlignment="CENTER">
                            <font>
                               <Font name="Cooper Black" size="20.0" />
                            </font>
