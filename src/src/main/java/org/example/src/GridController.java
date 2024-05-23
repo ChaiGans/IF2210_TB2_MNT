@@ -32,6 +32,7 @@ public class GridController {
     private GridPane grid;
     private Grid currentGrid;
     private Hands hands;
+    private boolean isEnemyGridActive = false;
 
     @FXML
     public void initialize() {
@@ -43,11 +44,22 @@ public class GridController {
             e.printStackTrace();
         }
     }
+
+    private boolean isNegativeEffect(Card card) {
+        if ("Destroy".equals(card.getName()) || "Delay".equals(card.getName())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void toggleGridDisplay(boolean enemy) {
         if (enemy == false) {
             currentGrid = PlayerManager.getInstance().getCurrentPlayer().getField();
+            this.isEnemyGridActive = false;
         } else {
             currentGrid = PlayerManager.getInstance().getEnemyPlayer().getField();
+            this.isEnemyGridActive = true;
         }
         updateGrids(currentGrid, new ArrayList<>());
     }
@@ -198,15 +210,26 @@ public class GridController {
                             }else if (card instanceof IItemEffect){
                                 IItemEffect itemCard = (IItemEffect) card;
                         
-                                if (targetCard instanceof PlantCard) {
-                                    itemCard.useOn((PlantCard) targetCard, currentGrid, targetCol, targetRow, currentPlayer);
-                                } else if (targetCard instanceof AnimalCard) {
-                                    itemCard.useOn((AnimalCard) targetCard, currentGrid, targetCol, targetRow, currentPlayer);
-                                }
-                                
-                                hands.deleteCard(sourceIndex);
-                                sourcePane.getChildren().remove(0);
-                                success = true;
+                                if (!isEnemyGridActive && !isNegativeEffect(card)) {
+                                        if (targetCard instanceof PlantCard) {
+                                            itemCard.useOn((PlantCard) targetCard, currentGrid, targetCol, targetRow, currentPlayer);
+                                        } else if (targetCard instanceof AnimalCard) {
+                                            itemCard.useOn((AnimalCard) targetCard, currentGrid, targetCol, targetRow, currentPlayer);
+                                        }
+                                        hands.deleteCard(sourceIndex);
+                                        sourcePane.getChildren().remove(0);
+                                        success = true;
+                                    } else if (isEnemyGridActive && isNegativeEffect(card)) {
+                                        Player enemyPlayer = PlayerManager.getInstance().getEnemyPlayer();
+                                        if (targetCard instanceof PlantCard) {
+                                            itemCard.useOn((PlantCard) targetCard, currentGrid, targetCol, targetRow, enemyPlayer);
+                                        } else if (targetCard instanceof AnimalCard) {
+                                            itemCard.useOn((AnimalCard) targetCard, currentGrid, targetCol, targetRow, enemyPlayer);
+                                        }
+                                        hands.deleteCard(sourceIndex);
+                                        sourcePane.getChildren().remove(0);
+                                        success = true;
+                                    }
                             }
                         }
                     }
