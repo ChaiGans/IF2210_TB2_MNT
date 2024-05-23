@@ -40,6 +40,10 @@ public class GameController {
     @FXML
     private Label currentPlayerLabel;
     private PlayerManager manager;
+    @FXML
+    private StackPane ShowEnemy;
+    @FXML
+    private StackPane CurrentButton;
 
     @FXML
     private Label counterLabel1;
@@ -99,10 +103,14 @@ public class GameController {
 
     @FXML
     public void ShowEnemy(MouseEvent event){
+        CurrentButton.setStyle("-fx-background-color: #99582a; -fx-background-radius: 10;");
+        ShowEnemy.setStyle("-fx-background-color: #312D27; -fx-background-radius: 10;");
         UIUpdateService.getInstance().updateEnemyGrid();
     }
     @FXML
     public void ShowCurrent(MouseEvent event){
+        ShowEnemy.setStyle("-fx-background-color: #99582a; -fx-background-radius: 10;");
+        CurrentButton.setStyle("-fx-background-color: #312D27; -fx-background-radius: 10;");
         UIUpdateService.getInstance().updateRealGrid();
     }
 
