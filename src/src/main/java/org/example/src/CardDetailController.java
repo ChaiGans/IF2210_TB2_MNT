@@ -84,6 +84,8 @@ public class CardDetailController {
         del = card.getEffectCount("Delay"); Delay.setText(del + " ");
         ins = card.getEffectCount("Instant Harvest"); InstantHarvest.setText(ins + " ");
         trap = card.getEffectCount("Trap"); Trap.setText(trap + " ");
+
+        panenButton11.setVisible(!GridController.getInstance().isEnemyGridActive());
     }
 
 

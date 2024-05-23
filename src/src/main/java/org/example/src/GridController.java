@@ -33,16 +33,28 @@ public class GridController {
     private Grid currentGrid;
     private Hands hands;
     private boolean isEnemyGridActive = false;
+    private static GridController instance;
 
     @FXML
     public void initialize() {
         try {
+            instance = this;
             currentGrid = PlayerManager.getInstance().getCurrentPlayer().getField();
             UIUpdateService.getInstance().setGridsController(this);
             updateGrids(currentGrid, new ArrayList<>());
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public GridController() {}
+
+    public static synchronized GridController getInstance() {
+        return instance;
+    }
+
+    public boolean isEnemyGridActive() {
+        return isEnemyGridActive;
     }
 
     private boolean isNegativeEffect(Card card) {
