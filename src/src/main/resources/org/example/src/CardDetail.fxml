@@ -25,7 +25,7 @@
                 <Font name="Segoe UI Semibold" size="25.0" />
             </font>
         </Text>
-        <Button fx:id="panenButton11" layoutX="268.0" layoutY="382.0" onAction="#handleBackButtonAction" prefHeight="20.0" prefWidth="104.0" style="-fx-background-color: #3F3B33;" text="PANEN" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+        <Button fx:id="panenButton11" layoutX="268.0" layoutY="382.0" onAction="#DoPanen" prefHeight="20.0" prefWidth="104.0" style="-fx-background-color: #3F3B33;" text="PANEN" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" >
             <font>
                 <Font name="Segoe UI Black" size="15.0" />
             </font>

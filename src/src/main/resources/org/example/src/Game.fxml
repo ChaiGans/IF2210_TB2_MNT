@@ -16,7 +16,7 @@
          <children>
             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="1500.0" spacing="40.0" style="-fx-background-color: #432818;">
                <children>
-                  <StackPane maxHeight="70.0" maxWidth="200.0" minHeight="60.0" minWidth="200.0" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #99582a; -fx-background-radius: 10;">
+                  <StackPane maxHeight="70.0" maxWidth="200.0" minHeight="60.0" minWidth="200.0" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #99582a; -fx-background-radius: 10;" onMouseClicked = "#viewToko">
                      <children>
                         <Label text="Toko" textFill="#ffe6a7">
                            <font>

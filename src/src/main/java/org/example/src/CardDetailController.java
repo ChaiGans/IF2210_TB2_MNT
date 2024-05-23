@@ -4,8 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-
+import javafx.stage.Stage;
 import entity.*;
 
 public class CardDetailController {
@@ -15,6 +16,8 @@ public class CardDetailController {
 
     @FXML
     private Button backButton31;
+    @FXML
+    private Button panenButton11;
 
     @FXML
     private ImageView cardImageView;
@@ -95,6 +98,20 @@ public class CardDetailController {
     private void handleBackButtonAction() {
         // Close the current window
         backButton31.getScene().getWindow().hide();
+    }
+
+    @FXML
+    private void DoPanen(){
+        System.out.println("Hello");
+        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+        int col = GameData.getInstance().ColClicked();
+        int row = GameData.getInstance().rowClciked();
+        Card card = currentPlayer.Panen(col, row);
+        currentPlayer.AddHand(card);
+        UIUpdateService.getInstance().updateHandsGrid();
+        UIUpdateService.getInstance().updateRealGrid();
+        Stage stage = (Stage) panenButton11.getScene().getWindow();
+        stage.close();
     }
 
 }
