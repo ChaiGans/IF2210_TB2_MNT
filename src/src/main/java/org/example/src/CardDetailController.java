@@ -9,6 +9,9 @@ import javafx.scene.text.Text;
 import entity.*;
 
 public class CardDetailController {
+    private int current;
+    private int ready;
+    private Card card;
 
     @FXML
     private Text cardNameText;
@@ -18,6 +21,9 @@ public class CardDetailController {
 
     @FXML
     private ImageView cardImageView;
+
+    @FXML
+    private Button PanenButton;
 
     @FXML
     private Text infoText;
@@ -42,31 +48,31 @@ public class CardDetailController {
 
 
     public void setCardDetails(Card card) {
+        this.card = card;
         cardNameText.setText(card.getName());
-        //boostLabel.setText("Boost: " + (card.getActiveEffect().isEmpty() ? "None" : String.join(", ", card.getActiveEffect())));
-        int ready = 0;
-        int current = 0;
         int acc, pro, del, des, ins, trap = 0;
         if (card instanceof AnimalCard) {
             AnimalCard animalCard = (AnimalCard) card;
             infoText.setText("Berat: " + animalCard.getCurrentWeight() + " / Target: " + animalCard.getHarvestWeight());
-            current = animalCard.getCurrentWeight();
-            ready = animalCard.getHarvestWeight();
+            this.current = animalCard.getCurrentWeight();
+            this.ready = animalCard.getHarvestWeight();
+
         } else if (card instanceof PlantCard) {
             PlantCard plantCard = (PlantCard) card;
             infoText.setText("Berat: " + plantCard.getCurrentAge() + " / Target: " + plantCard.getHarvestAge());
-            current = plantCard.getCurrentAge();
-            ready = plantCard.getHarvestAge();
+            this.current = plantCard.getCurrentAge();
+            this.ready = plantCard.getHarvestAge();
+
         } else {
             infoText.setText(" ");
-//            goalText.setText("");
         }
+
         if (current >= ready) {
-            System.out.println("Current weight is " + current + " and ready weight is " + ready + "READY");
-//            PanenButton.setVisible(true);
+//            PanenButton.setStyle("\"-textFill: black; -fx-background-color: #3F3B33");
+            PanenButton.setVisible(true);
         } else {
-            System.out.println("Current weight is " + current + " and ready weight is " + ready);
-//            PanenButton.setVisible(false);
+//            PanenButton.setStyle("\"-textFill: grey; -fx-background-color: #3F3B33");
+            PanenButton.setVisible(false);
         }
 
         try {
@@ -77,7 +83,7 @@ public class CardDetailController {
             cardImageView.setImage(new Image(getClass().getResourceAsStream("/org/example/src/assets/default.png")));
         }
 
-        acc = card.getEffectCount("Accelerate");
+        acc = card.getEffectCount("Accelerate"); Accelerate.setText(acc + " ");
         pro = card.getEffectCount("Protect"); Protect.setText(pro + " ");
         des = card.getEffectCount("Destroy"); Destroy.setText(des + " ");
         del = card.getEffectCount("Delay"); Delay.setText(del + " ");
@@ -90,6 +96,30 @@ public class CardDetailController {
         cardNameText.setText(cardName);
         cardImageView.setImage(cardImage);
     }
+
+    @FXML
+    private void handlePanenButtonClick() {
+        if (current >= ready) {
+            if (card instanceof AnimalCard) {
+                AnimalCard animalCard = (AnimalCard) card;
+                card = animalCard.harvest();
+
+            } else if (card instanceof PlantCard) {
+                PlantCard plantCard = (PlantCard) card;
+                card = plantCard.harvest();
+
+            } else {
+                System.out.println("produk ga bisa dipanen ");
+            }
+            infoText.setText(" ");
+            setCardDetails(card);
+
+            // Update Grid
+//            StoreController storeController = (StoreController) primaryStage.getUserData();
+//            storeController.refreshCardInGrid(card);
+        }
+    }
+
 
     @FXML
     private void handleBackButtonAction() {
