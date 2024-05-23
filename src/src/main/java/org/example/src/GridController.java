@@ -234,15 +234,27 @@ public class GridController {
                         }
                     }
                 } else if ("grid".equals(sourceType)) {
-                    Card card = currentGrid.getCard(sourceIndex, sourceRow);
-                    if (card != null && (sourceIndex != targetCol || sourceRow != targetRow)) {
-                        if (targetPane.getChildren().isEmpty()) {
-                            currentGrid.removeCard(sourceIndex, sourceRow);
-                            currentGrid.setCard(targetCol, targetRow, card);
-                            Node cardNode = sourcePane.getChildren().remove(0);
-                            targetPane.getChildren().add(cardNode);
-                            success = true;
-                        } 
+                    Card sourceCard = currentGrid.getCard(sourceIndex, sourceRow);
+                    Card targetCard = currentGrid.getCard(targetCol, targetRow);
+
+                    if (sourceCard != null && targetCard != null) {
+                        currentGrid.setCard(sourceIndex, sourceRow, targetCard);
+                        currentGrid.setCard(targetCol, targetRow, sourceCard);
+
+                        Node sourceNode = sourcePane.getChildren().remove(0);
+                        Node targetNode = targetPane.getChildren().remove(0);
+                        sourcePane.getChildren().add(targetNode);
+                        targetPane.getChildren().add(sourceNode);
+
+                        success = true;
+                    } else if (sourceCard != null && targetPane.getChildren().isEmpty()) {
+                        currentGrid.setCard(targetCol, targetRow, sourceCard);
+                        currentGrid.removeCard(sourceIndex, sourceRow);
+
+                        Node movedNode = sourcePane.getChildren().remove(0);
+                        targetPane.getChildren().add(movedNode);
+
+                        success = true;
                     }
                 }
             }
