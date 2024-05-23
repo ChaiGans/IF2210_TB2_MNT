@@ -43,6 +43,9 @@ public class DrawsController {
             int duration = bearAttack.getRandom().nextInt(bearAttack.maxDuration - bearAttack.minDuration + 1) + bearAttack.minDuration;
             startTimer(duration, bearAttack);
             System.out.println("Bear attack started! Duration: " + duration + " seconds");
+            MusicManager.stopMusic("mainTheme");
+            MusicManager.playMusic("battleTheme", true);
+            MusicManager.playMusic("alarmSound", false);
         }
     }
 
@@ -67,6 +70,8 @@ public class DrawsController {
             }
             UIUpdateService.getInstance().updateRealGrid();
             UIUpdateService.getInstance().updateHandsGrid();
+            MusicManager.stopAllMusic();
+            MusicManager.playMusic("mainTheme", true);
         });
         timerThread.start();
     }

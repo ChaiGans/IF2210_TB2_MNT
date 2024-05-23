@@ -1,5 +1,7 @@
 package entity;
 
+import com.almasb.fxgl.audio.Music;
+
 interface EatingStrategy {
     void eat(AnimalCard animal, ProductCard food);
 }
@@ -106,6 +108,7 @@ abstract public class AnimalCard extends Card {
         int animal_weight = animal.getCurrentWeight();
         animal_weight = animal_weight + food_weight;
         animal.setWeight(animal_weight);
+        MusicManager.playMusic("eatSound", false);
     }
     public abstract ProductCard harvest();
 }

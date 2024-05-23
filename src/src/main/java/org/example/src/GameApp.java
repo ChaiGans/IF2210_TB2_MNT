@@ -1,5 +1,6 @@
 package org.example.src;
 
+import entity.MusicManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,10 +24,15 @@ public class GameApp extends Application {
 //        primaryStage.show();
 //    }
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml")); // Ensure the path is correct
         primaryStage.setTitle("MNT Farming Game");
         primaryStage.setScene(new Scene(root, 1000, 700)); // Adjust the width and height as needed
+        MusicManager.loadMusic("mainTheme", "/org/example/src/assets/main-music.mp3"); // Adjust the path based on your resources folder
+        MusicManager.loadMusic("battleTheme", "/org/example/src/assets/battle.mp3");
+        MusicManager.loadMusic("alarmSound", "/org/example/src/assets/alarm.mp3");
+        MusicManager.loadMusic("eatSound", "/org/example/src/assets/eat.mp3");
+        MusicManager.playMusic("mainTheme", true);
         primaryStage.show();
     }
 

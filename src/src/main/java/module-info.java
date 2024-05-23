@@ -12,6 +12,7 @@ module org.example.src {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires com.fasterxml.jackson.databind;
+    requires javafx.media;
 
     opens org.example.src to javafx.fxml;
     exports org.example.src;
