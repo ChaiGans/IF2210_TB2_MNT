@@ -28,6 +28,8 @@ public class CardFactory {
                 return new Cow(owner);
             case "Chicken":
                 return new Chicken(owner);
+            case "Bear":
+                return new Bear(owner);
             case "Accelerate":
                 return new ItemCard(new AccelerateEffect(), owner);
             case "Delay":

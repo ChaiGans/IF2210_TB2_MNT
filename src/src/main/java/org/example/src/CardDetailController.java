@@ -108,6 +108,7 @@ public class CardDetailController {
             if (animalCard.isReadyToHarvest()){
                 ProductCard cards = animalCard.harvest();
                 currentPlayer.AddHand(cards);
+                currentPlayer.Panen(col, row);
             }
             else{
                 GameController.getInstance().showErrorPopup("Not Ready To Harvest");
@@ -117,12 +118,12 @@ public class CardDetailController {
             if (plantCard.isReadyToHarvest()){
                 ProductCard cards = plantCard.harvest();
                 currentPlayer.AddHand(cards);
+                currentPlayer.Panen(col, row);
             }
             else{
                 GameController.getInstance().showErrorPopup("Not Ready To Harvest");
             }
         }
-        currentPlayer.Panen(col, row);
         UIUpdateService.getInstance().updateHandsGrid();
         UIUpdateService.getInstance().updateRealGrid();
         Stage stage = (Stage) panenButton11.getScene().getWindow();
