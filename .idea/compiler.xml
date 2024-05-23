@@ -9,8 +9,10 @@
         <module name="Plugin-XML-Loader" />
         <module name="src" />
         <module name="Plugin-JSON-Loader" />
-        <module name="Plugin-TXT-Loader" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Plugin-TXT-Loader" target="20" />
+    </bytecodeTargetLevel>
   </component>
 </project>

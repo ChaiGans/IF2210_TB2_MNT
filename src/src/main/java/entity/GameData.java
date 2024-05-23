@@ -8,7 +8,7 @@ import entity.plugin.PluginInterface;
 import entity.plugin.PluginManager;
 
 public class GameData {
-    private PluginManager pluginManager;
+    private final PluginManager pluginManager;
     private PluginInterface plugin;
     private GameState gameState;
     private static GameData instance;
@@ -23,8 +23,12 @@ public class GameData {
         gridData = new Grid(5, 4);
     }
 
-    public void loadPlugins(String jarPath, String className) throws Exception {
-        pluginManager.loadPlugin(jarPath, className);
+    public void addNewPlugin(String jarPath) throws Exception {
+        pluginManager.loadPlugin(jarPath);
+
+    }
+
+    public void usePlugin(String className) {
         plugin = pluginManager.getPlugin(className);
     }
 
@@ -83,13 +87,7 @@ public class GameData {
     public void loadGame(String directoryPath) {
         try {
             if (plugin.verifyDirectory(directoryPath)) {
-                if (plugin.getName().equals("com.plugin.TxtConfigLoader")) {
-                    gameState = plugin.loadGameState(directoryPath + "/gamestate.txt", directoryPath + "/player1.txt", directoryPath + "/player2.txt");
-                } else if (plugin.getName().equals("com.plugin.JsonConfigLoader")) {
-                    gameState = plugin.loadGameState(directoryPath + "/gamestate.json", directoryPath + "/player1.json", directoryPath + "/player2.json");
-                } else if (plugin.getName().equals("com.plugin.XamlConfigLoader")) {
-                    gameState = plugin.loadGameState(directoryPath + "/gamestate.xml", directoryPath + "/player1.xml", directoryPath + "/player2.xml");
-                }
+                this.gameState = plugin.loadGameState(directoryPath);
             } else {
                 System.out.println("Required files are missing in the directory.");
             }
@@ -110,13 +108,7 @@ public class GameData {
 
     public void saveGame(String directoryPath) {
         try {
-            if (plugin.getName().equals("com.plugin.TxtConfigLoader")) {
-                plugin.saveGameState(gameState, directoryPath + "/gamestate.txt", directoryPath + "/player1.txt", directoryPath + "/player2.txt");
-            } else if (plugin.getName().equals("com.plugin.JsonConfigLoader")) {
-                plugin.saveGameState(gameState, directoryPath + "/gamestate.json", directoryPath + "/player1.json", directoryPath + "/player2.json");
-            } else if (plugin.getName().equals("com.plugin.XmlConfigLoader")) {
-                plugin.saveGameState(gameState, directoryPath + "/gamestate.xml", directoryPath + "/player1.xml", directoryPath + "/player2.xml");
-            }
+            plugin.saveGameState(gameState, directoryPath);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -157,13 +149,15 @@ public class GameData {
      public static void main(String[] args) {
         try {
             GameData game = new GameData();
-            String jarPath = "Plugin-JSON-Loader/target/Plugin-JSON-Loader-1.0-SNAPSHOT.jar";
-            String className = "com.plugin.JsonConfigLoader";
-            game.loadPlugins(jarPath, className);
+//            String jarPath = "Plugin-JSON-Loader/target/Plugin-JSON-Loader-1.0-SNAPSHOT.jar";
+//            String className = "com.plugin.JsonConfigLoader";
+//            game.addNewPlugin(jarPath);
 
             String directoryPath = "src/src/main/java/entity/plugin/statefiles";
+            game.usePlugin("com.plugin.TxtConfigLoader");
             game.loadGame(directoryPath);
             // Perform game operations...
+            System.out.println("loaded sucess");
             game.saveGame(directoryPath);
         } catch (Exception e) {
             e.printStackTrace();

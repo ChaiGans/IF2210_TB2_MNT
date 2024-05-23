@@ -68,7 +68,7 @@ public class JsonConfigLoader extends BasePlugin implements PluginInterface {
     }
 
     @Override
-    public void saveGameState(GameState gameState, String gameFilePath, String player1FilePath, String player2FilePath) throws IOException {
+    public void saveGameState(GameState gameState, String directory) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode jsonNode = objectMapper.createObjectNode();
         jsonNode.put("current_turn", gameState.getCurrentTurn());

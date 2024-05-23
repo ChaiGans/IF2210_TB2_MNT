@@ -36,10 +36,10 @@ public class TxtConfigLoader extends BasePlugin implements PluginInterface {
     }
 
     @Override
-    public GameState loadGameState(String gameFilePath, String player1FilePath, String player2FilePath) throws IOException {
+    public GameState loadGameState(String directoryPath) throws IOException {
         Store tempStore = new Store();
 
-        File myObj = new File(gameFilePath);
+        File myObj = new File(directoryPath + "/gamestate.txt");
         if (!myObj.exists()) {
             throw new FileNotFoundException();
         }
@@ -59,8 +59,8 @@ public class TxtConfigLoader extends BasePlugin implements PluginInterface {
         }
 
         List<Player> listPlayers = new ArrayList<>();
-        Player player1 = this.loadPlayer(player1FilePath);
-        Player player2 = this.loadPlayer(player2FilePath);
+        Player player1 = this.loadPlayer(directoryPath + "/player1.txt");
+        Player player2 = this.loadPlayer(directoryPath + "/player2.txt");
         listPlayers.add(player1);
         listPlayers.add(player2);
 
@@ -69,8 +69,8 @@ public class TxtConfigLoader extends BasePlugin implements PluginInterface {
     }
 
     @Override
-    public void saveGameState(GameState gameState, String gameFilePath, String player1FilePath, String player2FilePath) throws IOException {
-        File file = new File(gameFilePath);
+    public void saveGameState(GameState gameState, String directory) throws IOException {
+        File file = new File(directory + "/gamestate.txt");
         try (PrintWriter writer = new PrintWriter(file)) {
             writer.println(gameState.getCurrentTurn());
             Map<ProductCard, Integer> itemList = gameState.getStore().getStoreInformation();
@@ -80,8 +80,8 @@ public class TxtConfigLoader extends BasePlugin implements PluginInterface {
             }
         }
 
-        this.savePlayer(gameState.getPlayers().get(0), player1FilePath);
-        this.savePlayer(gameState.getPlayers().get(1), player2FilePath);
+        this.savePlayer(gameState.getPlayers().get(0), directory + "/player1.txt");
+        this.savePlayer(gameState.getPlayers().get(1), directory + "/player2.txt");
     }
 
     @Override
@@ -193,8 +193,8 @@ public class TxtConfigLoader extends BasePlugin implements PluginInterface {
             
             // Player player2 = new Player();
 
-            GameState game = loader.loadGameState("src/src/main/java/entity/plugin/statefiles/gamestate.txt", "src/src/main/java/entity/plugin/statefiles/player1.txt", "src/src/main/java/entity/plugin/statefiles/player2.txt");
-            loader.saveGameState(game, "src/src/main/java/entity/plugin/statefiles/gamestate.txt", "src/src/main/java/entity/plugin/statefiles/player1.txt", "src/src/main/java/entity/plugin/statefiles/player2.txt");
+            GameState game = loader.loadGameState("src/src/main/java/entity/plugin/statefiles/");
+            loader.saveGameState(game, "src/src/main/java/entity/plugin/statefiles/");
             // System.out.println(game.toString());
             // game.getStore().printStoreInformation();
             // store.addItem(product1, 5);

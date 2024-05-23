@@ -77,7 +77,7 @@ public class XMLConfigLoader extends BasePlugin implements PluginInterface {
 
 
     @Override
-    public void saveGameState(GameState gameState, String gameFilePath, String player1FilePath, String player2FilePath) throws IOException {
+    public void saveGameState(GameState gameState, String directory) throws IOException {
         try {
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();

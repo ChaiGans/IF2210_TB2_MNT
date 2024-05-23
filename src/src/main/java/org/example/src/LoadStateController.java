@@ -133,13 +133,13 @@ public class LoadStateController {
             GameState gameState = null;
             switch (selectedFormat) {
                 case "XML":
-                    gameState = new XMLConfigLoader().loadGameState(gameFilePath, player1FilePath, player2FilePath);
+//                    gameState = new XMLConfigLoader().loadGameState(gameFilePath, player1FilePath, player2FilePath);
                     break;
                 case "TXT":
-                    gameState = new TxtConfigLoader().loadGameState(gameFilePath, player1FilePath, player2FilePath);
+                    gameState = new TxtConfigLoader().loadGameState(String.valueOf(selectedDirectory));
                     break;
                 case "JSON":
-                    gameState = new JsonConfigLoader().loadGameState(gameFilePath, player1FilePath, player2FilePath);
+//                    gameState = new JsonConfigLoader().loadGameState(gameFilePath, player1FilePath, player2FilePath);
                     break;
                 default:
                     statusLabel.setText("Invalid format selected.");
