@@ -28,7 +28,8 @@ public class ActiveHandsController {
             e.printStackTrace();
         }
     }
-    
+
+
     private void populateHandsGrid() throws Exception {
         int rows = 1;
         int cols = 6;
