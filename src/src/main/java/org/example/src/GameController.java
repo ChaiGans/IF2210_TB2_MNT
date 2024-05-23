@@ -1,19 +1,23 @@
 package org.example.src;
-
+import javafx.scene.Scene;
 import entity.Card;
 import javafx.application.Platform;
 import entity.GameState;
 import entity.Player;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.util.List;
 
@@ -110,5 +114,22 @@ public class GameController {
         PlayerManager.getInstance().setPlayers(gameState.getPlayers());
         UIUpdateService.getInstance().updateRealGrid();
         UIUpdateService.getInstance().updateHandsGrid();
+    }
+
+    @FXML
+    private void viewToko(MouseEvent event) {
+        try {
+            System.out.println("Dioteklan");
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Store.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle("Toko");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

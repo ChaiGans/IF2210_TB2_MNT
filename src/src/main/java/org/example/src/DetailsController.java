@@ -13,7 +13,7 @@ import javafx.scene.layout.StackPane;
 
 public class DetailsController {
     @FXML
-    private Label cardNameLabel;
+    private Label cardNameText;
     @FXML
     private StackPane PanenButton;
     @FXML
@@ -26,7 +26,7 @@ public class DetailsController {
     private Label cardInfoLabel;
 
     public void setCardDetails(Card card) {
-        cardNameLabel.setText(card.getName());
+        cardNameText.setText(card.getName());
         boostLabel.setText("Boost: " + (card.getActiveEffect().isEmpty() ? "None" : String.join(", ", card.getActiveEffect())));
         int ready = 0;
         int current = 0;
@@ -43,12 +43,12 @@ public class DetailsController {
         } else {
             cardInfoLabel.setText("No additional information available");
         }
-        if (current >=ready){
-            PanenButton.setVisible(true);
-        }
-        else{
-            PanenButton.setVisible(false);
-        }
+        // if (current >=ready){
+        //     PanenButton.setVisible(true);
+        // }
+        // else{
+        //     PanenButton.setVisible(false);
+        // }
 
         try {
             Image image = new Image(getClass().getResourceAsStream("/org/example/src/assets/" + card.getName() + ".png"));
@@ -67,6 +67,7 @@ public class DetailsController {
 
     @FXML
     private void DoPanen(MouseEvent event){
+        System.out.println("Hello");
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         int col = GameData.getInstance().ColClicked();
         int row = GameData.getInstance().rowClciked();
