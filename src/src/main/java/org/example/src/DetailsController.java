@@ -67,7 +67,6 @@ public class DetailsController {
 
     @FXML
     private void DoPanen(MouseEvent event){
-        System.out.println("Hello");
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         int col = GameData.getInstance().ColClicked();
         int row = GameData.getInstance().rowClciked();

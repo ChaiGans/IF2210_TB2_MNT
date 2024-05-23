@@ -115,7 +115,23 @@ public class GameController {
         UIUpdateService.getInstance().updateRealGrid();
         UIUpdateService.getInstance().updateHandsGrid();
     }
-
+    @FXML
+    public void showErrorPopup(String errorMessage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ErrorMessage.fxml"));
+            Parent root = loader.load();
+            ErrorMessageController controller = loader.getController();
+            controller.setErrorMessage(errorMessage);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle("Error");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void viewToko(MouseEvent event) {
         try {

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: #fcb9b2; -fx-border-color: #6f1d1b; -fx-border-width: 5; -fx-border-radius: 10; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.src.ErrorController">
+   <children>
+      <Label fx:id="errorMessageLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="530.0" text="Error Message" textFill="#6f1d1b">
+         <font>
+            <Font name="Segoe UI Semibold" size="26.0" />
+         </font>
+      </Label>
+   </children>
+</HBox>
