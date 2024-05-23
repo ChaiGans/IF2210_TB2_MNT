@@ -48,23 +48,20 @@ public class LoadStateController {
     private File selectedDirectory;
     private String selectedFormat;
 
-
-    private BasePlugin configLoader;
-    private GameController gameController;
-
-    public LoadStateController() {
-        // Constructor used by FXML
-    }
-
-    public LoadStateController(BasePlugin configLoader, GameController gameController) {
-        this.configLoader = configLoader;
-        this.gameController = gameController;
-    }
-
-
     @FXML
     private void initialize() {
-        formatChoiceBox.getItems().addAll("XML", "TXT", "JSON");
+        if (GameData.getInstance().getPluginManager().getAllPluginName().contains("com.plugin.TxtConfigLoader")){
+            formatChoiceBox.getItems().add("TXT");
+        }
+
+        if (GameData.getInstance().getPluginManager().getAllPluginName().contains("com.plugin.JsonConfigLoader")){
+            formatChoiceBox.getItems().add("JSON");
+        }
+
+        if (GameData.getInstance().getPluginManager().getAllPluginName().contains("com.plugin.XMLConfigLoader")){
+            formatChoiceBox.getItems().add("XML");
+        }
+
         browseButton.setOnAction(e -> handleBrowse());
         loadButton.setOnAction(e -> handleLoad());
         backButton.setOnAction(e -> handleBack());
@@ -103,8 +100,15 @@ public class LoadStateController {
         // Open a directory chooser dialog to select the folder
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Select Folder to Load");
+
         Stage stage = (Stage) formatChoiceBox.getScene().getWindow();
         this.selectedDirectory = directoryChooser.showDialog(stage);
+
+        if (this.selectedDirectory != null) {
+            statusLabel.setText("Selected directory: " + this.selectedDirectory.getAbsolutePath());
+        } else {
+            statusLabel.setText("No directory selected.");
+        }
     }
 
 //    @FXML
@@ -125,9 +129,6 @@ public class LoadStateController {
         }
 
         String folder = selectedDirectory.getAbsolutePath();
-        String gameFilePath = folder + File.separator + "gamestate." + selectedFormat.toLowerCase();
-        String player1FilePath = folder + File.separator + "player1." + selectedFormat.toLowerCase();
-        String player2FilePath = folder + File.separator + "player2." + selectedFormat.toLowerCase();
 
         try {
             GameState gameState = null;
@@ -136,15 +137,17 @@ public class LoadStateController {
 //                    gameState = new XMLConfigLoader().loadGameState(gameFilePath, player1FilePath, player2FilePath);
                     break;
                 case "TXT":
-                    gameState = new TxtConfigLoader().loadGameState(String.valueOf(selectedDirectory));
+                    GameData.getInstance().usePlugin("com.plugin.TxtConfigLoader");
                     break;
                 case "JSON":
-//                    gameState = new JsonConfigLoader().loadGameState(gameFilePath, player1FilePath, player2FilePath);
+                    GameData.getInstance().usePlugin("com.plugin.JsonConfigLoader");
                     break;
                 default:
                     statusLabel.setText("Invalid format selected.");
                     return;
             }
+
+            gameState = GameData.getInstance().getPlugin().loadGameState(folder);
 
             if (gameState != null) {
                 statusLabel.setText("State Loaded Successfully");
@@ -176,21 +179,16 @@ public class LoadStateController {
         // Update player data
         PlayerManager playerManager = PlayerManager.getInstance();
         playerManager.setPlayers(gameState.getPlayers());
-        //playerManager.setCurrentTurn(gameState.getCurrentTurn());
+//        playerManager.setCurrentTurn(gameState.getCurrentTurn());
 
         // Update hands and grid data for the current player
-        gameData.uploadGridData(playerManager.getCurrentPlayer());
+//        gameData.uploadGridData(playerManager.getCurrentPlayer());
 
         // Additional logic to refresh the UI or game components can be added here
-        gameData.printPlayerStateInfo(playerManager.getCurrentPlayer());
-    }
+//        gameData.printPlayerStateInfo(playerManager.getCurrentPlayer());
 
-
-
-    public void setConfigLoader(BasePlugin configLoader) {
-        this.configLoader = configLoader;
-    }
-    public void setGameController(GameController gameController) {
-        this.gameController = gameController;
+        UIUpdateService.getInstance().updateHandsGrid();
+        UIUpdateService.getInstance().updateRealGrid();
+        UIUpdateService.getInstance().updateDrawsGrid();
     }
 }

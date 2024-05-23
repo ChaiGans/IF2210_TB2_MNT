@@ -19,12 +19,17 @@ public class GameData {
 
     public GameData() {
         pluginManager = new PluginManager();
+        this.usePlugin("com.plugin.TxtConfigLoader");
         hands = new Hands();
         gridData = new Grid(5, 4);
     }
 
     public PluginManager getPluginManager() {
         return this.pluginManager;
+    }
+
+    public PluginInterface getPlugin() {
+        return this.plugin;
     }
 
     public void addNewPlugin(String jarPath) throws Exception {
