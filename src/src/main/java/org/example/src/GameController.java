@@ -32,6 +32,8 @@ public class GameController {
     private Label counterLabel;
     private int counter = 1;
 
+    private PlayerManager manager;
+
     @FXML
     private Label counterLabel1;
     private float counterTime = 0.0F;
