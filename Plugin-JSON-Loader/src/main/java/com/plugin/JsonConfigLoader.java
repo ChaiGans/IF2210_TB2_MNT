@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 
-import entity.plugin.*;
-import entity.*;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import entity.plugin.*;
+import entity.*;
 
 public class JsonConfigLoader extends BasePlugin implements PluginInterface {
     public JsonConfigLoader() {
@@ -40,11 +40,11 @@ public class JsonConfigLoader extends BasePlugin implements PluginInterface {
     }
 
     @Override
-    public GameState loadGameState(String gameFilePath, String player1FilePath, String player2FilePath) throws IOException {
+    public GameState loadGameState(String directoryPath) throws IOException {
         Store tempStore = new Store();
 
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(new File(gameFilePath));
+        JsonNode jsonNode = objectMapper.readTree(new File(directoryPath + "/gamestate.json"));
         if (jsonNode == null) {
             throw new FileNotFoundException();
         }
@@ -59,8 +59,8 @@ public class JsonConfigLoader extends BasePlugin implements PluginInterface {
         }
 
         List<Player> listPlayers = new ArrayList<>();
-        Player player1 = this.loadPlayer(player1FilePath);
-        Player player2 = this.loadPlayer(player2FilePath);
+        Player player1 = this.loadPlayer(directoryPath + "/player1.json");
+        Player player2 = this.loadPlayer(directoryPath + "/player2.json");
         listPlayers.add(player1);
         listPlayers.add(player2);
 
@@ -88,11 +88,11 @@ public class JsonConfigLoader extends BasePlugin implements PluginInterface {
         jsonNode.set("shop_item", shopItemsArray);
 
         // Serialize and write the main JSON node to the file
-        objectMapper.writeValue(new File(gameFilePath), jsonNode);
+        objectMapper.writeValue(new File(directory + "/gamestate.json"), jsonNode);
 
         // Save player states
-        this.savePlayer(gameState.getPlayers().get(0), player1FilePath);
-        this.savePlayer(gameState.getPlayers().get(1), player2FilePath);
+        this.savePlayer(gameState.getPlayers().get(0), directory + "/player1.json");
+        this.savePlayer(gameState.getPlayers().get(1), directory + "/player2.json");
     }
 
     @Override

@@ -23,9 +23,12 @@ public class GameData {
         gridData = new Grid(5, 4);
     }
 
+    public PluginManager getPluginManager() {
+        return this.pluginManager;
+    }
+
     public void addNewPlugin(String jarPath) throws Exception {
         pluginManager.loadPlugin(jarPath);
-
     }
 
     public void usePlugin(String className) {
@@ -149,16 +152,16 @@ public class GameData {
      public static void main(String[] args) {
         try {
             GameData game = new GameData();
-//            String jarPath = "Plugin-JSON-Loader/target/Plugin-JSON-Loader-1.0-SNAPSHOT.jar";
+            String jarPath = "Plugin-JSON-Loader/target/Plugin-JSON-Loader-1.0-SNAPSHOT.jar";
 //            String className = "com.plugin.JsonConfigLoader";
-//            game.addNewPlugin(jarPath);
-
+            game.addNewPlugin(jarPath);
+            System.out.println(game.getPluginManager().getAllPluginName());
             String directoryPath = "src/src/main/java/entity/plugin/statefiles";
-            game.usePlugin("com.plugin.TxtConfigLoader");
-            game.loadGame(directoryPath);
+//            game.usePlugin("com.plugin.TxtConfigLoader");
+//            game.loadGame(directoryPath);
             // Perform game operations...
-            System.out.println("loaded sucess");
-            game.saveGame(directoryPath);
+//            System.out.println("loaded sucess");
+//            game.saveGame(directoryPath);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -18,7 +18,7 @@ public class TxtConfigLoader extends BasePlugin implements PluginInterface {
 
     @Override
     public String getName() {
-        return "TXT";
+        return "com.plugin.TxtConfigLoader";
     }
 
     @Override

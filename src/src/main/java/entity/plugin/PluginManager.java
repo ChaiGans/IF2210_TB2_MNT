@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
+import java.util.Set;
 
 public class PluginManager {
     private Map<String, PluginInterface> plugins = new HashMap<>();
@@ -16,6 +17,11 @@ public class PluginManager {
     public PluginManager() {
         this.plugins.put("com.plugin.TxtConfigLoader", new TxtConfigLoader());
     }
+
+    public Set<String> getAllPluginName() {
+        return plugins.keySet();
+    }
+
 
     public void loadPlugin(String jarPath) throws Exception {
         File file = new File(jarPath);
