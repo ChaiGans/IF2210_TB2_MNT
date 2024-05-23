@@ -11,6 +11,7 @@ import entity.IItemEffect;
 import entity.PlantCard;
 import entity.Player;
 import entity.ProductCard;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -21,6 +22,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.input.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class GridController {
     @FXML
@@ -33,7 +38,7 @@ public class GridController {
         try {
             currentGrid = PlayerManager.getInstance().getCurrentPlayer().getField();
             UIUpdateService.getInstance().setGridsController(this);
-            updateGrids(currentGrid);
+            updateGrids(currentGrid, new ArrayList<>());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,35 +47,42 @@ public class GridController {
     public void toggleGridDisplay(boolean enemy) {
         if (enemy == false) {
             currentGrid = PlayerManager.getInstance().getCurrentPlayer().getField();
-            updateGrids(currentGrid);
-
         } else {
             currentGrid = PlayerManager.getInstance().getEnemyPlayer().getField();
-            updateGrids(currentGrid);
         }
+        updateGrids(currentGrid, new ArrayList<>());
     }
-    
-    public void updateGrids(Grid gridData) {
+
+    public void updateGrids(Grid gridData, List<List<Integer>> attackArea) {
         grid.getChildren().clear();
+        if (attackArea == null) {
+            attackArea = new ArrayList<>();
+        }
         int rows = 4;
         int cols = 5;
         for (int row = 0; row < rows; row++) {
             for(int col = 0; col < cols; col++){
                 try {
                     StackPane cell = new StackPane();
-                    cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0; -fx-border-radius:10");
+
+                    List<Integer> positions = Arrays.asList(row, col);
+                    if (attackArea.contains(positions)) {
+                        cell.setStyle("-fx-border-color: red; -fx-border-width: 2; -fx-background-color: #f0f0f0; -fx-border-radius:10");
+                    } else {
+                        cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0; -fx-border-radius:10");
+                    }
                     cell.setPadding(new Insets(10));
-                    cell.setMinSize(80, 100); 
-    
+                    cell.setMinSize(80, 100);
+
                     Card card = gridData.getCard(col, row);
                     if (card != null) {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Card.fxml"));
                         Node cardNode = loader.load();
                         CardController controller = loader.getController();
-                        controller.setCardInfo(card.getName() + ".png", card.getName());  
-                        cell.getChildren().add(cardNode); 
+                        controller.setCardInfo(card.getName() + ".png", card.getName());
+                        cell.getChildren().add(cardNode);
                     }
-    
+
                     setupDragHandlers(cell, col, row);
                     grid.add(cell, col, row);
                 } catch (Exception e) {
@@ -79,6 +91,7 @@ public class GridController {
             }
         }
     }
+
 
     private void setupDragHandlers(Pane cell, int col, int row) {
         // currentGrid = PlayerManager.getInstance().getCurrentPlayer().getField();

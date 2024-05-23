@@ -51,6 +51,21 @@ public class Grid {
         }
     }
 
+    public void removeCardArea (List<List<Integer>> subgridPosition) {
+        for (List<Integer> area : subgridPosition) {
+            this.removeCard(area.get(1), area.get(0));
+        }
+    }
+
+    public boolean isAreaTrap (List<List<Integer>> subgridPosition) {
+        for (List<Integer> area : subgridPosition) {
+            if (this.getCard(area.get(1), area.get(0)) != null && this.getCard(area.get(1), area.get(0)).getActiveEffect().contains("Trap")) {
+                return true;
+            };
+        }
+        return false;
+    }
+
     public int getWidth() {
         return width;
     }

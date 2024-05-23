@@ -1,7 +1,9 @@
 package org.example.src;
 
 import entity.GameData;
+import entity.Grid;
 import javafx.application.Platform;
+import java.util.List;
 
 public class UIUpdateService {
     private static UIUpdateService instance = new UIUpdateService();
@@ -72,5 +74,10 @@ public class UIUpdateService {
                 drawsController.updateCardGrid(PlayerManager.getInstance().getCurrentPlayer().draw4());
             });
         }
+    }
+
+    public void updateGridColorAttack(List<List<Integer>> subgridLocationAttack) {
+        Grid currentGrid = PlayerManager.getInstance().getCurrentPlayer().getField();
+        gridController.updateGrids(currentGrid, subgridLocationAttack);
     }
 }

@@ -1,6 +1,7 @@
 package org.example.src;
 
 import entity.Card;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -15,7 +16,21 @@ public class GameController {
     private StackPane arrowImageView; 
     @FXML
     private Label counterLabel;
-    private int counter = 1; 
+    private int counter = 1;
+
+    @FXML
+    private Label counterLabel1;
+    private float counterTime = 0.0F;
+
+    private static GameController instance;
+
+    public GameController() {
+        instance = this;
+    }
+
+    public static GameController getInstance() {
+        return instance;
+    }
 
     @FXML
     public void initialize() {
@@ -24,8 +39,6 @@ public class GameController {
         counterLabel.setText(String.valueOf(counter));
         arrowImageView.setOnMouseClicked(event -> nextTurn());
         GameApp.openNewWindow("None", "Draws.fxml");
-
-
     }
 
     private void nextTurn() {
@@ -40,6 +53,12 @@ public class GameController {
         // manager.getCurrentPlayer().save(draws);
         GameApp.openNewWindow("None", "Draws.fxml");
     }
+
+    public void updateCounterLabel1(float newValue) {
+        counterTime = newValue;
+        Platform.runLater(() -> counterLabel1.setText("Time :" + String.valueOf(counterTime)));
+    }
+
     @FXML
     public void ShowEnemy(MouseEvent event){
         UIUpdateService.getInstance().updateEnemyGrid();
