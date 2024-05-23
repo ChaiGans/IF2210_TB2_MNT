@@ -1,14 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.src.StoreController"
-            prefHeight="400.0" prefWidth="600.0">
-    <GridPane fx:id="storeGrid" layoutX="14.0" layoutY="14.0" hgap="10" vgap="10"/>
+<AnchorPane prefHeight="407.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.src.StoreController">
+    <AnchorPane prefHeight="471.0" prefWidth="587.0" style="-fx-background-color: #3F3B33;">
+      <children>
+           <ImageView fitHeight="383.0" fitWidth="539.0" layoutX="23.0" layoutY="77.0">
+               <image>
+                   <Image url="@./detail/Store.png" />
+               </image>
+           </ImageView>
+         <Button fx:id="buyPumpkin" layoutX="128.0" layoutY="162.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0; -fx-effect: #6B6458;" text="Buy">
+            <font>
+               <Font name="Segoe UI Black" size="10.0" />
+            </font>
+         </Button>
+         <Button layoutX="126.0" layoutY="292.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0; -fx-effect: #6B6458;" text="Buy">
+            <font>
+               <Font name="Segoe UI Black" size="10.0" />
+            </font>
+         </Button>
+         <Button layoutX="127.0" layoutY="422.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0; -fx-effect: #6B6458;" text="Buy">
+            <font>
+               <Font name="Segoe UI Black" size="10.0" />
+            </font>
+         </Button>
+         <Button layoutX="311.0" layoutY="421.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0; -fx-effect: #6B6458;" text="Buy">
+            <font>
+               <Font name="Segoe UI Black" size="10.0" />
+            </font>
+         </Button>
+         <Button layoutX="311.0" layoutY="293.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0; -fx-effect: #6B6458;" text="Buy">
+            <font>
+               <Font name="Segoe UI Black" size="10.0" />
+            </font>
+         </Button>
+         <Button fx:id="buyBearMeat" layoutX="310.0" layoutY="162.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0; -fx-effect: #6B6458;" text="Buy">
+            <font>
+               <Font name="Segoe UI Black" size="10.0" />
+            </font>
+         </Button>
+         <Button layoutX="490.0" layoutY="293.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0; -fx-effect: #6B6458;" text="Buy">
+            <font>
+               <Font name="Segoe UI Black" size="10.0" />
+            </font>
+         </Button>
+         <Button layoutX="490.0" layoutY="161.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0; -fx-effect: #6B6458;" text="Buy">
+            <font>
+               <Font name="Segoe UI Black" size="10.0" />
+            </font>
+         </Button>
+         <Button layoutX="491.0" layoutY="421.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0; -fx-effect: #6B6458;" text="Buy">
+            <font>
+               <Font name="Segoe UI Black" size="10.0" />
+            </font>
+         </Button>
+         <Text fx:id="pricePumpkin" fill="#fbffb7" layoutX="140.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PriceP">
+            <font>
+               <Font name="Segoe UI Semibold" size="12.0" />
+            </font>
+         </Text>
+         <Text fx:id="stockPumpkin" fill="WHITE" layoutX="127.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stokp">
+            <font>
+               <Font name="Segoe UI Semibold" size="11.0" />
+            </font>
+         </Text>
+         <Text fx:id="priceBearMeat" fill="#fbffb7" layoutX="320.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Priceb">
+            <font>
+               <Font name="Segoe UI Semibold" size="12.0" />
+            </font>
+         </Text>
+         <Text fx:id="stokBearMeat" fill="WHITE" layoutX="311.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stokb">
+            <font>
+               <Font name="Segoe UI Semibold" size="11.0" />
+            </font>
+         </Text>
+         <Text fx:id="priceEgg" fill="#fbffb7" layoutX="498.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pricee">
+            <font>
+               <Font name="Segoe UI Semibold" size="12.0" />
+            </font>
+         </Text>
+         <Text fx:id="stockEgg" fill="WHITE" layoutX="490.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stoke">
+            <font>
+               <Font name="Segoe UI Semibold" size="11.0" />
+            </font>
+         </Text>
+         <Text fx:id="stockStrawberry" fill="WHITE" layoutX="126.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stoks">
+            <font>
+               <Font name="Segoe UI Semibold" size="11.0" />
+            </font>
+         </Text>
+         <Text fx:id="stokHorseMeat" fill="WHITE" layoutX="311.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stoksh">
+            <font>
+               <Font name="Segoe UI Semibold" size="11.0" />
+            </font>
+         </Text>
+         <Text fx:id="stockMIlk" fill="WHITE" layoutX="490.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stokm">
+            <font>
+               <Font name="Segoe UI Semibold" size="11.0" />
+            </font>
+         </Text>
+         <Text fx:id="stockCorn" fill="WHITE" layoutX="126.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stokc">
+            <font>
+               <Font name="Segoe UI Semibold" size="11.0" />
+            </font>
+         </Text>
+         <Text fx:id="stockSheepMeat" fill="WHITE" layoutX="311.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stoksm">
+            <font>
+               <Font name="Segoe UI Semibold" size="11.0" />
+            </font>
+         </Text>
+         <Text fx:id="stockSharkFin" fill="WHITE" layoutX="491.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stoksf">
+            <font>
+               <Font name="Segoe UI Semibold" size="11.0" />
+            </font>
+         </Text>
+         <Text fx:id="priceStarwberry" fill="#fbffb7" layoutX="136.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PriceS">
+            <font>
+               <Font name="Segoe UI Semibold" size="12.0" />
+            </font>
+         </Text>
+         <Text fx:id="priceHorseMeat" fill="#fbffb7" layoutX="321.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PricH">
+            <font>
+               <Font name="Segoe UI Semibold" size="12.0" />
+            </font>
+         </Text>
+         <Text fx:id="priceMilk" fill="#fbffb7" layoutX="501.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pricem">
+            <font>
+               <Font name="Segoe UI Semibold" size="12.0" />
+            </font>
+         </Text>
+         <Text fx:id="priceCorn" fill="#fbffb7" layoutX="140.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pricec">
+            <font>
+               <Font name="Segoe UI Semibold" size="12.0" />
+            </font>
+         </Text>
+         <Text fx:id="priceSheepMeat" fill="#fbffb7" layoutX="323.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pricesm">
+            <font>
+               <Font name="Segoe UI Semibold" size="12.0" />
+            </font>
+         </Text>
+         <Text fx:id="priceSharkFIn" fill="#fbffb7" layoutX="501.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PriceSF">
+            <font>
+               <Font name="Segoe UI Semibold" size="12.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" layoutX="121.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Store">
+            <font>
+               <Font name="Segoe UI Black" size="39.0" />
+            </font>
+         </Text>
+         <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="27.0" style="-fx-background-color: #3F3B33;" onAction="#handleBackButtonAction">
+            <graphic>
+               <ImageView fx:id="backButton" fitHeight="29.0" fitWidth="32.0">
+                  <image>
+                     <Image url="@detail/back.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+         </Button>
+      </children>
+    </AnchorPane>
 </AnchorPane>

@@ -1,4 +1,5 @@
 package org.example.src;
+import entity.Store;
 import javafx.scene.Scene;
 import entity.Card;
 import javafx.application.Platform;
@@ -19,6 +20,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.util.List;
 
 public class GameController {
@@ -52,8 +54,11 @@ public class GameController {
         return instance;
     }
 
+    public Store store;
+
     @FXML
     public void initialize() {
+        this.store = new Store();
         this.manager = PlayerManager.getInstance();
         updateMoneyDisplay();
         manager.switchPlayer();
@@ -100,6 +105,11 @@ public class GameController {
         GameApp.openNewWindow("LoadState", "LoadState.fxml");
     }
 
+    @FXML
+    public void LoadPlugin(MouseEvent event){
+        GameApp.openNewWindow("LoadPlugin", "LoadPlugin.fxml");
+    }
+
     private void updateMoneyDisplay() {
         Player1Money.setText("$ " + manager.getCurrentPlayer().getCash());
         Player2Money.setText("$ " + manager.getEnemyPlayer().getCash());
@@ -139,12 +149,10 @@ public class GameController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Store.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setTitle("Toko");
+            stage.setTitle("Store");
             stage.setScene(new Scene(root));
             stage.show();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

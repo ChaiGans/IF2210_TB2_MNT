@@ -16,26 +16,15 @@ import javafx.stage.StageStyle;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 public class CardController {
-    @FXML
-    private VBox card;
-    @FXML
-    private ImageView cardImage;
+    @FXML private VBox card;
+    @FXML private ImageView cardImage;
     private double xOffset = 0;
     private double yOffset = 0;
-    @FXML
-    private Label cardLabel;
-    @FXML
-    private Label cardNameLabel;
-
+    @FXML private Label cardLabel;
     private String cardName;
     private Card cardEntity;
     private Image cardImg;
-
-    @FXML
-    private Label boostLabel;
-    public void initialize() {
-        // makeDraggable();
-        // makeClickable();
+    @FXML public void initialize() {
     }
 
     private void makeDraggable() {
@@ -54,12 +43,6 @@ public class CardController {
             card.setTranslateY(newY);
         });
     }
-//    private void makeClickable() {
-//        card.setOnMouseClicked(event -> {
-//            System.out.println("Mouse clicked - x: " + event.getSceneX() + ", y: " + event.getSceneY());
-//            openCardDetailWindow();
-//        });
-//    }
 
     public void showCardDetails(Card card) {
         try {
@@ -89,7 +72,7 @@ public class CardController {
     }
 
     public void setCard(Card card) {
-        this.cardEntity = card;  // Store the Card entity
+        this.cardEntity = card;
         Image image = new Image(getClass().getResourceAsStream("/org/example/src/assets/" + card.getName() + ".png"));
         cardImage.setImage(image);
         cardLabel.setText(card.getName());
@@ -108,11 +91,8 @@ public class CardController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/CardDetail.fxml"));
             Parent root = loader.load();
-
-            // Get the controller instance and pass the card information
             CardDetailController controller = loader.getController();
             controller.setCardDetails(card);
-            // controller.setCardDetails(cardName, cardImg);
 
             Stage stage = new Stage();
             stage.setTitle("Card Details");
