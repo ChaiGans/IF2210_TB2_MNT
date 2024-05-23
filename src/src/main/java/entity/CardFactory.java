@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class CardFactory {
     private static final String[] CARD_TYPES = {
-        "Corn Seed", "Pumpkin Seed", "Strawberry Seed", "Land Shark", "Sheep", "Horse", "Cow", "Chicken", "Bear",
+        "Corn Seed", "Pumpkin Seed", "Strawberry Seed", "Land Shark", "Sheep", "Horse", "Cow", "Chicken",
         "Accelerate", "Delay", "Instant Harvest", "Destroy", "Protect", "Trap",
         "Shark Fin", "Milk", "Sheep Meat", "Horse Meat", "Egg", "Bear Meat",
         "Strawberry", "Pumpkin", "Corn"
@@ -28,8 +28,6 @@ public class CardFactory {
                 return new Cow(owner);
             case "Chicken":
                 return new Chicken(owner);
-            case "Bear":
-                return new Bear(owner);
             case "Accelerate":
                 return new ItemCard(new AccelerateEffect(), owner);
             case "Delay":

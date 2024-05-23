@@ -43,7 +43,6 @@ public class GridController {
             e.printStackTrace();
         }
     }
-
     public void toggleGridDisplay(boolean enemy) {
         if (enemy == false) {
             currentGrid = PlayerManager.getInstance().getCurrentPlayer().getField();
