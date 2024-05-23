@@ -70,14 +70,6 @@ public class CardDetailController {
             infoText.setText(" ");
         }
 
-        if (current >= ready) {
-//            PanenButton.setStyle("\"-textFill: black; -fx-background-color: #3F3B33");
-            PanenButton.setVisible(true);
-        } else {
-//            PanenButton.setStyle("\"-textFill: grey; -fx-background-color: #3F3B33");
-            PanenButton.setVisible(false);
-        }
-
         try {
             Image image = new Image(getClass().getResourceAsStream("/org/example/src/assets/" + card.getName() + ".png"));
             cardImageView.setImage(image);
@@ -99,31 +91,6 @@ public class CardDetailController {
         cardNameText.setText(cardName);
         cardImageView.setImage(cardImage);
     }
-
-    @FXML
-    private void handlePanenButtonClick() {
-        if (current >= ready) {
-            if (card instanceof AnimalCard) {
-                AnimalCard animalCard = (AnimalCard) card;
-                card = animalCard.harvest();
-
-            } else if (card instanceof PlantCard) {
-                PlantCard plantCard = (PlantCard) card;
-                card = plantCard.harvest();
-
-            } else {
-                System.out.println("produk ga bisa dipanen ");
-            }
-            infoText.setText(" ");
-            setCardDetails(card);
-
-            // Update Grid
-//            StoreController storeController = (StoreController) primaryStage.getUserData();
-//            storeController.refreshCardInGrid(card);
-        }
-    }
-
-
     @FXML
     private void handleBackButtonAction() {
         backButton31.getScene().getWindow().hide();
@@ -131,12 +98,31 @@ public class CardDetailController {
 
     @FXML
     private void DoPanen(){
-        System.out.println("Hello");
+        System.out.println("Kepanggil");
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         int col = GameData.getInstance().ColClicked();
         int row = GameData.getInstance().rowClciked();
-        Card card = currentPlayer.Panen(col, row);
-        currentPlayer.AddHand(card);
+        Card card = currentPlayer.getField().getCard(col, row);
+        if (card instanceof AnimalCard){
+            AnimalCard animalCard = (AnimalCard) card;
+            if (animalCard.isReadyToHarvest()){
+                ProductCard cards = animalCard.harvest();
+                currentPlayer.AddHand(cards);
+            }
+            else{
+                GameController.getInstance().showErrorPopup("Not Ready To Harvest");
+            }
+        }else if (card instanceof PlantCard){
+            PlantCard plantCard = (PlantCard) card;
+            if (plantCard.isReadyToHarvest()){
+                ProductCard cards = plantCard.harvest();
+                currentPlayer.AddHand(cards);
+            }
+            else{
+                GameController.getInstance().showErrorPopup("Not Ready To Harvest");
+            }
+        }
+        currentPlayer.Panen(col, row);
         UIUpdateService.getInstance().updateHandsGrid();
         UIUpdateService.getInstance().updateRealGrid();
         Stage stage = (Stage) panenButton11.getScene().getWindow();

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" spacing="20.0" style="-fx-background-color: #fcb9b2; -fx-border-color: #6f1d1b; -fx-border-width: 5; -fx-border-radius: 10; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.src.ErrorMessageController">
+   <children>
+      <Label fx:id="errorMessageLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="530.0" text="Error Message" textFill="#6f1d1b">
+         <font>
+            <Font name="Segoe UI Semibold" size="26.0" />
+         </font>
+      </Label>
+      <StackPane prefHeight="43.0" prefWidth="414.0" style="-fx-background-color: #6f1d1b; -fx-background-radius: 10;" onMouseClicked = "#handleGoBack">
+         <VBox.margin>
+            <Insets left="180.0" right="180.0" />
+         </VBox.margin>
+         <children>
+            <Label fx:id="errorMessageLabel1" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="530.0" text="Close" textFill="#fcb9b2">
+               <font>
+                  <Font name="Segoe UI Semibold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+   </children>
+</VBox>

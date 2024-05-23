@@ -98,15 +98,11 @@ public class GridController {
         // currentGrid = PlayerManager.getInstance().getCurrentPlayer().getField();
         cell.setOnMouseClicked(event -> {
             GameData.getInstance().getCoordinates(col, row);
-            System.out.println("This is clicked");
             Card targetCard = currentGrid.getCard(col, row);
-            currentGrid.printInformation();
             if (targetCard != null) {
-                System.out.println("Card at (" + col + ", " + row + "): " + targetCard.getName());
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Card.fxml"));
                     Parent root = loader.load();
-                    System.out.println("Namanya adalah"+targetCard.getName());
                     CardController controller = loader.getController();
                     controller.openCardDetailWindow(targetCard);
 //                    CardController controller = loader.getController();

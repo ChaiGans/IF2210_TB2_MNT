@@ -125,32 +125,29 @@ public class GameController {
         UIUpdateService.getInstance().updateRealGrid();
         UIUpdateService.getInstance().updateHandsGrid();
     }
-
-//    @FXML
-//    private void viewToko(MouseEvent event) {
-//        try {
-//            System.out.println("Dioteklan");
-//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Store.fxml"));
-//            Parent root = fxmlLoader.load();
-//            Stage stage = new Stage();
-//            stage.initModality(Modality.APPLICATION_MODAL);
-//            stage.initStyle(StageStyle.UNDECORATED);
-//            stage.setTitle("Toko");
-//            stage.setScene(new Scene(root));
-//            stage.show();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-    public void viewToko(MouseEvent event) {
+    @FXML
+    public void showErrorPopup(String errorMessage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Store.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ErrorMessage.fxml"));
             Parent root = loader.load();
-
-            StoreController controller = loader.getController();
-            controller.setStore(store);
-
+            ErrorMessageController controller = loader.getController();
+            controller.setErrorMessage(errorMessage);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle("Error");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void viewToko(MouseEvent event) {
+        try {
+            System.out.println("Dioteklan");
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Store.fxml"));
+            Parent root = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setTitle("Store");
             stage.setScene(new Scene(root));
