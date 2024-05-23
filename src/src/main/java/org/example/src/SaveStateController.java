@@ -1,5 +1,8 @@
 package org.example.src;
 
+import entity.GameData;
+import entity.GameState;
+import entity.Player;
 import entity.plugin.BasePlugin;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -8,6 +11,9 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SaveStateController {
@@ -48,7 +54,18 @@ public class SaveStateController {
 
         @FXML
         private void initialize() {
-            formatChoiceBox.getItems().addAll("XML", "TXT", "JSON");
+            if (GameData.getInstance().getPluginManager().getAllPluginName().contains("com.plugin.TxtConfigLoader")){
+                formatChoiceBox.getItems().add("TXT");
+            }
+
+            if (GameData.getInstance().getPluginManager().getAllPluginName().contains("com.plugin.JsonConfigLoader")){
+                formatChoiceBox.getItems().add("JSON");
+            }
+
+            if (GameData.getInstance().getPluginManager().getAllPluginName().contains("com.plugin.XMLConfigLoader")){
+                formatChoiceBox.getItems().add("XML");
+            }
+
             browseButton.setOnAction(e -> handleBrowse());
             saveButton.setOnAction(e -> handleSave());
             backButton.setOnAction(e -> handleBack());
@@ -84,12 +101,9 @@ public class SaveStateController {
             directoryChooser.setTitle("Select Folder to Load");
             Stage stage = (Stage) formatChoiceBox.getScene().getWindow();
             this.selectedDirectory = directoryChooser.showDialog(stage);
+
+            folderTextField.setText(String.valueOf(this.selectedDirectory));
         }
-
-
-        @FXML
-        private void handleSave() {}
-
 
         private void showAlert(String title, String message) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -104,69 +118,42 @@ public class SaveStateController {
         backButton.getScene().getWindow().hide();
         // Implement the action to go back to the previous screen if necessary
     }
-//
-//    @FXML
-//    private void handleSave() {
-//        String format = formatChoiceBox.getValue();
-//
-//        if (format == null || format.isEmpty()) {
-//            statusLabel.setText("Please select a format.");
-//            return;
-//        }
-//
-//        // Open a directory chooser dialog to select the folder
-//        DirectoryChooser directoryChooser = new DirectoryChooser();
-//        directoryChooser.setTitle("Select Folder to Save");
-//        Stage stage = (Stage) formatChoiceBox.getScene().getWindow();
-//        File selectedDirectory = directoryChooser.showDialog(stage);
-//
-//        if (selectedDirectory == null) {
-//            statusLabel.setText("No folder selected.");
-//            return;
-//        }
-//
-//        String folder = selectedDirectory.getAbsolutePath();
-//
-//        try {
-//            saved = false;
-//            switch (format) {
-//                case "XML":
-//                    saved = ((XMLConfigLoader) configLoader).saveGameState(gameState, folder, player1FilePath, player2FilePath);
-//                    break;
-//                case "TXT":
-//                    saved = ((TxtConfigLoader) configLoader).saveGameState(gameState, folder, player1FilePath, player2FilePath);
-//                    break;
-//                case "JSON":
-//                    saved = ((JsonConfigLoader) configLoader).saveGameState(gameState, folder, player1FilePath, player2FilePath);
-//                    break;
-//                default:
-//                    statusLabel.setText("Invalid format selected.");
-//                    return;
-//            }
-//
-//            if (saved) {
-//                statusLabel.setText("State Saved Successfully");
-//            } else {
-//                statusLabel.setText("Failed to Save State");
-//            }
-//        } catch (IOException e) {
-//            statusLabel.setText("Error: " + e.getMessage());
-//        }
-//    }
-//
-//    public void setConfigLoader(BasePlugin configLoader) {
-//        this.configLoader = configLoader;
-//    }
-//
-//    public void setGameState(Object gameState) {
-//        this.gameState = gameState;
-//    }
-//
-//    public void setPlayer1FilePath(String player1FilePath) {
-//        this.player1FilePath = player1FilePath;
-//    }
-//
-//    public void setPlayer2FilePath(String player2FilePath) {
-//        this.player2FilePath = player2FilePath;
-//    }
+
+    @FXML
+    private void handleSave() {
+        if (selectedDirectory == null || selectedFormat == null || selectedFormat.isEmpty()) {
+            statusLabel.setText("Please select a format and folder.");
+            return;
+        }
+
+        String folder = selectedDirectory.getAbsolutePath();
+        List<Player> tempPlayerList = new ArrayList<>();
+        tempPlayerList.add(PlayerManager.getInstance().getPlayer1());
+        tempPlayerList.add(PlayerManager.getInstance().getPlayer2());
+        GameData.getInstance().getGameState().setPlayers(tempPlayerList);
+        // set toko di gamestate
+        // set current turn di gamestate
+
+        switch (selectedFormat) {
+            case "XML":
+//                    gameState = new XMLConfigLoader().loadGameState(gameFilePath, player1FilePath, player2FilePath);
+                break;
+            case "TXT":
+                GameData.getInstance().usePlugin("com.plugin.TxtConfigLoader");
+                break;
+            case "JSON":
+                GameData.getInstance().usePlugin("com.plugin.JsonConfigLoader");
+                break;
+            default:
+                statusLabel.setText("Invalid format selected.");
+                return;
+        }
+
+        if (GameData.getInstance().getGameState() != null) {
+            GameData.getInstance().saveGame(String.valueOf(selectedDirectory));
+            statusLabel.setText("State Save Successfully");
+        } else {
+            statusLabel.setText("Failed to Save State");
+        }
+    }
 }

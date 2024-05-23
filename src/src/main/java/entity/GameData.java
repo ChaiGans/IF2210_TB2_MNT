@@ -20,6 +20,7 @@ public class GameData {
     public GameData() {
         pluginManager = new PluginManager();
         this.usePlugin("com.plugin.TxtConfigLoader");
+        this.gameState = new GameState();
         hands = new Hands();
         gridData = new Grid(5, 4);
     }
