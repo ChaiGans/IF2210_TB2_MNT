@@ -13,11 +13,11 @@
 
 <AnchorPane prefHeight="655.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.src.GameController">
     <children>
-        <VBox prefHeight="611.0" prefWidth="1000.0" style="-fx-background-color: faedcd;">
+        <VBox layoutX="8.0" prefHeight="611.0" prefWidth="1000.0" style="-fx-background-color: faedcd;">
             <children>
                 <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="1000.0" spacing="10.0" style="-fx-background-color: #6B6458;">
                     <children>
-                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #FDFFEC; -fx-background-radius: 10;" onMouseClicked="#viewToko">
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#viewToko" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #FDFFEC; -fx-background-radius: 10;">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Store" textAlignment="CENTER">
                            <font>
@@ -52,7 +52,7 @@
                            </StackPane>
                   <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #312D27; -fx-background-radius: 10;">
                      <children>
-                        <Text fx:id="LoadPlugin" onMouseClicked="#LoadPlugin" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Load Plugin" textAlignment="CENTER">
+                        <Text fx:id="LoadPlugin" fill="WHITE" onMouseClicked="#LoadPlugin" strokeType="OUTSIDE" strokeWidth="0.0" text="Load Plugin" textAlignment="CENTER">
                            <font>
                               <Font name="Cooper Black" size="20.0" />
                            </font>
@@ -212,6 +212,11 @@
                                          </Label>
                                      </children>
                                  </StackPane>
+                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="210.0" text="Currently Playing : " fx:id="currentPlayerLabel">
+                           <font>
+                              <Font name="Segoe UI Black" size="12.0" />
+                           </font>
+                        </Label>
                             </children>
                             <HBox.margin>
                                 <Insets left="20.0" />

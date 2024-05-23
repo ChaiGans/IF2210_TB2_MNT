@@ -37,7 +37,8 @@ public class GameController {
     @FXML
     private Label counterLabel;
     private int counter = 1;
-
+    @FXML
+    private Label currentPlayerLabel;
     private PlayerManager manager;
 
     @FXML
@@ -45,7 +46,15 @@ public class GameController {
     private float counterTime = 0.0F;
 
     private static GameController instance;
-
+    public void updateCurrentPlayerLabel() {
+        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+        if (currentPlayer == PlayerManager.getInstance().getPlayer1()){
+            currentPlayerLabel.setText("Currently Playing : Player 1");
+        }
+        else{
+            currentPlayerLabel.setText("Currently Playing : Player 2");
+        }
+    }
     public GameController() {
         instance = this;
     }
@@ -58,6 +67,7 @@ public class GameController {
 
     @FXML
     public void initialize() {
+        updateCurrentPlayerLabel();
         this.store = new Store();
         this.manager = PlayerManager.getInstance();
         updateMoneyDisplay();
@@ -79,6 +89,7 @@ public class GameController {
         // manager.getCurrentPlayer().save(draws);
         GameApp.openNewWindow("None", "Draws.fxml");
         updateMoneyDisplay();
+        updateCurrentPlayerLabel();
     }
 
     public void updateCounterLabel1(float newValue) {
