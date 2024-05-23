@@ -105,7 +105,7 @@ public class LoadStateController {
         this.selectedDirectory = directoryChooser.showDialog(stage);
 
         if (this.selectedDirectory != null) {
-            folderTextField.setText("Selected directory: " + this.selectedDirectory.getAbsolutePath());
+            folderTextField.setText(this.selectedDirectory.getAbsolutePath());
         } else {
             folderTextField.setText("No directory selected.");
         }
