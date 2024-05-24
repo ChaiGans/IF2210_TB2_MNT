@@ -11,21 +11,41 @@ public class Store {
     }
 
     public void addItem(ProductCard newItem, int quantity) {
-        // Retrieve current quantity, update it, or initialize it if not present
-        this.item_list.merge(newItem, quantity, Integer::sum);
+        // Find if there's an existing key of the same class
+        Optional<ProductCard> existingKey = this.item_list.keySet().stream()
+                .filter(p -> p.getClass().equals(newItem.getClass()))
+                .findFirst();
+
+        if (existingKey.isPresent()) {
+            // If found, merge the quantities
+            this.item_list.merge(existingKey.get(), quantity, Integer::sum);
+        } else {
+            // If not found, put the new item with the initial quantity
+            this.item_list.put(newItem, quantity);
+        }
     }
 
     public void deductItem(ProductCard targetItem, int quantity) throws Exception {
-        // Check if item exists and has sufficient quantity
-        Integer currentQuantity = this.item_list.get(targetItem);
-        if (currentQuantity == null || currentQuantity == 0) {
+        // Find if there's an existing key of the same class
+        Optional<ProductCard> existingKey = this.item_list.keySet().stream()
+                .filter(p -> p.getClass().equals(targetItem.getClass()))
+                .findFirst();
+
+        if (existingKey.isEmpty()) {
+            throw new Exception("You can't deduct the stock, because no item of this type exists");
+        }
+
+        // Check if the existing item has sufficient quantity
+        Integer currentQuantity = this.item_list.get(existingKey.get());
+        if (currentQuantity == 0) {
             throw new Exception("You can't deduct the stock, because item is currently sold out");
         }
         if (currentQuantity < quantity) {
             throw new Exception("Insufficient stock to deduct: requested " + quantity + ", available " + currentQuantity);
         }
+
         // Update the store's inventory by reducing the quantity
-        this.item_list.put(targetItem, currentQuantity - quantity);
+        this.item_list.put(existingKey.get(), currentQuantity - quantity);
     }
 
     public void purchaseItem(ProductCard item, Player player, int quantity) throws Exception {
@@ -43,11 +63,6 @@ public class Store {
         deductItem(item, quantity);
     }
 
-    public void sellingItem(ProductCard item, Player player, int quantity) throws Exception {
-        this.addItem(item, quantity);
-        int totalProfit = item.getPrice() * quantity;
-        player.addCash(totalProfit);
-    }
 
     public Map<ProductCard, Integer> getStoreInformation() {
         return Collections.unmodifiableMap(item_list);
