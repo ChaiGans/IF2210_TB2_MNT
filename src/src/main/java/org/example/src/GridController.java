@@ -103,7 +103,6 @@ public class GridController {
                         Node cardNode = loader.load();
                         CardController controller = loader.getController();
                         controller.setIsStorePage(false);
-                        controller.setIsStorePage(false);
                         controller.setCard(card);
                         controller.setCardInfo(card.getName() + ".png", card.getName());
                         cell.getChildren().add(cardNode);
