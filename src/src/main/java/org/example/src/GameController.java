@@ -43,6 +43,8 @@ public class GameController {
     private StackPane ShowEnemy;
     @FXML
     private StackPane CurrentButton;
+    @FXML
+    private StackPane TokoButton;
 
     private int currentView = 1; // if currentView == 1 (means current player view)
 
@@ -76,6 +78,18 @@ public class GameController {
             UIUpdateService.getInstance().updateEnemyGrid();
         }
         this.currentView = newCurrentView;
+    }
+
+    public void disableButtonBearAttack() {
+        arrowImageView.setDisable(true);
+        ShowEnemy.setDisable(true);
+        TokoButton.setDisable(true);
+    }
+
+    public void enableButtonBearAtack() {
+        arrowImageView.setDisable(false);
+        ShowEnemy.setDisable(false);
+        TokoButton.setDisable(false);
     }
 
     public int getCurrentTurn() {

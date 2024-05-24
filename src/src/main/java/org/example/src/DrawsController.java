@@ -96,6 +96,7 @@ public class DrawsController {
         MusicManager.stopAllMusic();
         MusicManager.playMusic("mainTheme", true);
         GameController.getInstance().updateCounterLabel1(0.0F);
+        GameController.getInstance().enableButtonBearAtack();
     }
 
     public void shuffle(){
@@ -151,6 +152,7 @@ public class DrawsController {
             bearAttack = new BearAttack();
             this.startBearAttack(PlayerManager.getInstance().getCurrentPlayer().getField());
             if (bearAttack.isBearAttackHappening()) {
+                GameController.getInstance().disableButtonBearAttack();
                 UIUpdateService.getInstance().updateGridColorAttack(bearAttack.getTargetSubgrid());
             }
         }

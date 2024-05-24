@@ -17,7 +17,7 @@
             <children>
                 <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="1000.0" spacing="10.0" style="-fx-background-color: #6B6458;">
                     <children>
-                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#viewToko" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #FDFFEC; -fx-background-radius: 10;">
+                  <StackPane fx:id="TokoButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#viewToko" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #FDFFEC; -fx-background-radius: 10;">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Store" textAlignment="CENTER">
                            <font>
