@@ -79,6 +79,11 @@ public class DrawsController {
 
     private static void concludeBearAttack() {
         bearAttack.setBearAttackHappening(false);
+        if (!PlayerManager.getInstance().getCurrentPlayer().getField().isAreaTrap(bearAttack.getTargetSubgrid())) {
+            PlayerManager.getInstance().getCurrentPlayer().getField().removeCardArea(bearAttack.getTargetSubgrid());
+        } else {
+            PlayerManager.getInstance().getCurrentPlayer().getHands().addCard(CardFactory.createCard("Bear", PlayerManager.getInstance().getCurrentPlayer()));
+        }
         UIUpdateService.getInstance().updateRealGrid();
         UIUpdateService.getInstance().updateHandsGrid();
         MusicManager.stopAllMusic();
