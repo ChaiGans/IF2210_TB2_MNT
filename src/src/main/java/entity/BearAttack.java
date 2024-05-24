@@ -42,32 +42,36 @@ public class BearAttack {
                 positions.add(List.of(random.nextInt(rows), random.nextInt(cols)));
                 break;
             case 2: // 1x2 or 2x1 subgrid
-                int row2 = random.nextInt(rows);
-                int col2 = random.nextInt(cols - 1);
-                if (random.nextBoolean()) {
+                if (random.nextBoolean()) { // 1 x 2
+                    int row2 = random.nextInt(0, rows);
+                    int col2 = random.nextInt(0, cols - 1); // [0..3]
                     positions.add(List.of(row2, col2));
                     positions.add(List.of(row2, col2 + 1));
                 } else {
-                    positions.add(List.of(col2, row2));
-                    positions.add(List.of(col2 + 1, row2));
+                    int row2 = random.nextInt(0, rows - 1); // [0..2]
+                    int col2 = random.nextInt(0, cols);
+                    positions.add(List.of(row2, col2));
+                    positions.add(List.of(row2 + 1, col2));
                 }
                 break;
             case 3: // 1x3 or 3x1 subgrid
-                int row3 = random.nextInt(rows);
-                int col3 = random.nextInt(cols - 2);
-                if (random.nextBoolean()) {
+                if (random.nextBoolean()) { // 1x3
+                    int row3 = random.nextInt(0, rows);
+                    int col3 = random.nextInt(0, cols - 2); // [0..2]
                     positions.add(List.of(row3, col3));
                     positions.add(List.of(row3, col3 + 1));
                     positions.add(List.of(row3, col3 + 2));
-                } else {
-                    positions.add(List.of(col3, row3));
-                    positions.add(List.of(col3 + 1, row3));
-                    positions.add(List.of(col3 + 2, row3));
+                } else { // 3 x 1
+                    int row3 = random.nextInt(0, rows-2); // [0..1]
+                    int col3 = random.nextInt(0, cols);
+                    positions.add(List.of(row3, col3));
+                    positions.add(List.of(row3+1, col3));
+                    positions.add(List.of(row3+2, col3));
                 }
                 break;
             case 4: // 2x2 subgrid
-                int row4 = random.nextInt(rows - 1);
-                int col4 = random.nextInt(cols - 1);
+                int row4 = random.nextInt(0,rows - 1); // [0..2]
+                int col4 = random.nextInt(0,cols - 1); // [0..3]
                 positions.add(List.of(row4, col4));
                 positions.add(List.of(row4, col4 + 1));
                 positions.add(List.of(row4 + 1, col4));
@@ -75,27 +79,29 @@ public class BearAttack {
                 break;
             case 5: // 1x5 or 5x1 subgrid
                 if (random.nextBoolean()) {
-                    int row5 = random.nextInt(rows);
+                    int row5 = random.nextInt(0, rows); // 4 x 1
                     for (int i = 0; i < 4; i++) {
                         positions.add(List.of(row5, i));
                     }
                 } else {
-                    int col5 = random.nextInt(cols);
+                    int col5 = random.nextInt(0, cols); // 1 x 5
                     for (int i = 0; i < 5; i++) {
                         positions.add(List.of(i, col5));
                     }
                 }
                 break;
-            case 6: // 2x3 or 3x2 subgrid
-                int row6 = random.nextInt(rows - 2);
-                int col6 = random.nextInt(cols - 2);
+            case 6: // 2x3 or 3x2 subgrid batas aman row[0..3] col[0..4]
                 if (random.nextBoolean()) { // 2x3
+                    int row6 = random.nextInt(0,rows - 2); // row6[0..2]
+                    int col6 = random.nextInt(0,cols - 3); // col6[0..2]
                     for (int i = 0; i < 2; i++) {
                         for (int j = 0; j < 3; j++) {
                             positions.add(List.of(row6 + i, col6 + j));
                         }
                     }
                 } else { //3x2
+                    int row6 = random.nextInt(0,rows - 3); // row6[0..1]
+                    int col6 = random.nextInt(0,cols - 2); // col6[0..3]
                     for (int i = 0; i < 3; i++) {
                         for (int j = 0; j < 2; j++) {
                             positions.add(List.of(row6 + i, col6 + j));

@@ -128,7 +128,6 @@ public class GameController {
         this.store = new Store();
         this.manager = PlayerManager.getInstance();
         updateMoneyDisplay();
-        manager.switchPlayer();
         counterLabel.setText(String.valueOf(counter));
         arrowImageView.setOnMouseClicked(event -> nextTurn());
         GameApp.openNewWindow("None", "Draws.fxml");

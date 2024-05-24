@@ -13,7 +13,7 @@ public class PlayerManager {
     private Player player1;
     private Player player2;
     private Player currentPlayer;
-    private boolean isFirstTurn = true;
+    private boolean isFirstTurn = false;
 
     private PlayerManager() {
         player1 = new Player();
@@ -34,12 +34,10 @@ public class PlayerManager {
     }
 
     public void switchPlayer() {
-        if (isFirstTurn) {
-            currentPlayer = player1;
-            isFirstTurn = false;
-        } else {
+        if (currentPlayer == player1) {
             currentPlayer = player2;
-            isFirstTurn = true;
+        } else {
+            currentPlayer = player1;
         }
     }
 
