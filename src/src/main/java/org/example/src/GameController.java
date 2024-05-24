@@ -126,7 +126,21 @@ public class GameController {
         GameController.getInstance().updateDeckLabel();
     }
 
+    public Player currentWinningPlayer() {
+        if (PlayerManager.getInstance().getPlayer1().getCash() > PlayerManager.getInstance().getPlayer2().getCash()) {
+            return PlayerManager.getInstance().getPlayer1();
+        } else if (PlayerManager.getInstance().getPlayer1().getCash() < PlayerManager.getInstance().getPlayer2().getCash()) {
+            return PlayerManager.getInstance().getPlayer2();
+        }
+        return null; // drawState
+    }
+
     private void nextTurn() {
+        if (this.getCurrentView() > 20) {
+            Player winningPlayer = currentWinningPlayer();
+
+            // set text winningPlayer.getName();
+        }
         manager = PlayerManager.getInstance();
         PlayerManager.getInstance().getCurrentPlayer().nextDay();
         PlayerManager.getInstance().getEnemyPlayer().nextDay();
