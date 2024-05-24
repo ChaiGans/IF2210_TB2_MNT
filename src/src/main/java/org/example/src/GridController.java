@@ -180,7 +180,7 @@ public class GridController {
                     System.out.println("source index: " +  sourceIndex);
                     if (card != null && targetCol >= 0 && targetCol < currentGrid.getWidth() && targetRow >= 0 && targetRow < currentGrid.getHeight()) {
                         if (targetPane.getChildren().isEmpty()) {
-                            if (card instanceof AnimalCard || card instanceof PlantCard) {
+                            if ((card instanceof AnimalCard || card instanceof PlantCard) && !isEnemyGridActive()) {
                                 System.out.println("this is plant or animal");
 
                                 hands.deleteCard(sourceIndex);
@@ -193,7 +193,7 @@ public class GridController {
                         } else {
                             Card targetCard = currentGrid.getCard(targetCol, targetRow);
                             System.out.println("target card: " + targetCard);
-                            if (targetCard instanceof AnimalCard && card instanceof ProductCard) {
+                            if (targetCard instanceof AnimalCard && card instanceof ProductCard && !isEnemyGridActive()) {
                                 AnimalCard targetAnimalCard = (AnimalCard) targetCard;
                                 ProductCard sourcePlantCard = (ProductCard) card;
                                 if (targetAnimalCard.isCarnivore() && sourcePlantCard.isNonVeganProduct()) {
