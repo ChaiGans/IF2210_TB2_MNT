@@ -69,6 +69,10 @@ public class GameController {
         return store;
     }
 
+    public void setStore(Store newStore) {
+        this.store = newStore;
+    }
+
     public void disableButtonBearAttack() {
         arrowImageView.setDisable(true);
         ShowEnemy.setDisable(true);

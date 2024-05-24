@@ -130,14 +130,15 @@ public class SaveStateController {
         List<Player> tempPlayerList = new ArrayList<>();
         tempPlayerList.add(PlayerManager.getInstance().getPlayer1());
         tempPlayerList.add(PlayerManager.getInstance().getPlayer2());
+
+        // set semua data yang mau disave ke gamedata
         GameData.getInstance().getGameState().setPlayers(tempPlayerList);
-        // set toko di gamestate
-        // set current turn di gamestate
+        GameData.getInstance().getGameState().setStore(GameController.getInstance().getStore());
         GameData.getInstance().getGameState().setCurrentTurn(GameController.getInstance().getCurrentTurn());
 
         switch (selectedFormat) {
             case "XML":
-//                    gameState = new XMLConfigLoader().loadGameState(gameFilePath, player1FilePath, player2FilePath);
+                GameData.getInstance().usePlugin("com.plugin.XMLConfigLoader");
                 break;
             case "TXT":
                 GameData.getInstance().usePlugin("com.plugin.TxtConfigLoader");

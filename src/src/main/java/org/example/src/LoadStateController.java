@@ -134,7 +134,7 @@ public class LoadStateController {
             GameState gameState = null;
             switch (selectedFormat) {
                 case "XML":
-//                    gameState = new XMLConfigLoader().loadGameState(gameFilePath, player1FilePath, player2FilePath);
+                    GameData.getInstance().usePlugin("com.plugin.XMLConfigLoader");
                     break;
                 case "TXT":
                     GameData.getInstance().usePlugin("com.plugin.TxtConfigLoader");
@@ -178,7 +178,13 @@ public class LoadStateController {
         // Update player data
         PlayerManager playerManager = PlayerManager.getInstance();
         playerManager.setPlayers(gameState.getPlayers());
+
+        // update current turn to gamecontroller
         GameController.getInstance().setCurrentTurn(gameState.getCurrentTurn());
+
+        // update store to gamecontroller
+        GameController.getInstance().setStore(gameState.getStore());
+
         PlayerManager.getInstance().setCurrentEnemyPlayer(GameController.getInstance().getCurrentTurn());
         DrawsController.stopBearAttack();
         if (GameController.getInstance().getCurrentView() == 2) {

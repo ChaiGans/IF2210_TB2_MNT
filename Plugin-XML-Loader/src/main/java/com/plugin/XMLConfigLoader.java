@@ -218,37 +218,4 @@ public class XMLConfigLoader extends BasePlugin implements PluginInterface {
             throw new IOException("Error writing XML file", e);
         }
     }
-
-
-    public static void main(String[] args) {
-        String directoryPath = "src/src/main/java/entity/plugin/statefiles";
-        String gameStatePath = directoryPath + "/gamestate.xml";
-        String player1Path = directoryPath + "/player1.xml";
-        String player2Path = directoryPath + "/player2.xml";
-
-        XMLConfigLoader loader = new XMLConfigLoader();
-
-        try {
-            if (!loader.verifyDirectory(directoryPath)) {
-                System.out.println("Required XML files are missing in the directory.");
-                return;
-            }
-
-            System.out.println("Loading game state from XML...");
-            GameState loadedGameState = loader.loadGameState(directoryPath);
-            System.out.println("Game state loaded successfully:");
-            System.out.println("Current Turn: " + loadedGameState.getCurrentTurn());
-            System.out.println("Number of Players: " + loadedGameState.getPlayers().size());
-            System.out.println("Store Items: " + loadedGameState.getStore().getStoreInformation().size());
-
-
-            System.out.println("Saving game state to XML...");
-            loader.saveGameState(loadedGameState, directoryPath);
-            System.out.println("Game state saved successfully to XML files.");
-
-        } catch (IOException e) {
-            System.err.println("An error occurred: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
 }
