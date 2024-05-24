@@ -24,7 +24,10 @@ public class CardController {
     private String cardName;
     private Card cardEntity;
     private Image cardImg;
+    private boolean isStorePage = false;
+
     @FXML public void initialize() {
+
     }
 
     private void makeDraggable() {
@@ -44,39 +47,43 @@ public class CardController {
         });
     }
 
-    public void showCardDetails(Card card) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Details.fxml"));
-            Parent root = loader.load();
-            DetailsController controller = loader.getController();
-            controller.setCardDetails(card);
-            Stage detailStage = new Stage();
-            Scene scene = new Scene(root);
-            detailStage.setScene(scene);
-            detailStage.setOnShown(event -> {
-                double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
-                double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
-                detailStage.setX((screenWidth - detailStage.getWidth()) / 2);
-                detailStage.setY((screenHeight - detailStage.getHeight()) / 2);
-            });
-            detailStage.initStyle(StageStyle.UNDECORATED);
-            detailStage.setTitle("Card Details");
-            detailStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void showCardDetails(Card card) {
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Details.fxml"));
+//            Parent root = loader.load();
+//            DetailsController controller = loader.getController();
+//            controller.setCardDetails(card);
+//            Stage detailStage = new Stage();
+//            Scene scene = new Scene(root);
+//            detailStage.setScene(scene);
+//            detailStage.setOnShown(event -> {
+//                double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
+//                double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
+//                detailStage.setX((screenWidth - detailStage.getWidth()) / 2);
+//                detailStage.setY((screenHeight - detailStage.getHeight()) / 2);
+//            });
+//            detailStage.initStyle(StageStyle.UNDECORATED);
+//            detailStage.setTitle("Card Details");
+//            detailStage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public ImageView getCardImage() {
         return cardImage;
     }
 
-    public void setCard(Card card) {
-        this.cardEntity = card;
-        Image image = new Image(getClass().getResourceAsStream("/org/example/src/assets/" + card.getName() + ".png"));
+    public void setCard(Card cards) {
+        this.cardEntity = cards;
+        Image image = new Image(getClass().getResourceAsStream("/org/example/src/assets/" + cards.getName() + ".png"));
         cardImage.setImage(image);
-        cardLabel.setText(card.getName());
+        cardLabel.setText(cards.getName());
         this.cardImg = image;
+
+        if (isStorePage) {
+            card.setOnMouseClicked(event -> openCardSellWindow(cardEntity));
+        }
     }
 
     public void setCardInfo(String imageName, String cardName) {
@@ -85,6 +92,10 @@ public class CardController {
         cardLabel.setText(cardName);
         this.cardName = cardName;
         this.cardImg = image;
+    }
+
+    public void setIsStorePage(boolean isStorePage) {
+        this.isStorePage = isStorePage;
     }
 
     public void openCardDetailWindow(Card card) {
@@ -96,6 +107,22 @@ public class CardController {
 
             Stage stage = new Stage();
             stage.setTitle("Card Details");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void openCardSellWindow(Card card) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/SellProduct.fxml"));
+            Parent root = loader.load();
+            SellCardController controller = loader.getController();
+            controller.setCardDetails(card);
+
+            Stage stage = new Stage();
+            stage.setTitle("Sell Card");
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {

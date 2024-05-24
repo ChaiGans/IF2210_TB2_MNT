@@ -102,6 +102,8 @@ public class GridController {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Card.fxml"));
                         Node cardNode = loader.load();
                         CardController controller = loader.getController();
+                        controller.setIsStorePage(false);
+                        controller.setIsStorePage(false);
                         controller.setCard(card);
                         controller.setCardInfo(card.getName() + ".png", card.getName());
                         cell.getChildren().add(cardNode);

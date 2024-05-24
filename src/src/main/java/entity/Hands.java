@@ -117,6 +117,26 @@ public class Hands {
         throw new IllegalArgumentException("Card not found in the player's deck");
     }
 
+    public int getCardIndexFromLocation(String location) {
+        if (location != null && location.length() == 3 && location.charAt(0) == 'A') {
+            try {
+                int index = Integer.parseInt(location.substring(1)) - 1;
+                if (index >= 0 && index < cards.size()) {
+                    return index;
+                } else {
+                    System.out.println("Location out of bounds.");
+                    return -1;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid location format.");
+                return -1;
+            }
+        } else {
+            System.out.println("Invalid location format.");
+            return -1;
+        }
+    }
+
     public int getCardCount() {
         int count = 0;
         for (Card card : cards) {

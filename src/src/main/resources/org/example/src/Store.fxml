@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="407.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.src.StoreController">
-   <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="650.0">
+   <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="650.0" style="-fx-bacound-color: #3F3B33;">
       <children>
           <AnchorPane prefHeight="471.0" prefWidth="587.0" style="-fx-background-color: #3F3B33;">
             <children>
@@ -27,8 +27,7 @@
                          <Image url="@./detail/Store.png" />
                      </image>
                  </ImageView>
-               <Button fx:id="buyPumpkin" layoutX="128.0" layoutY="162.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0;
-" text="Buy">
+               <Button fx:id="buyPumpkin" layoutX="128.0" layoutY="162.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0; " text="Buy">
                   <font>
                      <Font name="Segoe UI Black" size="10.0" />
                   </font>
@@ -88,7 +87,7 @@
                      <Font name="Segoe UI Semibold" size="12.0" />
                   </font>
                </Text>
-               <Text fx:id="stokBearMeat" fill="WHITE" layoutX="311.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <Text fx:id="stockBearMeat" fill="WHITE" layoutX="311.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                   <font>
                      <Font name="Segoe UI Semibold" size="11.0" />
                   </font>
@@ -108,7 +107,7 @@
                      <Font name="Segoe UI Semibold" size="11.0" />
                   </font>
                </Text>
-               <Text fx:id="stokHorseMeat" fill="WHITE" layoutX="311.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <Text fx:id="stockHorseMeat" fill="WHITE" layoutX="311.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                   <font>
                      <Font name="Segoe UI Semibold" size="11.0" />
                   </font>
@@ -133,7 +132,7 @@
                      <Font name="Segoe UI Semibold" size="11.0" />
                   </font>
                </Text>
-               <Text fx:id="priceStarwberry" fill="#fbffb7" layoutX="136.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+               <Text fx:id="priceStrawberry" fill="#fbffb7" layoutX="136.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
                   <font>
                      <Font name="Segoe UI Semibold" size="12.0" />
                   </font>
@@ -170,7 +169,7 @@
                </Text>
             </children>
           </AnchorPane>
-       <fx:include fx:id="StoreHands" source="ActiveHands.fxml" />
+       <fx:include fx:id="storeHandsGrid" source="StoreHands.fxml" />
       </children>
    </VBox>
 </AnchorPane>

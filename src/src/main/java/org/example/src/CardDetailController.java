@@ -26,9 +26,6 @@ public class CardDetailController {
     private ImageView cardImageView;
 
     @FXML
-    private Button PanenButton;
-
-    @FXML
     private Text infoText;
 
     @FXML

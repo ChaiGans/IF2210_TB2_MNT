@@ -1,6 +1,7 @@
 package org.example.src;
 
 import entity.GameData;
+import entity.*;
 import entity.Grid;
 import javafx.application.Platform;
 import java.util.List;
@@ -21,9 +22,9 @@ public class UIUpdateService {
         this.handsController = controller;
     }
 
-//    public void setStoreController(ActiveHandsController controller) {
-//        this.storeController = controller;
-//    }
+    public void setStoreController(StoreController controller) {
+        this.storeController = controller;
+    }
 
     public void setDrawsController(DrawsController controller) {
         this.drawsController = controller;
@@ -51,7 +52,7 @@ public class UIUpdateService {
     public void updateStoreHandsGrid() {
         if (storeController != null) {
             Platform.runLater(() -> {
-                handsController.updateGrid(PlayerManager.getInstance().getCurrentPlayer().getHands());
+                storeController.updateStoreGrid(PlayerManager.getInstance().getCurrentPlayer().getHands());
             });
         } else {
             System.out.println("Store hands is null");
