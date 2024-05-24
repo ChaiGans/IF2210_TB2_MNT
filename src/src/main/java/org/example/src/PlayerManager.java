@@ -36,14 +36,10 @@ public class PlayerManager {
     public void switchPlayer() {
         if (isFirstTurn) {
             currentPlayer = player1;
-            System.out.println("Pemain saat ini : player 1");
             isFirstTurn = false;
-            playerInformation();
         } else {
-            System.out.println("Pemain saat ini : player 2");
             currentPlayer = player2;
             isFirstTurn = true;
-            playerInformation();
         }
     }
 
@@ -114,7 +110,6 @@ public class PlayerManager {
 
         currentPlayer = player1;
         isFirstTurn = true;
-        playerInformation();
     }
 
 }

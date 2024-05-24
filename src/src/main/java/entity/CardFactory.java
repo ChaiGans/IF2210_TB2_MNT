@@ -7,7 +7,7 @@ public class CardFactory {
         "Corn Seed", "Pumpkin Seed", "Strawberry Seed", "Land Shark", "Sheep", "Horse", "Cow", "Chicken",
         "Accelerate", "Delay", "Instant Harvest", "Destroy", "Protect", "Trap",
         "Shark Fin", "Milk", "Sheep Meat", "Horse Meat", "Egg", "Bear Meat",
-        "Strawberry", "Pumpkin", "Corn"
+        "Strawberry", "Pumpkin", "Corn","Bear"
     };
 
     public static Card createCard(String cardType, Player owner) {

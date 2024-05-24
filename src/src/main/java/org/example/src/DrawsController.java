@@ -32,17 +32,19 @@ public class DrawsController {
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         int size = (6 - PlayerManager.getInstance().getCurrentPlayer().getHands().getCardCount());
         if (size >0){
-            if (size > 40 - PlayerManager.getInstance().getCurrentPlayer().getDeck().getMax()){
-                draws = currentPlayer.draw4(40 - PlayerManager.getInstance().getCurrentPlayer().getDeck().getMax());
-                updateCardGrid(draws);
-            }
             if(size >4){
                 size = 4;
             }
-        draws = currentPlayer.draw4(size);
-        updateCardGrid(draws);
+            if (size > PlayerManager.getInstance().getCurrentPlayer().getDeck().getCurrentDeckCardCount()){
+                System.out.println("Ga cukup");
+                size = PlayerManager.getInstance().getCurrentPlayer().getDeck().getCurrentDeckCardCount();
+            }
+            System.out.println("Yang digacha"+size);
+            draws = currentPlayer.draw4(size);
+            updateCardGrid(draws);
+            }
+            System.out.println("Player ini jumlah kartu deck :"+PlayerManager.getInstance().getCurrentPlayer().getDeck().getCurrentDeckCardCount());
         }
-    }
 
     public synchronized void startBearAttack(Grid field) {
         if (!bearAttack.isBearAttackHappening() && bearAttack.getRandom().nextBoolean()) {
@@ -78,8 +80,8 @@ public class DrawsController {
 
     public static void stopBearAttack() {
         if (bearAttack.isBearAttackHappening()) {
-            bearAttackThread.interrupt();  // Interrupt the bear attack thread
-            concludeBearAttack(); // Conclude bear attack handling
+            bearAttackThread.interrupt();  
+            concludeBearAttack(); 
         }
     }
 
@@ -103,7 +105,9 @@ public class DrawsController {
         int handCardCount = PlayerManager.getInstance().getCurrentPlayer().getHands().getCardCount();
         int initialSize = 6 - handCardCount;
         final int size = Math.min(initialSize, 4);
-        draws = PlayerManager.getInstance().getCurrentPlayer().draw4(size);
+        System.out.println("Maunya sejumlah"+size);
+        System.out.println("Player ini jumlah kartu deck :"+PlayerManager.getInstance().getCurrentPlayer().getDeck().getCurrentDeckCardCount());
+        draws = PlayerManager.getInstance().getCurrentPlayer().shuffleDeal(size);
         updateCardGrid(draws);
     }
     public void updateCardGrid(List<Card> draws) {
@@ -141,9 +145,6 @@ public class DrawsController {
             PlayerManager.getInstance().getCurrentPlayer().ShowHand();
             Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
             currentPlayer.save(draws);
-            int limitSize = currentPlayer.getDeck().getMax() - size;
-            currentPlayer.limitDeck(limitSize);
-            System.out.println("Limit:"+limitSize);
             UIUpdateService.getInstance().updateHandsGrid();
             Node source = (Node) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();

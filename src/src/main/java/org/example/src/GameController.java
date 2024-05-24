@@ -150,9 +150,9 @@ public class GameController {
         int handCardCount = PlayerManager.getInstance().getCurrentPlayer().getHands().getCardCount();
         int initialSize = 6 - handCardCount;
         final int size = Math.min(initialSize, 4);
-        if (size > 0){
-            GameApp.openNewWindow("None", "Draws.fxml");
-        }
+        // if (size > 0){
+        GameApp.openNewWindow("None", "Draws.fxml");
+        // }
         updateMoneyDisplay();
         updateCurrentPlayerLabel();
     }
@@ -242,7 +242,7 @@ public class GameController {
 
     public void updateDeckLabel() {
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-        int deckCount = 40 - currentPlayer.getDeck().getMax();
+        int deckCount = 40 - currentPlayer.getDeck().getCurrentDeckCardCount();
         deckCountLabel.setText(deckCount + "/" + "40");
     }
 }

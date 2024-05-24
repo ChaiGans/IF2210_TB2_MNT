@@ -93,6 +93,9 @@ public class Player {
     public List<Card> draw4(int size){
         return this.deck.deal(size);
     }
+    public List<Card> shuffleDeal(int size){
+        return this.deck.shuffleSingular(size);
+    }
     public void save(List<Card> draws){
         this.hands.addSet(draws);
     }
@@ -110,9 +113,6 @@ public class Player {
     }
     public Card Panen(int col,int row){
         return this.field.Panen(col,row);
-    }
-    public void limitDeck(int max){
-        this.deck.setMax(max);
     }
 }
 

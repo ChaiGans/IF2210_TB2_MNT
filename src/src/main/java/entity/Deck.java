@@ -18,12 +18,11 @@ public class Deck {
         this.owner = owner;
         this.cards = new ArrayList<>();
         this.countCard = 0;
-        this.max = 40;
         initializeDeck();
     }
 
     private void initializeDeck() {
-        for (int i = 0; i < max; i++) {
+        for (int i = 0; i < 40; i++) {
             Card card = CardFactory.createRandomCard(owner);
             while(card.getName() == "Bear"){
                 card = CardFactory.createRandomCard(owner);
@@ -65,6 +64,16 @@ public class Deck {
         }
         return dealtCards;
     }
+    public List<Card> shuffleSingular(int size) {
+        List<Card> dealtCards = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            int index = random.nextInt(cards.size());
+            // System.out.println("Ukuran"+cards);
+            dealtCards.add(cards.get(index));
+        }
+        return dealtCards;
+    }
 
     public List<Card> getCards() {
         return this.cards;
@@ -83,16 +92,8 @@ public class Deck {
     public List<Card> shuffleDeal(int size) {
         Set<Card> uniqueDealtCards = new HashSet<>(deal(size));
         while (uniqueDealtCards.size() < DEAL_SIZE) {
-            uniqueDealtCards.addAll(deal(size));
+            uniqueDealtCards.addAll(shuffleDeal(size));
         }
         return new ArrayList<>(uniqueDealtCards);
-    }
-
-    public void setMax(int max){
-        this.max = max;
-    }
-
-    public int getMax(){
-        return this.max;
     }
 }
