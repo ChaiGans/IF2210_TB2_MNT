@@ -106,6 +106,17 @@ public class GridController {
                         controller.setIsStorePage(false);
                         controller.setCard(card);
                         controller.setCardInfo(card.getName() + ".png", card.getName());
+                        if (card instanceof PlantCard) {
+                            if (((PlantCard) card).getCurrentAge() >= ((PlantCard) card).getHarvestAge()) {
+                                if (card.getName() == "Corn Seed") {
+                                    controller.setCardInfo("Corn.png", "Corn");
+                                } else if (card.getName() == "Pumpkin Seed") {
+                                    controller.setCardInfo("Pumpkin.png", "Pumpkin");
+                                } else if (card.getName() == "Strawberry Seed") {
+                                    controller.setCardInfo("Strawberry.png", "Strawberry");
+                                }
+                            }
+                        }
                         cell.getChildren().add(cardNode);
                     }
 

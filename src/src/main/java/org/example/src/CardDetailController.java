@@ -53,13 +53,13 @@ public class CardDetailController {
         int acc, pro, del, des, ins, trap = 0;
         if (card instanceof AnimalCard) {
             AnimalCard animalCard = (AnimalCard) card;
-            infoText.setText("Berat: " + animalCard.getCurrentWeight() + " / Target: " + animalCard.getHarvestWeight());
+            infoText.setText("Weight: " + animalCard.getCurrentWeight() + " / Target: " + animalCard.getHarvestWeight());
             this.current = animalCard.getCurrentWeight();
             this.ready = animalCard.getHarvestWeight();
 
         } else if (card instanceof PlantCard) {
             PlantCard plantCard = (PlantCard) card;
-            infoText.setText("Berat: " + plantCard.getCurrentAge() + " / Target: " + plantCard.getHarvestAge());
+            infoText.setText("Age: " + plantCard.getCurrentAge() + " / Target: " + plantCard.getHarvestAge());
             this.current = plantCard.getCurrentAge();
             this.ready = plantCard.getHarvestAge();
 
