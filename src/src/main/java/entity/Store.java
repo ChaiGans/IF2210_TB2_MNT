@@ -11,38 +11,32 @@ public class Store {
     }
 
     public void addItem(ProductCard newItem, int quantity) {
-        // Jika kartu produk belum pernah ada di toko
-        if (!this.item_list.containsKey(newItem)) {
-            this.item_list.put(newItem, quantity);
-            return;
-        }
-
-        // Jika produk sudah ada di toko maka +1 quantity
-        this.item_list.put(newItem, this.item_list.get(newItem) + quantity);
+        // Retrieve current quantity, update it, or initialize it if not present
+        this.item_list.merge(newItem, quantity, Integer::sum);
     }
 
     public void deductItem(ProductCard targetItem, int quantity) throws Exception {
-        // Jika produk sedang habis stoknya
-        if (!this.item_list.containsKey(targetItem) || this.item_list.get(targetItem) == 0) {
+        // Check if item exists and has sufficient quantity
+        Integer currentQuantity = this.item_list.get(targetItem);
+        if (currentQuantity == null || currentQuantity == 0) {
             throw new Exception("You can't deduct the stock, because item is currently sold out");
         }
-
-        // Kurangi stok produk sebanyak 1 buah
-        if (this.item_list.get(targetItem) < quantity) {
-            throw new Exception("You can't buy that much, because item stock is unsufficient");
+        if (currentQuantity < quantity) {
+            throw new Exception("Insufficient stock to deduct: requested " + quantity + ", available " + currentQuantity);
         }
-
-        this.item_list.put(targetItem, this.item_list.get(targetItem) - quantity);
+        // Update the store's inventory by reducing the quantity
+        this.item_list.put(targetItem, currentQuantity - quantity);
     }
 
     public void purchaseItem(ProductCard item, Player player, int quantity) throws Exception {
         printStoreInformation();
-        if (!item_list.containsKey(item) || item_list.get(item) == 0) {
+        Integer stock = item_list.get(item);
+        if (stock == null || stock == 0) {
             throw new Exception("Item is out of stock.");
         }
         int totalCost = item.getPrice() * quantity;
         if (player.getCash() < totalCost) {
-            throw new Exception("Insufficient funds.");
+            throw new Exception("Insufficient funds. Required: $" + totalCost + ", Available: $" + player.getCash());
         }
         player.deductCash(totalCost);
         player.AddHand(item);
@@ -56,24 +50,19 @@ public class Store {
     }
 
     public Map<ProductCard, Integer> getStoreInformation() {
-        return this.item_list;
+        return Collections.unmodifiableMap(item_list);
     }
 
     public void printStoreInformation() {
         System.out.println("Store Inventory:");
-        for (Map.Entry<ProductCard, Integer> entry : item_list.entrySet()) {
-            ProductCard product = entry.getKey();
-            int quantity = entry.getValue();
-            System.out.println(product.toString() + " - Quantity: " + quantity);
-        }
+        item_list.forEach((product, quantity) ->
+                System.out.println(product + " - Quantity: " + quantity));
     }
 
     public ProductCard findProductByName(String name) {
-        for (ProductCard product : item_list.keySet()) {
-            if (product.getName().equalsIgnoreCase(name)) {
-                return product;
-            }
-        }
-        return null;
+        return item_list.keySet().stream()
+                .filter(product -> product.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
     }
 }
