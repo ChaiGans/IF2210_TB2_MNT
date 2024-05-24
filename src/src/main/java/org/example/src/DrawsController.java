@@ -25,15 +25,21 @@ public class DrawsController {
     String name;
 
     public void initialize() {
-        System.out.println("Ayok gacha");
         hands = GameData.getInstance().getHands();
-        System.out.println("Tangan awal:");
         PlayerManager.getInstance().getCurrentPlayer().ShowHand();
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-        System.out.println("Before:");
-        PlayerManager.getInstance().getCurrentPlayer().ShowHand();
-        draws = currentPlayer.draw4();
+        int size = (6 - PlayerManager.getInstance().getCurrentPlayer().getHands().getCardCount());
+        if (size >0){
+            if (size > 40 - PlayerManager.getInstance().getCurrentPlayer().getDeck().getMax()){
+                draws = currentPlayer.draw4(40 - PlayerManager.getInstance().getCurrentPlayer().getDeck().getMax());
+                updateCardGrid(draws);
+            }
+            if(size >4){
+                size = 4;
+            }
+        draws = currentPlayer.draw4(size);
         updateCardGrid(draws);
+        }
     }
 
     public synchronized void startBearAttack(BearAttack bearAttack, Grid field) {
@@ -77,7 +83,10 @@ public class DrawsController {
     }
 
     public void shuffle(){
-        draws = PlayerManager.getInstance().getCurrentPlayer().draw4();
+        int handCardCount = PlayerManager.getInstance().getCurrentPlayer().getHands().getCardCount();
+        int initialSize = 6 - handCardCount;
+        final int size = Math.min(initialSize, 4);
+        draws = PlayerManager.getInstance().getCurrentPlayer().draw4(size);
         updateCardGrid(draws);
     }
     public void updateCardGrid(List<Card> draws) {
@@ -92,7 +101,6 @@ public class DrawsController {
             imageView.setFitWidth(100);
             GridPane.setHalignment(imageView, HPos.CENTER);
             GridPane.setValignment(imageView, VPos.CENTER); 
-
             Label label = new Label(name);
             label.setMaxWidth(Double.MAX_VALUE); 
             GridPane.setHalignment(label, HPos.CENTER);
@@ -109,19 +117,32 @@ public class DrawsController {
 
     @FXML
     private void handleGoBack(ActionEvent event) {
-        System.out.println("ditekan sekali");
-        PlayerManager.getInstance().getCurrentPlayer().ShowHand();
-        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-        currentPlayer.save(draws);
-        System.out.println("Hands adalah:"+hands);
-        UIUpdateService.getInstance().updateHandsGrid();
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
-        BearAttack bearAttack = new BearAttack();
-        this.startBearAttack(bearAttack, PlayerManager.getInstance().getCurrentPlayer().getField());
-        if (bearAttack.isBearAttackHappening()) {
-            UIUpdateService.getInstance().updateGridColorAttack(bearAttack.getTargetSubgrid());
+        int handCardCount = PlayerManager.getInstance().getCurrentPlayer().getHands().getCardCount();
+        int initialSize = 6 - handCardCount;
+        final int size = Math.min(initialSize, 4);
+        if(size > 0){
+            PlayerManager.getInstance().getCurrentPlayer().ShowHand();
+            Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+            currentPlayer.save(draws);
+            int limitSize = currentPlayer.getDeck().getMax() - size;
+            currentPlayer.limitDeck(limitSize);
+            System.out.println("Limit:"+limitSize);
+            UIUpdateService.getInstance().updateHandsGrid();
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
+            GameController.getInstance().updateDeckLabel();
+            BearAttack bearAttack = new BearAttack();
+            this.startBearAttack(bearAttack, PlayerManager.getInstance().getCurrentPlayer().getField());
+            if (bearAttack.isBearAttackHappening()) {
+                UIUpdateService.getInstance().updateGridColorAttack(bearAttack.getTargetSubgrid());
+            }
         }
+        else{
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
+        }
+        
     }
 }

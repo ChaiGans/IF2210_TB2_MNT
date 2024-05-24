@@ -1,10 +1,7 @@
 package org.example.src;
-import entity.Store;
+import entity.*;
 import javafx.scene.Scene;
-import entity.Card;
 import javafx.application.Platform;
-import entity.GameState;
-import entity.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -28,6 +25,8 @@ public class GameController {
 //    private Text SaveState;
 //    @FXML
 //    private Text LoadState;
+    @FXML
+    private Label deckCountLabel;
     @FXML
     private Text Player1Money;
     @FXML
@@ -100,6 +99,7 @@ public class GameController {
         counterLabel.setText(String.valueOf(counter));
         arrowImageView.setOnMouseClicked(event -> nextTurn());
         GameApp.openNewWindow("None", "Draws.fxml");
+        GameController.getInstance().updateDeckLabel();
     }
 
     private void nextTurn() {
@@ -107,12 +107,16 @@ public class GameController {
         PlayerManager.getInstance().getCurrentPlayer().nextDay();
         manager.switchPlayer(); // Switch to the next player
         counter++;
+        GameController.getInstance().updateDeckLabel();
         counterLabel.setText(String.valueOf(counter));
         UIUpdateService.getInstance().updateRealGrid();
         UIUpdateService.getInstance().updateHandsGrid();
-        // List<Card> draws = manager.getCurrentPlayer().draw4();
-        // manager.getCurrentPlayer().save(draws);
-        GameApp.openNewWindow("None", "Draws.fxml");
+        int handCardCount = PlayerManager.getInstance().getCurrentPlayer().getHands().getCardCount();
+        int initialSize = 6 - handCardCount;
+        final int size = Math.min(initialSize, 4);
+        if (size > 0){
+            GameApp.openNewWindow("None", "Draws.fxml");
+        }
         updateMoneyDisplay();
         updateCurrentPlayerLabel();
     }
@@ -198,4 +202,9 @@ public class GameController {
         }
     }
 
+    public void updateDeckLabel() {
+        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+        int deckCount = 40 - currentPlayer.getDeck().getMax();
+        deckCountLabel.setText(deckCount + "/" + "40");
+    }
 }

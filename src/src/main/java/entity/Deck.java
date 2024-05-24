@@ -11,24 +11,28 @@ public class Deck {
     private List<Card> cards;
     private Player owner;
     private int countCard;
-    private static final int DECK_SIZE = 40;
+    private int max;
     private static final int DEAL_SIZE = 4;
 
     public Deck(Player owner) {
         this.owner = owner;
         this.cards = new ArrayList<>();
         this.countCard = 0;
+        this.max = 40;
         initializeDeck();
     }
 
     private void initializeDeck() {
-        for (int i = 0; i < DECK_SIZE; i++) {
-            cards.add(CardFactory.createRandomCard(owner));
+        for (int i = 0; i < max; i++) {
+            Card card = CardFactory.createRandomCard(owner);
+            while(card.getName() == "Bear"){
+                card = CardFactory.createRandomCard(owner);
+            }
+            cards.add(card);
             this.countCard++;
         }
     }
 
-    // To init player deck with defined size
     void initializeDeckBySize(int size) {
         for (int i = 0; i < size; i++) {
             cards.add(CardFactory.createRandomCard(owner));
@@ -36,12 +40,10 @@ public class Deck {
         } 
     }
 
-    // To know current count of card in deck
     public int getCurrentDeckCardCount() {
         return this.countCard;
     }
 
-    // To empty deck by removing all cards
     public void emptyDeck() {
         for (int i = 0; i < this.cards.size(); i++) {
             cards.remove(0);
@@ -53,16 +55,14 @@ public class Deck {
         Collections.shuffle(cards);
     }
 
-    public List<Card> deal() {
+    public List<Card> deal(int size) {
         List<Card> dealtCards = new ArrayList<>();
         Random random = new Random();
-
-        for (int i = 0; i < DEAL_SIZE; i++) {
+        for (int i = 0; i < size; i++) {
             int index = random.nextInt(cards.size());
             dealtCards.add(cards.remove(index));
-            this.countCard++;
+            this.countCard--; 
         }
-
         return dealtCards;
     }
 
@@ -80,11 +80,19 @@ public class Deck {
         }
     }
 
-    public List<Card> shuffleDeal() {
-        Set<Card> uniqueDealtCards = new HashSet<>(deal());
+    public List<Card> shuffleDeal(int size) {
+        Set<Card> uniqueDealtCards = new HashSet<>(deal(size));
         while (uniqueDealtCards.size() < DEAL_SIZE) {
-            uniqueDealtCards.addAll(deal());
+            uniqueDealtCards.addAll(deal(size));
         }
         return new ArrayList<>(uniqueDealtCards);
+    }
+
+    public void setMax(int max){
+        this.max = max;
+    }
+
+    public int getMax(){
+        return this.max;
     }
 }

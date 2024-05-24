@@ -88,8 +88,29 @@
                         <Insets bottom="40.0" left="20.0" top="40.0" />
                     </padding>
                 </HBox>
-            <HBox fx:id="Title" alignment="CENTER" prefHeight="474.0" prefWidth="725.0">
+            <HBox fx:id="Title" alignment="CENTER_LEFT" prefHeight="474.0" prefWidth="725.0">
                <children>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #FDFFEC; -fx-background-radius: 10;">
+                     <HBox.margin>
+                        <Insets left="40.0" right="30.0" top="300.0" />
+                     </HBox.margin>
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                           <children>
+                              <Label text="Deck">
+                                 <font>
+                                    <Font name="Segoe UI Black" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label text="1/40" fx:id="deckCountLabel">
+                                 <font>
+                                    <Font name="Segoe UI Black" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </StackPane>
                    <fx:include fx:id="GridField" source="GridField.fxml" />
                         <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="0.0" spacing="20.0">
                             <children>
@@ -212,7 +233,7 @@
                                          </Label>
                                      </children>
                                  </StackPane>
-                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="210.0" text="Currently Playing : " fx:id="currentPlayerLabel">
+                        <Label fx:id="currentPlayerLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="210.0" text="Currently Playing : ">
                            <font>
                               <Font name="Segoe UI Black" size="12.0" />
                            </font>

@@ -83,12 +83,16 @@ public class UIUpdateService {
     }
     
     public void updateDrawsGrid() {
+        int handCardCount = PlayerManager.getInstance().getCurrentPlayer().getHands().getCardCount();
+        int initialSize = 6 - handCardCount;
+        final int size = Math.min(initialSize, 4);
         if (drawsController != null) {
             Platform.runLater(() -> {
-                drawsController.updateCardGrid(PlayerManager.getInstance().getCurrentPlayer().draw4());
+                drawsController.updateCardGrid(PlayerManager.getInstance().getCurrentPlayer().draw4(size));
             });
         }
     }
+    
 
     public void updateGridColorAttack(List<List<Integer>> subgridLocationAttack) {
         Grid currentGrid = PlayerManager.getInstance().getCurrentPlayer().getField();
