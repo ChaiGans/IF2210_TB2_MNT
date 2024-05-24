@@ -55,7 +55,7 @@ public class ActiveHandsController {
                 cell.setMinSize(80, 100);
                 Card cards = hands.getCard(i);
                 if(cards != null){
-                    System.out.println("JALANNNNNNNNNNNNNNNNN");
+                    // System.out.println("JALANNNNNNNNNNNNNNNNN");
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Card.fxml"));
                     Node cardNode = loader.load();
                     CardController controller = loader.getController();
@@ -95,6 +95,7 @@ public class ActiveHandsController {
         });
     
         cell.setOnDragDropped(event -> {
+            hands = PlayerManager.getInstance().getCurrentPlayer().getHands();
             Dragboard db = event.getDragboard();
             boolean success = false;
             Node dragSource = DragContext.getInstance().getDragSource();

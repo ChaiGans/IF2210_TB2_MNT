@@ -73,7 +73,7 @@ public class GridController {
             currentGrid = PlayerManager.getInstance().getEnemyPlayer().getField();
             this.isEnemyGridActive = true;
         }
-        updateGrids(currentGrid, new ArrayList<>());
+        updateGrids(currentGrid, DrawsController.getBearAttack().getTargetSubgrid());
     }
 
     public void updateGrids(Grid gridData, List<List<Integer>> attackArea) {
@@ -192,6 +192,9 @@ public class GridController {
                                 targetPane.getChildren().add(cardNode);
                                 success = true;
                             }
+                            else{
+                                GameController.getInstance().showErrorPopup("Error: Can't drag");
+                            }
                         } else {
                             Card targetCard = currentGrid.getCard(targetCol, targetRow);
                             System.out.println("target card: " + targetCard);
@@ -243,7 +246,9 @@ public class GridController {
                                         hands.deleteCard(sourceIndex);
                                         sourcePane.getChildren().remove(0);
                                         success = true;
-                                    }
+                                }else{
+
+                                }
                             }
                         }
                     }

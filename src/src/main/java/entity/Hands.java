@@ -13,11 +13,11 @@ public class Hands {
 
     static {
         locationIndexMap.put("A01", 0);
-        locationIndexMap.put("A02", 1);
-        locationIndexMap.put("A03", 2);
-        locationIndexMap.put("A04", 3);
-        locationIndexMap.put("A05", 4);
-        locationIndexMap.put("A06", 5);
+        locationIndexMap.put("B01", 1);
+        locationIndexMap.put("C01", 2);
+        locationIndexMap.put("D01", 3);
+        locationIndexMap.put("E01", 4);
+        locationIndexMap.put("F01", 5);
     }
 
     public Hands() {
@@ -107,11 +107,12 @@ public class Hands {
             return null;
         }
     }
-    
+
     public String findCardLocation(Card card) {
-        for (int i = 0; i < this.getCardCount(); i++) {
-            if (this.cards.get(i) == card) {
-                return String.format("A%02d", i + 1);
+        for (int i = 0; i < this.cards.size(); i++) {
+            if (card.equals(this.cards.get(i))) {
+                char section = (char) ('A' + i); // Calculate the character for the section
+                return String.format("%c%02d", section, 1); // Use %02d to ensure the number is two digits (e.g., 01)
             }
         }
         throw new IllegalArgumentException("Card not found in the player's deck");
