@@ -179,14 +179,15 @@ public class LoadStateController {
         // Update player data
         PlayerManager playerManager = PlayerManager.getInstance();
         playerManager.setPlayers(gameState.getPlayers());
-//        playerManager.setCurrentTurn(gameState.getCurrentTurn());
+        GameController.getInstance().setCurrentTurn(gameState.getCurrentTurn());
+        PlayerManager.getInstance().setCurrentEnemyPlayer(GameController.getInstance().getCurrentTurn());
 
         // Update hands and grid data for the current player
 //        gameData.uploadGridData(playerManager.getCurrentPlayer());
 
         // Additional logic to refresh the UI or game components can be added here
 //        gameData.printPlayerStateInfo(playerManager.getCurrentPlayer());
-
+        GameController.getInstance().updateMoneyUI();
         UIUpdateService.getInstance().updateHandsGrid();
         UIUpdateService.getInstance().updateRealGrid();
         UIUpdateService.getInstance().updateDrawsGrid();

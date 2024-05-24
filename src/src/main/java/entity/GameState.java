@@ -27,6 +27,14 @@ public class GameState {
     public void setPlayers(List<Player> players) {
         this.players = players;
     }
+
+    public void setCurrentTurn(int currentTurn) {
+        this.currentTurn = currentTurn;
+    }
+
+    public void setStore(Store newStore) {
+        this.store = newStore;
+    }
     
     public Store getStore() {
         return this.store;

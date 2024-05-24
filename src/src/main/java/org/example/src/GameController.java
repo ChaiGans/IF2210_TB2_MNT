@@ -59,8 +59,29 @@ public class GameController {
             currentPlayerLabel.setText("Currently Playing : Player 2");
         }
     }
+
+    public int getCurrentTurn() {
+        return this.counter;
+    }
+
+    public void setCurrentPlayerLabel(int currentTurn) {
+        if (currentTurn % 2 == 1) {
+            currentPlayerLabel.setText("Currently Playing : Player 1");
+        } else {
+            currentPlayerLabel.setText("Currently Playing : Player 2");
+        }
+    }
+
+    public void setCurrentTurn(int currentTurn) {
+        this.counter = currentTurn;
+    }
+
     public GameController() {
         instance = this;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 
     public static GameController getInstance() {
@@ -130,13 +151,14 @@ public class GameController {
     }
 
     private void updateMoneyDisplay() {
-        Player1Money.setText("$ " + manager.getCurrentPlayer().getCash());
-        Player2Money.setText("$ " + manager.getEnemyPlayer().getCash());
+        counterLabel.setText(String.valueOf(GameController.getInstance().getCurrentTurn()));
+        Player1Money.setText("$ " + manager.getPlayer1().getCash());
+        Player2Money.setText("$ " + manager.getPlayer2().getCash());
     }
 
-
-
-
+    public void updateMoneyUI() {
+        updateMoneyDisplay();
+    }
 
     public void updateGameState(GameState gameState) {
         // Update UI or perform necessary actions with the loaded game state
@@ -175,4 +197,5 @@ public class GameController {
             e.printStackTrace();
         }
     }
+
 }

@@ -133,6 +133,7 @@ public class SaveStateController {
         GameData.getInstance().getGameState().setPlayers(tempPlayerList);
         // set toko di gamestate
         // set current turn di gamestate
+        GameData.getInstance().getGameState().setCurrentTurn(GameController.getInstance().getCurrentTurn());
 
         switch (selectedFormat) {
             case "XML":

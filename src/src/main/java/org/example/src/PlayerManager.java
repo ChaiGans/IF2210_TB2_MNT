@@ -93,6 +93,17 @@ public class PlayerManager {
         }
     }
 
+    public void setCurrentEnemyPlayer(int currentTurn) {
+        if (currentTurn % 2 == 1) { // currentTurn ganjil
+            this.currentPlayer = this.player1;
+            GameController.getInstance().setCurrentPlayerLabel(currentTurn);
+        }
+        else {
+            this.currentPlayer = this.player2;
+            GameController.getInstance().setCurrentPlayerLabel(currentTurn);
+        }
+    }
+
     public void setPlayers(List<Player> players) {
         if (players.size() != 2) {
             throw new IllegalArgumentException("Player list must contain exactly two players.");
