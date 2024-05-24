@@ -53,7 +53,9 @@ public class Grid {
 
     public void removeCardArea (List<List<Integer>> subgridPosition) {
         for (List<Integer> area : subgridPosition) {
-            this.removeCard(area.get(1), area.get(0));
+            if (!this.getCard(area.get(1), area.get(0)).getActiveEffect().contains("Protect")) {
+                this.removeCard(area.get(1), area.get(0));
+            }
         }
     }
 
