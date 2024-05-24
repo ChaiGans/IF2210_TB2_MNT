@@ -76,7 +76,7 @@ public class BearAttack {
             case 5: // 1x5 or 5x1 subgrid
                 if (random.nextBoolean()) {
                     int row5 = random.nextInt(rows);
-                    for (int i = 0; i < 5; i++) {
+                    for (int i = 0; i < 4; i++) {
                         positions.add(List.of(row5, i));
                     }
                 } else {

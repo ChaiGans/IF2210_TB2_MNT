@@ -46,6 +46,10 @@ public class DrawsController {
             System.out.println("Player ini jumlah kartu deck :"+PlayerManager.getInstance().getCurrentPlayer().getDeck().getCurrentDeckCardCount());
         }
 
+        public static BearAttack getBearAttack() {
+            return bearAttack;
+        }
+
     public synchronized void startBearAttack(Grid field) {
         if (!bearAttack.isBearAttackHappening() && bearAttack.getRandom().nextBoolean()) {
             bearAttack.setBearAttackHappening(true);

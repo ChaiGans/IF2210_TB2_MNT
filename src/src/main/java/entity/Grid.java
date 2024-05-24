@@ -59,6 +59,7 @@ public class Grid {
 
     public boolean isAreaTrap (List<List<Integer>> subgridPosition) {
         for (List<Integer> area : subgridPosition) {
+            System.out.println("area: "  + area);
             Card currentCard = this.getCard(area.get(1), area.get(0));
             if (currentCard != null && currentCard.getActiveEffect().contains("Trap")) {
                 return true;
@@ -89,6 +90,8 @@ public class Grid {
 
     public Card getCard(int x, int y) {
         if (x < 0 || x >= width || y < 0 || y >= height) {
+            System.out.println("col: " + x);
+            System.out.println("row: " + y);
             throw new IndexOutOfBoundsException("Coordinates out of bounds");
         }
         return matrix.get(y).get(x);
@@ -98,6 +101,7 @@ public class Grid {
         if (x >= 0 && x < width && y >= 0 && y < height) {
             matrix.get(y).set(x, null);
         } else {
+            System.out.println("ini remove");
             throw new IndexOutOfBoundsException("Coordinates out of bounds");
         }
     }
