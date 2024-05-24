@@ -158,7 +158,7 @@ public class GameData {
      public static void main(String[] args) {
         try {
             GameData game = new GameData();
-            String jarPath = "Plugin-JSON-Loader/target/Plugin-JSON-Loader-1.0-SNAPSHOT.jar";
+            String jarPath = "Plugin-XML-Loader/target/Plugin-XML-Loader-1.0-SNAPSHOT.jar";
 //            String className = "com.plugin.JsonConfigLoader";
             game.addNewPlugin(jarPath);
             System.out.println(game.getPluginManager().getAllPluginName());

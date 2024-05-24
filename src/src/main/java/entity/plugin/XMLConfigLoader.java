@@ -46,7 +46,7 @@ public class XMLConfigLoader extends BasePlugin implements PluginInterface {
         DocumentBuilder builder;
         try {
             builder = factory.newDocumentBuilder();
-            Document gameStateDoc = builder.parse(new File(directoryPath));
+            Document gameStateDoc = builder.parse(new File(directoryPath + "/gamestate.xml"));
             int currentTurn = Integer.parseInt(gameStateDoc.getElementsByTagName("currentTurn").item(0).getTextContent());
             NodeList items = gameStateDoc.getElementsByTagName("item");
 
@@ -106,7 +106,7 @@ public class XMLConfigLoader extends BasePlugin implements PluginInterface {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource domSource = new DOMSource(document);
-            StreamResult streamResult = new StreamResult(new File(directoryPath));
+            StreamResult streamResult = new StreamResult(new File(directoryPath + "/gamestate.xml"));
             transformer.transform(domSource, streamResult);
 
             savePlayer(gameState.getPlayers().get(0), directoryPath + "/player1.xml");
