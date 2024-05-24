@@ -102,27 +102,33 @@ public class CardDetailController {
         int col = GameData.getInstance().ColClicked();
         int row = GameData.getInstance().rowClciked();
         Card card = currentPlayer.getField().getCard(col, row);
-        if (card instanceof AnimalCard){
-            AnimalCard animalCard = (AnimalCard) card;
-            if (animalCard.isReadyToHarvest()){
-                ProductCard cards = animalCard.harvest();
-                currentPlayer.AddHand(cards);
-                currentPlayer.Panen(col, row);
+        if(currentPlayer.getHands().length() < 6){
+            System.out.println("size hands: " + currentPlayer.getHands().length());
+            if (card instanceof AnimalCard){
+                AnimalCard animalCard = (AnimalCard) card;
+                if (animalCard.isReadyToHarvest()){
+                    ProductCard cards = animalCard.harvest();
+                    currentPlayer.AddHand(cards);
+                    currentPlayer.Panen(col, row);
+                }
+                else{
+                    GameController.getInstance().showErrorPopup("Not Ready To Harvest");
+                }
+            }else if (card instanceof PlantCard){
+                PlantCard plantCard = (PlantCard) card;
+                if (plantCard.isReadyToHarvest()){
+                    ProductCard cards = plantCard.harvest();
+                    currentPlayer.AddHand(cards);
+                    currentPlayer.Panen(col, row);
+                }
+                else{
+                    GameController.getInstance().showErrorPopup("Not Ready To Harvest");
+                }
             }
-            else{
-                GameController.getInstance().showErrorPopup("Not Ready To Harvest");
-            }
-        }else if (card instanceof PlantCard){
-            PlantCard plantCard = (PlantCard) card;
-            if (plantCard.isReadyToHarvest()){
-                ProductCard cards = plantCard.harvest();
-                currentPlayer.AddHand(cards);
-                currentPlayer.Panen(col, row);
-            }
-            else{
-                GameController.getInstance().showErrorPopup("Not Ready To Harvest");
-            }
+        }else{
+            GameController.getInstance().showErrorPopup("Hands full, Can't Harvest");
         }
+        
         UIUpdateService.getInstance().updateHandsGrid();
         UIUpdateService.getInstance().updateRealGrid();
         Stage stage = (Stage) panenButton11.getScene().getWindow();
