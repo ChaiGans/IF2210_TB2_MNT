@@ -85,8 +85,9 @@ public class DrawsController {
 
     private static void concludeBearAttack() {
         bearAttack.setBearAttackHappening(false);
-        if (!PlayerManager.getInstance().getCurrentPlayer().getField().isAreaTrap(bearAttack.getTargetSubgrid())) {
-            PlayerManager.getInstance().getCurrentPlayer().getField().removeCardArea(bearAttack.getTargetSubgrid());
+        List<List<Integer>> attack = bearAttack.getTargetSubgrid();
+        if (!PlayerManager.getInstance().getCurrentPlayer().getField().isAreaTrap(attack)) {
+            PlayerManager.getInstance().getCurrentPlayer().getField().removeCardArea(attack);
         } else {
             PlayerManager.getInstance().getCurrentPlayer().getHands().addCard(CardFactory.createCard("Bear", PlayerManager.getInstance().getCurrentPlayer()));
         }
@@ -147,7 +148,7 @@ public class DrawsController {
             Stage stage = (Stage) source.getScene().getWindow();
             stage.close();
             GameController.getInstance().updateDeckLabel();
-            BearAttack bearAttack = new BearAttack();
+            bearAttack = new BearAttack();
             this.startBearAttack(PlayerManager.getInstance().getCurrentPlayer().getField());
             if (bearAttack.isBearAttackHappening()) {
                 UIUpdateService.getInstance().updateGridColorAttack(bearAttack.getTargetSubgrid());

@@ -59,7 +59,8 @@ public class Grid {
 
     public boolean isAreaTrap (List<List<Integer>> subgridPosition) {
         for (List<Integer> area : subgridPosition) {
-            if (this.getCard(area.get(1), area.get(0)) != null && this.getCard(area.get(1), area.get(0)).getActiveEffect().contains("Trap")) {
+            Card currentCard = this.getCard(area.get(1), area.get(0));
+            if (currentCard != null && currentCard.getActiveEffect().contains("Trap")) {
                 return true;
             };
         }
