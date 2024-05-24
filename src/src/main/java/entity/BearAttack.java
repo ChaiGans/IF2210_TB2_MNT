@@ -79,13 +79,13 @@ public class BearAttack {
                 break;
             case 5: // 1x5 or 5x1 subgrid
                 if (random.nextBoolean()) {
-                    int row5 = random.nextInt(0, rows); // 4 x 1
-                    for (int i = 0; i < 4; i++) {
+                    int row5 = random.nextInt(0, rows); // 1x5
+                    for (int i = 0; i < 5; i++) {
                         positions.add(List.of(row5, i));
                     }
                 } else {
-                    int col5 = random.nextInt(0, cols); // 1 x 5
-                    for (int i = 0; i < 5; i++) {
+                    int col5 = random.nextInt(0, cols); // 4x1
+                    for (int i = 0; i < 4; i++) {
                         positions.add(List.of(i, col5));
                     }
                 }

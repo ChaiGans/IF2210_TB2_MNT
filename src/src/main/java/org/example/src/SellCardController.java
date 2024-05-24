@@ -92,6 +92,8 @@ public class SellCardController {
         } else {
             System.out.println("Harusnya ga keluar pagenya atau keluar pagenya tapi tulisannya oops");
         }
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.close();
     }
 
     private void updateStoreHands() {

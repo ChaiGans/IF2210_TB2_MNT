@@ -17,7 +17,9 @@ public class PlayerManager {
 
     private PlayerManager() {
         player1 = new Player();
+        player1.setName("Player 1");
         player2 = new Player();
+        player2.setName("Player 2");
         currentPlayer = player1;
     }
 

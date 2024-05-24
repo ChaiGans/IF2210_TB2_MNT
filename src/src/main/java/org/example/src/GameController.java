@@ -121,7 +121,13 @@ public class GameController {
         this.manager = PlayerManager.getInstance();
         updateMoneyDisplay();
         counterLabel.setText(String.valueOf(counter));
-        arrowImageView.setOnMouseClicked(event -> nextTurn());
+        arrowImageView.setOnMouseClicked(event -> {
+            try {
+                nextTurn();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
         GameApp.openNewWindow("None", "Draws.fxml");
         GameController.getInstance().updateDeckLabel();
     }
@@ -135,17 +141,33 @@ public class GameController {
         return null; // drawState
     }
 
-    private void nextTurn() {
-        if (this.getCurrentView() > 20) {
+    private void nextTurn() throws IOException {
+        counter++;
+        if (this.getCurrentTurn() > 20) {
             Player winningPlayer = currentWinningPlayer();
+            Stage stage = new Stage();
+            if (winningPlayer != null) { // tidak draw
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlayerWon.fxml"));
+                Parent root = fxmlLoader.load();
+                PlayerWonController playerWonController = fxmlLoader.getController();
+                playerWonController.setWinnerName(winningPlayer.getName());
+                stage.setTitle("PlayerWon");
+                stage.setScene(new Scene(root));
+                stage.show();
+            } else {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ItsADraw.fxml"));
+                Parent root = fxmlLoader.load();
+                stage.setTitle("DrawMatch");
+                stage.setScene(new Scene(root));
+                stage.show();
+            }
 
-            // set text winningPlayer.getName();
+            return;
         }
         manager = PlayerManager.getInstance();
         PlayerManager.getInstance().getCurrentPlayer().nextDay();
         PlayerManager.getInstance().getEnemyPlayer().nextDay();
         manager.switchPlayer(); // Switch to the next player
-        counter++;
         GameController.getInstance().updateDeckLabel();
         GameController.getInstance().
         counterLabel.setText(String.valueOf(counter));
