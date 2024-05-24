@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -163,6 +164,89 @@ public class StoreController {
             default:
                 break;
         }
+    }
+
+    @FXML
+    private void handleBuyAction(ActionEvent event) {
+        Button sourceButton = (Button) event.getSource();
+        String productName = null;
+
+        switch (sourceButton.getId()) {
+            case "buyPumpkin":
+                productName = "Pumpkin";
+                break;
+            case "buyStrawberry":
+                productName = "Strawberry";
+                break;
+            case "buyCorn":
+                productName = "Corn";
+                break;
+            case "buySheepMeat":
+                productName = "SheepMeat";
+                break;
+            case "buyHorseMeat":
+                productName = "HorseMeat";
+                break;
+            case "buyBearMeat":
+                productName = "BearMeat";
+                break;
+            case "buyMilk":
+                productName = "Milk";
+                break;
+            case "buyEgg":
+                productName = "Egg";
+                break;
+            case "buySharkFin":
+                productName = "SharkFin";
+                break;
+        }
+
+        if (productName != null) {
+            try {
+                DoBuy(productName);
+            } catch (Exception e) {
+                showErrorMessage(e.getMessage());
+            }
+        }
+    }
+
+    private void DoBuy(String productName) throws Exception {
+        System.out.println("Bisa tekan beli");
+        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+        ProductCard productCard = store.findProductByName(productName);
+
+        if (productCard != null) {
+            store.purchaseItem(productCard, currentPlayer, 1);
+            updateStoreHands();
+            updateStock();
+            showSuccessMessage("Purchase operation succeeded!");
+        } else {
+            throw new Exception("The product is unavailable now.");
+        }
+    }
+
+    private void showSuccessMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void showErrorMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void updateStoreHands() {
+        UIUpdateService.getInstance().updateStoreHandsGrid();
+    }
+
+    private void updateStock() {
+        UIUpdateService.getInstance().updateHandsGrid();
     }
 
 }

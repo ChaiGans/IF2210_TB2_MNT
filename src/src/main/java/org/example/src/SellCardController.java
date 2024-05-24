@@ -58,6 +58,7 @@ public class SellCardController {
         System.out.println("Bisa tekan");
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         Hands hands = currentPlayer.getHands();
+        System.out.println(hands.findCardLocation(card));
         int price, currentMoney, idx = 0;
         currentMoney = currentPlayer.getCash();
         if (card instanceof ProductCard) {
@@ -65,7 +66,9 @@ public class SellCardController {
             price = productSell.getPrice();
             currentPlayer.setCash(currentMoney + price);
             String index = hands.findCardLocation(card);
-            idx = hands.getCardIndexFromLocation(index);
+
+            idx = hands.getCardIndexFromHands(index);
+            System.out.println(idx);
             hands.deleteCard(idx);
             currentPlayer.setHands(hands);
 //            storeController.updateStoreGrid(hands);
@@ -73,17 +76,17 @@ public class SellCardController {
                 store = GameController.getInstance().getStore();
             }
 
-            if (store != null) {
-                store.addItem(productSell, 1);
-                if (storeController != null) {
-                    storeController.updateStoreGrid(hands);
-                }
-                updateStoreHands();
-                updateStock();
-                showSuccessMessage();
-            } else {
-                System.out.println("Store is not initialized.");
+            store.addItem(productSell, 1);
+            store.printStoreInformation();
+            if (storeController != null) {
+                storeController.updateStoreGrid(hands);
             }
+            updateStoreHands();
+            updateStock();
+            showSuccessMessage();
+//            else {
+//                System.out.println("Store is not initialized.");
+//            }
         } else {
             System.out.println("Harusnya ga keluar pagenya atau keluar pagenya tapi tulisannya oops");
         }
@@ -106,11 +109,11 @@ public class SellCardController {
     }
 
 
+}
 
 //    @FXML
-//    private void DoBuy(String name){
+//    private void DoBuy(Player currentPlayer, ProductCard card){
 //        System.out.println("Bisa tekan beli");
-//        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
 //        Hands hands = currentPlayer.getHands();
 //        int price, currentMoney, idx = 0;
 //        currentMoney = currentPlayer.getCash();
@@ -128,4 +131,11 @@ public class SellCardController {
 //        }
 //    }
 
-}
+//    private void buyStrawberry(){
+//        store.
+//        ProductCard strawberry = (ProductCard) card;
+//        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+//        currentPlayer.AddHand(strawberry);
+//    }
+
+

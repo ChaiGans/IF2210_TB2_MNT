@@ -65,4 +65,13 @@ public class Store {
             System.out.println(product.toString() + " - Quantity: " + quantity);
         }
     }
+
+    public ProductCard findProductByName(String name) {
+        for (ProductCard product : item_list.keySet()) {
+            if (product.getName().equalsIgnoreCase(name)) {
+                return product;
+            }
+        }
+        return null;
+    }
 }

@@ -118,12 +118,15 @@ public class Hands {
         throw new IllegalArgumentException("Card not found in the player's deck");
     }
 
-    public int getCardIndexFromLocation(String location) {
-        if (location != null && location.length() == 3 && location.charAt(0) == 'A') {
+    public int getCardIndexFromHands(String location) {
+        System.out.println("Location received: " + location);
+        if (location != null && location.length() == 3 && location.charAt(0) >= 'A' && location.charAt(0) <= 'F') {
             try {
-                int index = Integer.parseInt(location.substring(1)) - 1;
-                if (index >= 0 && index < cards.size()) {
-                    return index;
+                int letterIndex = location.charAt(0) - 'A';
+                System.out.println(letterIndex);
+
+                if (letterIndex >= 0 && letterIndex < cards.size()) {
+                    return letterIndex;
                 } else {
                     System.out.println("Location out of bounds.");
                     return -1;
@@ -137,6 +140,7 @@ public class Hands {
             return -1;
         }
     }
+
 
     public int getCardCount() {
         int count = 0;
