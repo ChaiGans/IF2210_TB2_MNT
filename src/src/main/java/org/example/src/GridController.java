@@ -222,6 +222,8 @@ public class GridController {
                                     System.out.println("sesudah makan " + targetAnimalCard.getCurrentWeight());
                                     sourcePane.getChildren().remove(0);
                                     success = true;  
+                                }else{
+                                    GameController.getInstance().showErrorPopup("Error: Can't drag");
                                 }
                                                               
                             }else if (card instanceof IItemEffect){
@@ -247,7 +249,7 @@ public class GridController {
                                         sourcePane.getChildren().remove(0);
                                         success = true;
                                 }else{
-
+                                    GameController.getInstance().showErrorPopup("Error: Can't drag");
                                 }
                             }
                         }
