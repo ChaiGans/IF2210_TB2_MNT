@@ -138,6 +138,7 @@ public class GameController {
     private void nextTurn() {
         manager = PlayerManager.getInstance();
         PlayerManager.getInstance().getCurrentPlayer().nextDay();
+        PlayerManager.getInstance().getEnemyPlayer().nextDay();
         manager.switchPlayer(); // Switch to the next player
         counter++;
         GameController.getInstance().updateDeckLabel();
