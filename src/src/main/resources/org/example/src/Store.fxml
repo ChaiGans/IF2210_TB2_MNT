@@ -8,10 +8,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="407.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.src.StoreController">
+<AnchorPane prefHeight="407.0" prefWidth="480.0" style="-fx-background-color: #3F3B33;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.src.StoreController">
    <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="650.0" style="-fx-bacound-color: #3F3B33;">
       <children>
-          <AnchorPane prefHeight="471.0" prefWidth="587.0" style="-fx-background-color: #3F3B33;">
+          <AnchorPane prefHeight="471.0" prefWidth="578.0" style="-fx-background-color: #3F3B33;">
             <children>
                <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBackButtonAction" prefHeight="38.0" prefWidth="27.0" style="-fx-background-color: #3F3B33;">
                   <graphic>
@@ -22,147 +22,147 @@
                      </ImageView>
                   </graphic>
                </Button>
-                 <ImageView fitHeight="383.0" fitWidth="539.0" layoutX="23.0" layoutY="77.0">
+                 <ImageView fitHeight="383.0" fitWidth="539.0" layoutX="56.0" layoutY="77.0">
                      <image>
                          <Image url="@./detail/Store.png" />
                      </image>
                  </ImageView>
-               <Button fx:id="buyPumpkin" layoutX="128.0" layoutY="162.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0; " text="Buy">
+               <Button fx:id="buyPumpkin" layoutX="161.0" layoutY="162.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0; " text="Buy">
                   <font>
                      <Font name="Segoe UI Black" size="10.0" />
                   </font>
                </Button>
-               <Button fx:id="buyStrawberry" layoutX="126.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0;" text="Buy">
+               <Button fx:id="buyStrawberry" layoutX="159.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0;" text="Buy">
                   <font>
                      <Font name="Segoe UI Black" size="10.0" />
                   </font>
                </Button>
-               <Button fx:id="buyCorn" layoutX="127.0" layoutY="422.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0;;" text="Buy">
+               <Button fx:id="buyCorn" layoutX="160.0" layoutY="422.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0;;" text="Buy">
                   <font>
                      <Font name="Segoe UI Black" size="10.0" />
                   </font>
                </Button>
-               <Button fx:id="buySheepMeat" layoutX="311.0" layoutY="421.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0; " text="Buy">
+               <Button fx:id="buySheepMeat" layoutX="344.0" layoutY="421.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0; " text="Buy">
                   <font>
                      <Font name="Segoe UI Black" size="10.0" />
                   </font>
                </Button>
-               <Button fx:id="buyHorseMeat" layoutX="311.0" layoutY="293.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0;" text="Buy">
+               <Button fx:id="buyHorseMeat" layoutX="344.0" layoutY="293.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0;" text="Buy">
                   <font>
                      <Font name="Segoe UI Black" size="10.0" />
                   </font>
                </Button>
-               <Button fx:id="buyBearMeat" layoutX="310.0" layoutY="162.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0;" text="Buy">
+               <Button fx:id="buyBearMeat" layoutX="343.0" layoutY="162.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0;" text="Buy">
                   <font>
                      <Font name="Segoe UI Black" size="10.0" />
                   </font>
                </Button>
-               <Button fx:id="buyMilk" layoutX="490.0" layoutY="293.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0;" text="Buy">
+               <Button fx:id="buyMilk" layoutX="523.0" layoutY="293.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0;" text="Buy">
                   <font>
                      <Font name="Segoe UI Black" size="10.0" />
                   </font>
                </Button>
-               <Button fx:id="buyEgg" layoutX="490.0" layoutY="161.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0;" text="Buy">
+               <Button fx:id="buyEgg" layoutX="523.0" layoutY="161.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0;" text="Buy">
                   <font>
                      <Font name="Segoe UI Black" size="10.0" />
                   </font>
                </Button>
-               <Button fx:id="buySharkFin" layoutX="491.0" layoutY="421.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0; " text="Buy">
+               <Button fx:id="buySharkFin" layoutX="524.0" layoutY="421.0" mnemonicParsing="false" onAction="#handleBuyAction" prefHeight="8.0" prefWidth="48.0" style="-fx-background-color: #F7F5F0; " text="Buy">
                   <font>
                      <Font name="Segoe UI Black" size="10.0" />
                   </font>
                </Button>
-               <Text fx:id="pricePumpkin" fill="#fbffb7" layoutX="140.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+               <Text fx:id="pricePumpkin" fill="#fbffb7" layoutX="173.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
                   <font>
                      <Font name="Segoe UI Semibold" size="12.0" />
                   </font>
                </Text>
-               <Text fx:id="stockPumpkin" fill="WHITE" layoutX="127.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <Text fx:id="stockPumpkin" fill="WHITE" layoutX="160.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                   <font>
                      <Font name="Segoe UI Semibold" size="11.0" />
                   </font>
                </Text>
-               <Text fx:id="priceBearMeat" fill="#fbffb7" layoutX="320.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+               <Text fx:id="priceBearMeat" fill="#fbffb7" layoutX="353.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
                   <font>
                      <Font name="Segoe UI Semibold" size="12.0" />
                   </font>
                </Text>
-               <Text fx:id="stockBearMeat" fill="WHITE" layoutX="311.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <Text fx:id="stockBearMeat" fill="WHITE" layoutX="344.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                   <font>
                      <Font name="Segoe UI Semibold" size="11.0" />
                   </font>
                </Text>
-               <Text fx:id="priceEgg" fill="#fbffb7" layoutX="498.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+               <Text fx:id="priceEgg" fill="#fbffb7" layoutX="531.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
                   <font>
                      <Font name="Segoe UI Semibold" size="12.0" />
                   </font>
                </Text>
-               <Text fx:id="stockEgg" fill="WHITE" layoutX="490.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <Text fx:id="stockEgg" fill="WHITE" layoutX="523.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                   <font>
                      <Font name="Segoe UI Semibold" size="11.0" />
                   </font>
                </Text>
-               <Text fx:id="stockStrawberry" fill="WHITE" layoutX="126.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <Text fx:id="stockStrawberry" fill="WHITE" layoutX="159.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                   <font>
                      <Font name="Segoe UI Semibold" size="11.0" />
                   </font>
                </Text>
-               <Text fx:id="stockHorseMeat" fill="WHITE" layoutX="311.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <Text fx:id="stockHorseMeat" fill="WHITE" layoutX="344.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                   <font>
                      <Font name="Segoe UI Semibold" size="11.0" />
                   </font>
                </Text>
-               <Text fx:id="stockMIlk" fill="WHITE" layoutX="490.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <Text fx:id="stockMIlk" fill="WHITE" layoutX="523.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                   <font>
                      <Font name="Segoe UI Semibold" size="11.0" />
                   </font>
                </Text>
-               <Text fx:id="stockCorn" fill="WHITE" layoutX="126.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <Text fx:id="stockCorn" fill="WHITE" layoutX="159.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                   <font>
                      <Font name="Segoe UI Semibold" size="11.0" />
                   </font>
                </Text>
-               <Text fx:id="stockSheepMeat" fill="WHITE" layoutX="311.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <Text fx:id="stockSheepMeat" fill="WHITE" layoutX="344.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                   <font>
                      <Font name="Segoe UI Semibold" size="11.0" />
                   </font>
                </Text>
-               <Text fx:id="stockSharkFin" fill="WHITE" layoutX="491.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <Text fx:id="stockSharkFin" fill="WHITE" layoutX="524.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                   <font>
                      <Font name="Segoe UI Semibold" size="11.0" />
                   </font>
                </Text>
-               <Text fx:id="priceStrawberry" fill="#fbffb7" layoutX="136.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+               <Text fx:id="priceStrawberry" fill="#fbffb7" layoutX="169.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
                   <font>
                      <Font name="Segoe UI Semibold" size="12.0" />
                   </font>
                </Text>
-               <Text fx:id="priceHorseMeat" fill="#fbffb7" layoutX="321.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+               <Text fx:id="priceHorseMeat" fill="#fbffb7" layoutX="354.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
                   <font>
                      <Font name="Segoe UI Semibold" size="12.0" />
                   </font>
                </Text>
-               <Text fx:id="priceMilk" fill="#fbffb7" layoutX="501.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+               <Text fx:id="priceMilk" fill="#fbffb7" layoutX="534.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
                   <font>
                      <Font name="Segoe UI Semibold" size="12.0" />
                   </font>
                </Text>
-               <Text fx:id="priceCorn" fill="#fbffb7" layoutX="140.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+               <Text fx:id="priceCorn" fill="#fbffb7" layoutX="173.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
                   <font>
                      <Font name="Segoe UI Semibold" size="12.0" />
                   </font>
                </Text>
-               <Text fx:id="priceSheepMeat" fill="#fbffb7" layoutX="323.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+               <Text fx:id="priceSheepMeat" fill="#fbffb7" layoutX="356.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
                   <font>
                      <Font name="Segoe UI Semibold" size="12.0" />
                   </font>
                </Text>
-               <Text fx:id="priceSharkFIn" fill="#fbffb7" layoutX="501.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+               <Text fx:id="priceSharkFIn" fill="#fbffb7" layoutX="534.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
                   <font>
                      <Font name="Segoe UI Semibold" size="12.0" />
                   </font>
                </Text>
-               <Text fill="WHITE" layoutX="121.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Store">
+               <Text fill="WHITE" layoutX="154.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Store">
                   <font>
                      <Font name="Segoe UI Black" size="39.0" />
                   </font>
