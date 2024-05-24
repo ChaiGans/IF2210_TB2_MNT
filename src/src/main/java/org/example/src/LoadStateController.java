@@ -152,7 +152,6 @@ public class LoadStateController {
             if (gameState != null) {
                 statusLabel.setText("State Loaded Successfully");
                 GameData.getInstance().setGameState(gameState);  // Set the loaded game state into GameData
-                GameData.getInstance().uploadGridData(PlayerManager.getInstance().getCurrentPlayer());
                 refreshGameComponents();
             } else {
                 statusLabel.setText("Failed to Load State");
@@ -181,12 +180,11 @@ public class LoadStateController {
         playerManager.setPlayers(gameState.getPlayers());
         GameController.getInstance().setCurrentTurn(gameState.getCurrentTurn());
         PlayerManager.getInstance().setCurrentEnemyPlayer(GameController.getInstance().getCurrentTurn());
+        DrawsController.stopBearAttack();
+        if (GameController.getInstance().getCurrentView() == 2) {
+            GameController.getInstance().setCurrentView(1);
+        }
 
-        // Update hands and grid data for the current player
-//        gameData.uploadGridData(playerManager.getCurrentPlayer());
-
-        // Additional logic to refresh the UI or game components can be added here
-//        gameData.printPlayerStateInfo(playerManager.getCurrentPlayer());
         GameController.getInstance().updateMoneyUI();
         UIUpdateService.getInstance().updateHandsGrid();
         UIUpdateService.getInstance().updateRealGrid();

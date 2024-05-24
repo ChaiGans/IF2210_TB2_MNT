@@ -45,6 +45,8 @@ public class GameController {
     @FXML
     private StackPane CurrentButton;
 
+    private int currentView = 1; // if currentView == 1 (means current player view)
+
     @FXML
     private Label counterLabel1;
     private float counterTime = 0.0F;
@@ -58,6 +60,23 @@ public class GameController {
         else{
             currentPlayerLabel.setText("Currently Playing : Player 2");
         }
+    }
+
+    public int getCurrentView() {
+        return this.currentView;
+    }
+
+    public void setCurrentView(int newCurrentView) {
+        if (newCurrentView == 1) {
+            ShowEnemy.setStyle("-fx-background-color: #99582a; -fx-background-radius: 10;");
+            CurrentButton.setStyle("-fx-background-color: #312D27; -fx-background-radius: 10;");
+            UIUpdateService.getInstance().updateRealGrid();
+        } else if (newCurrentView == 2) {
+            CurrentButton.setStyle("-fx-background-color: #99582a; -fx-background-radius: 10;");
+            ShowEnemy.setStyle("-fx-background-color: #312D27; -fx-background-radius: 10;");
+            UIUpdateService.getInstance().updateEnemyGrid();
+        }
+        this.currentView = newCurrentView;
     }
 
     public int getCurrentTurn() {
@@ -108,8 +127,12 @@ public class GameController {
         manager.switchPlayer(); // Switch to the next player
         counter++;
         counterLabel.setText(String.valueOf(counter));
+        currentView = 1;
+        ShowEnemy.setStyle("-fx-background-color: #99582a; -fx-background-radius: 10;");
+        CurrentButton.setStyle("-fx-background-color: #312D27; -fx-background-radius: 10;");
         UIUpdateService.getInstance().updateRealGrid();
         UIUpdateService.getInstance().updateHandsGrid();
+
         // List<Card> draws = manager.getCurrentPlayer().draw4();
         // manager.getCurrentPlayer().save(draws);
         GameApp.openNewWindow("None", "Draws.fxml");
@@ -124,12 +147,14 @@ public class GameController {
 
     @FXML
     public void ShowEnemy(MouseEvent event){
+        currentView = 2;
         CurrentButton.setStyle("-fx-background-color: #99582a; -fx-background-radius: 10;");
         ShowEnemy.setStyle("-fx-background-color: #312D27; -fx-background-radius: 10;");
         UIUpdateService.getInstance().updateEnemyGrid();
     }
     @FXML
     public void ShowCurrent(MouseEvent event){
+        currentView = 1;
         ShowEnemy.setStyle("-fx-background-color: #99582a; -fx-background-radius: 10;");
         CurrentButton.setStyle("-fx-background-color: #312D27; -fx-background-radius: 10;");
         UIUpdateService.getInstance().updateRealGrid();

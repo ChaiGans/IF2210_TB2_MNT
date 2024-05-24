@@ -12,8 +12,6 @@ public class GameData {
     private PluginInterface plugin;
     private GameState gameState;
     private static GameData instance;
-    private Hands hands;
-    private Grid gridData;
     private int currentClickedRow;
     private int currentClickedCol;
 
@@ -21,8 +19,6 @@ public class GameData {
         pluginManager = new PluginManager();
         this.usePlugin("com.plugin.TxtConfigLoader");
         this.gameState = new GameState();
-        hands = new Hands();
-        gridData = new Grid(5, 4);
     }
 
     public PluginManager getPluginManager() {
@@ -43,13 +39,6 @@ public class GameData {
 
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
-    }
-
-    public void uploadGridData(Player currPlayer) {
-        if (currPlayer != null) {
-            currPlayer.setHands(this.hands);  
-            currPlayer.setField(this.gridData);
-        }
     }
 
     public void printPlayerStateInfo(Player player) {
@@ -123,15 +112,6 @@ public class GameData {
         }
     }
 
-    public void switchSavedData(){
-        if (PlayerManager.getInstance().getCurrentPlayer() == PlayerManager.getInstance().getPlayer1() ){
-            System.out.println("Mengambil dari player 1");
-            hands = PlayerManager.getInstance().getPlayer1().getHands();
-        }else{
-            hands = PlayerManager.getInstance().getPlayer2().getHands();
-        }
-    }
-
     public static synchronized GameData getInstance() {
         if (instance == null) {
             instance = new GameData();
@@ -139,16 +119,8 @@ public class GameData {
         return instance;
     }
 
-    public Hands getHands() {
-        return hands;
-    }
-
     public GameState getGameState() {
         return gameState;
-    }
-
-    public Grid getGridData() {
-        return gridData;
     }
 
     public void printInformation() {
