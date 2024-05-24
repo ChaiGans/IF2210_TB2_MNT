@@ -59,7 +59,8 @@ public class StoreController {
         try {
             Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
             hands = currentPlayer.getHands();
-            UIUpdateService.getInstance().setStoreController(this);
+//            UIUpdateService uiUpdateService = new UIUpdateService();
+            UIUpdateService.getInstance().updateHandsGrid();
             updateStoreGrid(hands);
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,7 +113,7 @@ public class StoreController {
                 cell.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;-fx-border-radius:10");
                 cell.setMinSize(80, 100);
                 Card cards = hands.getCard(i);
-                if(cards != null){
+                if(this.hands.getCards() != null){
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/src/Card.fxml"));
                     Node cardNode = loader.load();
                     CardController controller = loader.getController();
@@ -132,70 +133,70 @@ public class StoreController {
         }
     }
 
-//    private void setupStoreDragHandlers(Pane cell, int col, int row) {
-//        cell.setOnDragDetected(event -> {
-//            if (!cell.getChildren().isEmpty()) {
-//                Dragboard db = cell.startDragAndDrop(TransferMode.MOVE);
-//                ClipboardContent content = new ClipboardContent();
-//                content.putString("hands," + storeHandsGrid.getChildren().indexOf(cell));
-//                db.setContent(content);
-//                DragContext.getInstance().setDragSource(cell);
-//                event.consume();
-//            }
-//        });
-//
-//        cell.setOnDragOver(event -> {
-//            if (event.getGestureSource() != cell && event.getDragboard().hasString()) {
-//                event.acceptTransferModes(TransferMode.MOVE);
-//            }
-//            event.consume();
-//        });
-//
-//        cell.setOnDragDropped(event -> {
-//            Dragboard db = event.getDragboard();
-//            boolean success = false;
-//            Node dragSource = DragContext.getInstance().getDragSource();
-//            if (db.hasString() && dragSource != null) {
-//                String[] parts = db.getString().split(",");
-//                int sourceIndex = Integer.parseInt(parts[1]);
-//
-//                Pane sourcePane = (Pane) dragSource;
-//                Pane targetPane = (Pane) event.getGestureTarget();
-//
-//                int targetIndex = GridPane.getColumnIndex(targetPane);
-//                if (sourceIndex != targetIndex) {
-//                    Card sourceCard = hands.getCard(sourceIndex);
-//                    Card targetCard = hands.getCard(targetIndex);
-//                    if (sourceCard != null) {
-//                        if (targetCard != null) {
-//                            hands.setCard(targetIndex, sourceCard);
-//                            hands.setCard(sourceIndex, targetCard);
-//                        } else {
-//                            hands.moveCard(sourceIndex, targetIndex);
-//                        }
-//
-//                        Node sourceNode = sourcePane.getChildren().remove(0);
-//                        Node targetNode = targetPane.getChildren().isEmpty() ? null : targetPane.getChildren().remove(0);
-//
-//                        targetPane.getChildren().add(sourceNode);
-//                        if (targetNode != null) {
-//                            sourcePane.getChildren().add(targetNode);
-//                        }
-//
-//                        success = true;
-//                    }
-//                }
-//            }
-//
-//            event.setDropCompleted(success);
-//            event.consume();
-//        });
-//
-//        cell.setOnDragDone(event -> {
-//            DragContext.getInstance().setDragSource(null);
-//            event.consume();
-//        });
-//    }
+    private void setupStoreDragHandlers(Pane cell, int col, int row) {
+        cell.setOnDragDetected(event -> {
+            if (!cell.getChildren().isEmpty()) {
+                Dragboard db = cell.startDragAndDrop(TransferMode.MOVE);
+                ClipboardContent content = new ClipboardContent();
+                content.putString("hands," + storeHandsGrid.getChildren().indexOf(cell));
+                db.setContent(content);
+                DragContext.getInstance().setDragSource(cell);
+                event.consume();
+            }
+        });
+
+        cell.setOnDragOver(event -> {
+            if (event.getGestureSource() != cell && event.getDragboard().hasString()) {
+                event.acceptTransferModes(TransferMode.MOVE);
+            }
+            event.consume();
+        });
+
+        cell.setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+            Node dragSource = DragContext.getInstance().getDragSource();
+            if (db.hasString() && dragSource != null) {
+                String[] parts = db.getString().split(",");
+                int sourceIndex = Integer.parseInt(parts[1]);
+
+                Pane sourcePane = (Pane) dragSource;
+                Pane targetPane = (Pane) event.getGestureTarget();
+
+                int targetIndex = GridPane.getColumnIndex(targetPane);
+                if (sourceIndex != targetIndex) {
+                    Card sourceCard = hands.getCard(sourceIndex);
+                    Card targetCard = hands.getCard(targetIndex);
+                    if (sourceCard != null) {
+                        if (targetCard != null) {
+                            hands.setCard(targetIndex, sourceCard);
+                            hands.setCard(sourceIndex, targetCard);
+                        } else {
+                            hands.moveCard(sourceIndex, targetIndex);
+                        }
+
+                        Node sourceNode = sourcePane.getChildren().remove(0);
+                        Node targetNode = targetPane.getChildren().isEmpty() ? null : targetPane.getChildren().remove(0);
+
+                        targetPane.getChildren().add(sourceNode);
+                        if (targetNode != null) {
+                            sourcePane.getChildren().add(targetNode);
+                        }
+
+                        success = true;
+                    }
+                }
+            }
+
+            event.setDropCompleted(success);
+            event.consume();
+        });
+
+        cell.setOnDragDone(event -> {
+            DragContext.getInstance().setDragSource(null);
+            event.consume();
+        });
+    }
 
 
 

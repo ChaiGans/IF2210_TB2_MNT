@@ -21,6 +21,10 @@ public class UIUpdateService {
         this.handsController = controller;
     }
 
+//    public void setStoreController(ActiveHandsController controller) {
+//        this.storeController = controller;
+//    }
+
     public void setDrawsController(DrawsController controller) {
         this.drawsController = controller;
     }
@@ -29,7 +33,6 @@ public class UIUpdateService {
         this.gridController = controller;
     }
 
-    public void setStoreController(StoreController controller) { this.storeController = controller;}
 
     public void updateHandsGrid() {
         System.out.println("Wanted to Save: "+PlayerManager.getInstance().getCurrentPlayer().getHands());
@@ -48,7 +51,7 @@ public class UIUpdateService {
     public void updateStoreHandsGrid() {
         if (storeController != null) {
             Platform.runLater(() -> {
-                storeController.updateStoreGrid(PlayerManager.getInstance().getCurrentPlayer().getHands());
+                handsController.updateGrid(PlayerManager.getInstance().getCurrentPlayer().getHands());
             });
         } else {
             System.out.println("Store hands is null");
