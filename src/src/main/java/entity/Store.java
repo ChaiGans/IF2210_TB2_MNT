@@ -36,6 +36,7 @@ public class Store {
     }
 
     public void purchaseItem(ProductCard item, Player player, int quantity) throws Exception {
+        printStoreInformation();
         if (!item_list.containsKey(item) || item_list.get(item) == 0) {
             throw new Exception("Item is out of stock.");
         }
@@ -44,6 +45,7 @@ public class Store {
             throw new Exception("Insufficient funds.");
         }
         player.deductCash(totalCost);
+        player.AddHand(item);
         deductItem(item, quantity);
     }
 

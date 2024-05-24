@@ -26,6 +26,10 @@ public class UIUpdateService {
         this.storeController = controller;
     }
 
+//    public void getStoreController(StoreController controller) {
+//        return this.storeController = controller;
+//    }
+
     public void setDrawsController(DrawsController controller) {
         this.drawsController = controller;
     }
@@ -48,6 +52,12 @@ public class UIUpdateService {
             System.out.println("Hands is null");
         }
     }
+
+    public void UpdateStockProduct(){
+        Store store = GameController.getInstance().getStore();
+        storeController.updateUI(store);
+    }
+
 
     public void updateStoreHandsGrid() {
         if (storeController != null) {

@@ -71,6 +71,7 @@ public class SellCardController {
             System.out.println(idx);
             hands.deleteCard(idx);
             currentPlayer.setHands(hands);
+            UIUpdateService.getInstance().updateHandsGrid();
 //            storeController.updateStoreGrid(hands);
             if (store == null) {
                 store = GameController.getInstance().getStore();
@@ -83,6 +84,7 @@ public class SellCardController {
             }
             updateStoreHands();
             updateStock();
+            GameController.getInstance().updateMoneyUI();
             showSuccessMessage();
 //            else {
 //                System.out.println("Store is not initialized.");
@@ -97,7 +99,7 @@ public class SellCardController {
     }
 
     private void updateStock() {
-        UIUpdateService.getInstance().updateHandsGrid();
+        UIUpdateService.getInstance().UpdateStockProduct();
     }
 
     private void showSuccessMessage() {
@@ -110,32 +112,3 @@ public class SellCardController {
 
 
 }
-
-//    @FXML
-//    private void DoBuy(Player currentPlayer, ProductCard card){
-//        System.out.println("Bisa tekan beli");
-//        Hands hands = currentPlayer.getHands();
-//        int price, currentMoney, idx = 0;
-//        currentMoney = currentPlayer.getCash();
-//        if (card instanceof ProductCard) {
-//            ProductCard productSell = (ProductCard) card;
-//            price = productSell.getPrice();
-//            currentPlayer.setCash(currentMoney - price);
-//            String index = hands.findCardLocation(card);
-//            idx = hands.getCardIndexFromLocation(index);
-//            hands.deleteCard(idx);
-//            currentPlayer.setHands(hands);
-//            store.addItem(productSell, 1);
-//        } else {
-//            System.out.println("Harusnya ga keluar pagenya atau keluar pagenya tapi tulisannya oops");
-//        }
-//    }
-
-//    private void buyStrawberry(){
-//        store.
-//        ProductCard strawberry = (ProductCard) card;
-//        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-//        currentPlayer.AddHand(strawberry);
-//    }
-
-

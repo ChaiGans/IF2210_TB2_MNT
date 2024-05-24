@@ -46,7 +46,7 @@ public class StoreController {
     @FXML private Text priceSharkFIn;
     @FXML private ImageView backButton;
     @FXML private GridPane storeHandsGrid;
-    private Store store;
+//    private Store store;
     private Hands hands;
     private Map<ProductCard, Integer> products;
 
@@ -54,9 +54,9 @@ public class StoreController {
     @FXML
     public void initialize() {
         try {
-            this.store = new Store();
             Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
             hands = currentPlayer.getHands();
+
             CardController controller = new CardController();
             controller.setIsStorePage(true);
             if (storeHandsGrid == null) {
@@ -65,6 +65,8 @@ public class StoreController {
                 System.out.println("storeHandsGrid is initialized.");
             }
             UIUpdateService.getInstance().updateStoreHandsGrid();
+            UIUpdateService.getInstance().setStoreController(this);
+            UIUpdateService.getInstance().UpdateStockProduct();
             updateStoreGrid(hands);
         } catch (Exception e) {
             e.printStackTrace();
@@ -120,7 +122,7 @@ public class StoreController {
         }
     }
 
-    private void updateProductInfo(ProductCard product, int quantity) {
+    public void updateProductInfo(ProductCard product, int quantity) {
         String productName = product.getName();
         int price = product.getPrice();
 
@@ -213,13 +215,23 @@ public class StoreController {
     private void DoBuy(String productName) throws Exception {
         System.out.println("Bisa tekan beli");
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-        ProductCard productCard = store.findProductByName(productName);
+        ProductCard productCard = GameController.getInstance().getStore().findProductByName(productName);
 
         if (productCard != null) {
-            store.purchaseItem(productCard, currentPlayer, 1);
-            updateStoreHands();
-            updateStock();
-            showSuccessMessage("Purchase operation succeeded!");
+            if (currentPlayer.getHands().getCardCount() < 6){
+                GameController.getInstance().getStore().purchaseItem(productCard, currentPlayer, 1);
+                UIUpdateService.getInstance().updateHandsGrid();
+                UIUpdateService.getInstance().UpdateStockProduct();
+                updateStoreHands();
+                updateStock();
+                showSuccessMessage("Purchase operation succeeded!");
+                GameController.getInstance().getStore().printStoreInformation();
+                UIUpdateService.getInstance().updateStoreHandsGrid();
+                GameController.getInstance().updateMoneyUI();
+            } else {
+                throw new Exception("Your hands are too full!.");
+            }
+
         } else {
             throw new Exception("The product is unavailable now.");
         }
@@ -231,6 +243,8 @@ public class StoreController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+        UIUpdateService.getInstance().updateStoreHandsGrid();
+        GameController.getInstance().updateMoneyUI();
     }
 
     private void showErrorMessage(String message) {
