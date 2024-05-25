@@ -4,6 +4,7 @@ import entity.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
@@ -128,7 +129,8 @@ public class DrawsController {
             imageView.setFitHeight(100);
             imageView.setFitWidth(100);
             GridPane.setHalignment(imageView, HPos.CENTER);
-            GridPane.setValignment(imageView, VPos.CENTER); 
+            GridPane.setValignment(imageView, VPos.CENTER);
+            GridPane.setMargin(imageView, new Insets(10));
             Label label = new Label(name);
             label.setMaxWidth(Double.MAX_VALUE);
             GridPane.setHalignment(label, HPos.CENTER);

@@ -8,14 +8,19 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="430.0" prefWidth="300.0" style="-fx-background-color: #FFFFF3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.src.DrawsController">
+<AnchorPane prefHeight="430.0" prefWidth="344.0" style="-fx-background-color: #FFFFF3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.src.DrawsController">
     <children>
-      <ImageView fitHeight="135.0" fitWidth="128.0" layoutX="167.0" layoutY="196.0">
+      <ImageView fitHeight="135.0" fitWidth="128.0" layoutX="167.0" layoutY="178.0">
          <image>
             <Image url="@detail/bgShuffle.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="135.0" fitWidth="128.0" layoutX="33.0" layoutY="196.0">
+      <ImageView fitHeight="471.0" fitWidth="344.0" layoutY="-26.0">
+         <image>
+            <Image url="@detail/borderShuffle.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="135.0" fitWidth="128.0" layoutX="33.0" layoutY="179.0">
          <image>
             <Image url="@detail/bgShuffle.png" />
          </image>
@@ -25,12 +30,12 @@
                   <Image url="@../public/refresh.png" />
               </image>
           </ImageView>
-      <ImageView fitHeight="135.0" fitWidth="128.0" layoutX="167.0" layoutY="36.0">
+      <ImageView fitHeight="135.0" fitWidth="128.0" layoutX="167.0" layoutY="10.0">
          <image>
             <Image url="@detail/bgShuffle.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="135.0" fitWidth="128.0" layoutX="33.0" layoutY="36.0">
+      <ImageView fitHeight="135.0" fitWidth="128.0" layoutX="33.0" layoutY="10.0">
          <image>
             <Image url="@detail/bgShuffle.png" />
          </image>
@@ -45,10 +50,5 @@
                 <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
         </GridPane>
-      <ImageView fitHeight="431.0" fitWidth="333.0" layoutY="-1.0">
-         <image>
-            <Image url="@detail/borderShuffle.png" />
-         </image>
-      </ImageView>
     </children>
 </AnchorPane>
