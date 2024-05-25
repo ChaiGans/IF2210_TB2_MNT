@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BearAttack {
-    public final int minDuration = 10; // 30 seconds
-    public final int maxDuration = 15; // 60 seconds
+    public final int minDuration = 30; // 30 seconds
+    public final int maxDuration = 60; // 60 seconds
     private final Random random = new Random();
     private boolean bearAttackHappening = false;
     private List<List<Integer>> subgridPosition; // Position of the subgrid being attacked
