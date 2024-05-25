@@ -99,6 +99,9 @@ public class ActiveHandsController {
             Dragboard db = event.getDragboard();
             boolean success = false;
             Node dragSource = DragContext.getInstance().getDragSource();
+            if (!dragSource.getParent().equals(handsGrid)) {
+                return;
+            }
             System.out.println("hands before: " + hands.getCards());
             if (db.hasString() && dragSource != null) {
                 String[] parts = db.getString().split(",");

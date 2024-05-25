@@ -74,7 +74,7 @@ class DelayEffect implements ItemEffect {
 class InstantHarvestEffect implements ItemEffect {
     private String name = "Instant Harvest";
     public void applyEffect(PlantCard plant, Grid grid, int col, int row, Player currentPlayer) {
-        if (currentPlayer.getHands().length() <= 6) { 
+        if (currentPlayer.getHands().getCardCount() <= 6) { 
             ProductCard product = grid.Panen(col, row); 
             if (product != null) {
                 currentPlayer.AddHand(product);
@@ -88,7 +88,7 @@ class InstantHarvestEffect implements ItemEffect {
     }
 
     public void applyEffect(AnimalCard animal, Grid grid, int col, int row, Player currentPlayer) {
-        if (currentPlayer.getHands().length() <= 6) { 
+        if (currentPlayer.getHands().getCardCount() <= 6) { 
             ProductCard product = grid.Panen(col, row);
             if (product != null) {
                 currentPlayer.AddHand(product); 
