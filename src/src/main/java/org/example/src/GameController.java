@@ -274,7 +274,7 @@ public class GameController {
 
     public void updateDeckLabel() {
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-        int deckCount = 40 - currentPlayer.getDeck().getCurrentDeckCardCount();
+        int deckCount = currentPlayer.getDeck().getCurrentDeckCardCount();
         deckCountLabel.setText(deckCount + "/" + "40");
     }
 
