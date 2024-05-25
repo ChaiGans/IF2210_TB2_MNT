@@ -25,7 +25,7 @@ public class Player {
 
     public void reshuffleDeck(int size) {
         this.deck.emptyDeck();
-        this.deck.initializeDeckBySize(40-size);
+        this.deck.initializeDeckBySize(size);
     }
 
     // location is based on state like 'A01', 'B01', etc.
