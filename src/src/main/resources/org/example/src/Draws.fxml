@@ -30,12 +30,12 @@
             <Image url="@detail/bgShuffle.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="129.0" fitWidth="128.0" layoutX="172.0" layoutY="182.0">
+      <ImageView fitHeight="129.0" fitWidth="128.0" layoutX="172.0" layoutY="180.0">
          <image>
             <Image url="@detail/bgShuffle.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="129.0" fitWidth="128.0" layoutX="33.0" layoutY="182.0">
+      <ImageView fitHeight="129.0" fitWidth="128.0" layoutX="33.0" layoutY="180.0">
          <image>
             <Image url="@detail/bgShuffle.png" />
          </image>

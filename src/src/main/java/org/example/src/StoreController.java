@@ -184,13 +184,13 @@ public class StoreController {
                 productName = "Corn";
                 break;
             case "buySheepMeat":
-                productName = "SheepMeat";
+                productName = "Sheep Meat";
                 break;
             case "buyHorseMeat":
-                productName = "HorseMeat";
+                productName = "Horse Meat";
                 break;
             case "buyBearMeat":
-                productName = "BearMeat";
+                productName = "Bear Meat";
                 break;
             case "buyMilk":
                 productName = "Milk";
@@ -199,7 +199,7 @@ public class StoreController {
                 productName = "Egg";
                 break;
             case "buySharkFin":
-                productName = "SharkFin";
+                productName = "Shark Fin";
                 break;
         }
 
@@ -216,6 +216,7 @@ public class StoreController {
         System.out.println("Bisa tekan beli");
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         ProductCard productCard = GameController.getInstance().getStore().findProductByName(productName);
+        System.out.println("Product found: " + productCard);
 
         if (productCard != null) {
             if (currentPlayer.getHands().getCardCount() < 6){
