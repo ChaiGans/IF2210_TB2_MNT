@@ -15,14 +15,6 @@ public class GameApp extends Application {
 
     private static Stage primaryStage; // Primary stage
 
-//    @Override
-//    public void start(Stage stage) throws IOException {
-//        primaryStage = stage;
-//        primaryStage.setTitle("Game Scene");
-//        primaryStage.setScene(createScene("Main.fxml"));
-//        primaryStage.initStyle(StageStyle.UNDECORATED);
-//        primaryStage.show();
-//    }
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Main.fxml")); // Ensure the path is correct
