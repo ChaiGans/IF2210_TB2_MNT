@@ -32,6 +32,7 @@ public class DrawsController {
     public void initialize() {
         bearAttack = new BearAttack();
         PlayerManager.getInstance().getCurrentPlayer().ShowHand();
+        UIUpdateService.getInstance().setDrawsController(this);
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         int size = (6 - PlayerManager.getInstance().getCurrentPlayer().getHands().getCardCount());
         if (size >0){

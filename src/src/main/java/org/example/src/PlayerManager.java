@@ -106,7 +106,9 @@ public class PlayerManager {
         }
 
         player1 = players.get(0);
+        player1.setName("player1");
         player2 = players.get(1);
+        player2.setName("player2");
 
         currentPlayer = player1;
         isFirstTurn = true;

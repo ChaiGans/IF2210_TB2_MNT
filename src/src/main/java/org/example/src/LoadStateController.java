@@ -179,6 +179,9 @@ public class LoadStateController {
         PlayerManager playerManager = PlayerManager.getInstance();
         playerManager.setPlayers(gameState.getPlayers());
 
+        // update deck number
+        GameController.getInstance().updateDeckLabel();
+
         // update current turn to gamecontroller
         GameController.getInstance().setCurrentTurn(gameState.getCurrentTurn());
 
@@ -186,12 +189,14 @@ public class LoadStateController {
         GameController.getInstance().setStore(gameState.getStore());
 
         PlayerManager.getInstance().setCurrentEnemyPlayer(GameController.getInstance().getCurrentTurn());
+
         DrawsController.stopBearAttack();
         if (GameController.getInstance().getCurrentView() == 2) {
             GameController.getInstance().setCurrentView(1);
         }
 
         GameController.getInstance().updateMoneyUI();
+        UIUpdateService.getInstance().updateStoreHandsGrid();
         UIUpdateService.getInstance().updateHandsGrid();
         UIUpdateService.getInstance().updateRealGrid();
         UIUpdateService.getInstance().updateDrawsGrid();
