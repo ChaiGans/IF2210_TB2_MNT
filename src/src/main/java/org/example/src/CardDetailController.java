@@ -102,7 +102,7 @@ public class CardDetailController {
         int col = GameData.getInstance().ColClicked();
         int row = GameData.getInstance().rowClciked();
         Card card = currentPlayer.getField().getCard(col, row);
-        if(currentPlayer.getHands().length() < 6){
+        if(currentPlayer.getHands().getCardCount() < 6){
             System.out.println("size hands: " + currentPlayer.getHands().length());
             if (card instanceof AnimalCard){
                 AnimalCard animalCard = (AnimalCard) card;

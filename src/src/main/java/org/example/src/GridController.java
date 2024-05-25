@@ -240,24 +240,39 @@ public class GridController {
                                 IItemEffect itemCard = (IItemEffect) card;
                         
                                 if (!isEnemyGridActive && !isNegativeEffect(card)) {
+                                    if (targetCard instanceof PlantCard && "Instant Harvest".equals(card.getName()) ) {
+                                        System.out.println("harvesttttt");
+                                        hands.deleteCard(sourceIndex);
+                                        itemCard.useOn((PlantCard) targetCard, currentGrid, targetCol, targetRow, currentPlayer);
+                                        sourcePane.getChildren().remove(0);
+                                        success = true;
+                                    }else if (targetCard instanceof AnimalCard && "Instant Harvest".equals(card.getName())) {
+                                        System.out.println("harvesttttt");
+                                        hands.deleteCard(sourceIndex);
+                                        itemCard.useOn((AnimalCard) targetCard, currentGrid, targetCol, targetRow, currentPlayer);
+                                        sourcePane.getChildren().remove(0);
+                                        success = true;
+                                    }
+                                    else{
                                         if (targetCard instanceof PlantCard) {
                                             itemCard.useOn((PlantCard) targetCard, currentGrid, targetCol, targetRow, currentPlayer);
-                                        } else if (targetCard instanceof AnimalCard) {
+                                        }else if (targetCard instanceof AnimalCard) {
                                             itemCard.useOn((AnimalCard) targetCard, currentGrid, targetCol, targetRow, currentPlayer);
                                         }
                                         hands.deleteCard(sourceIndex);
                                         sourcePane.getChildren().remove(0);
                                         success = true;
-                                    } else if (isEnemyGridActive && isNegativeEffect(card)) {
-                                        Player enemyPlayer = PlayerManager.getInstance().getEnemyPlayer();
-                                        if (targetCard instanceof PlantCard) {
-                                            itemCard.useOn((PlantCard) targetCard, currentGrid, targetCol, targetRow, enemyPlayer);
-                                        } else if (targetCard instanceof AnimalCard) {
-                                            itemCard.useOn((AnimalCard) targetCard, currentGrid, targetCol, targetRow, enemyPlayer);
-                                        }
-                                        hands.deleteCard(sourceIndex);
-                                        sourcePane.getChildren().remove(0);
-                                        success = true;
+                                    }
+                                } else if (isEnemyGridActive && isNegativeEffect(card)) {
+                                    Player enemyPlayer = PlayerManager.getInstance().getEnemyPlayer();
+                                    if (targetCard instanceof PlantCard) {
+                                        itemCard.useOn((PlantCard) targetCard, currentGrid, targetCol, targetRow, enemyPlayer);
+                                    } else if (targetCard instanceof AnimalCard) {
+                                        itemCard.useOn((AnimalCard) targetCard, currentGrid, targetCol, targetRow, enemyPlayer);
+                                    }
+                                    hands.deleteCard(sourceIndex);
+                                    sourcePane.getChildren().remove(0);
+                                    success = true;
                                 }else{
                                     GameController.getInstance().showErrorPopup("Error: Can't drag");
                                 }
