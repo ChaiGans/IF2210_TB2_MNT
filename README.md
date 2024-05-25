@@ -40,10 +40,5 @@ Program ini juga dilengkapi dengan kemungkinan adanya serangan beruang yang meng
 ## Cara Menjalankan Program melalui drive pengumpulan
 
 1. Ekstrak zip pengumpulan, akan didapatkan 3 file jar pada bin yaitu src-1.0-SNAPSHOT-shaded.jar (program utama), Plugin-JSON-Loader-1.0-SNAPSHOT.jar (plugin), dan Plugin-XML-Loader-1.0-SNAPSHOT.jar (plugin).
-2. Dari root folder hasil repository, yang sekarang diprediksikan merupakan folder "IF2210_TB2_MNT" sebagai current directory. Maka, terdapat beberapa langkah yang harus dilakukan untuk menghasilkan 3 buah jar, yaitu jar program utama, jar untuk Plugin-JSON-Loader, dan jar untuk Plugin-XML-Loader.
-    -  Untuk membuat jar src, cd src terlebih dahulu kemudian lakukan mvn clean install. Jika menggunakan intellij, pada toolbox maven, lakukan clean kemudian lakukan install, maka akan tergenerate sebuah folder target yang berisi jile far src-1.0-SNAPSHOT-shaded.jar. Jar file tersebut merupakan file executable yang dapat dijalankan dengan java -jar  src-1.0-SNAPSHOT-shaded.jar pada folder tersebut, atau dengan melakukan double-click pada file tersebut.
-
-    - Untuk membuat jar plugin loader untuk file json, dari root folder lakukan cd Plugin-JSON-Loader, kemudian lakukan hal yang sama, yaitu mvn clear install. Maka, akan muncul sebuah folder target yang memiliki sebuah jar file bernama Plugin-JSON-Loader-1.0-SNAPSHOT.jar
-
-    - Untuk membuat jar plugin loader untuk file berekstensi XML, dari roto folder lakukan cd Plugin-XML-Loader, kemudian lakukan hal yang sama, yaitu mvn clear install. Maka, akan muncul sebuah folder target yang memiliki sebuah jar file bernama Plugin-XML-Loader-1.0-SNAPSHOT.jar
-3. Dari terminal, Jalankan dengan masuk ke dalam folder program lalu masuk folder bin dengan cara mengetik java -jar "src-1.0-SNAPSHOT-shaded.jar" atau juga bisa langsung dengan double-click pada file jar nya.
+2. Masuk ke dalam folder hasil ekstraksi zip pengumpulan dan jalankan perintah java -jar "src-1.0-SNAPSHOT-shaded.jar" dan ini perintah tersebut bisa disesuaikan tergantung dari lokasi jar file java -jar "src-1.0-SNAPSHOT-shaded.jar"
+3. Bisa juga dijalankan dengan cara yang lebih gampang yaitu dengan mendouble-click pada file jar nya.
