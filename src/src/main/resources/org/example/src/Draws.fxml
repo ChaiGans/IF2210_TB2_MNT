@@ -30,12 +30,12 @@
             <Image url="@detail/bgShuffle.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="129.0" fitWidth="128.0" layoutX="172.0" layoutY="180.0">
+      <ImageView fitHeight="129.0" fitWidth="128.0" layoutX="172.0" layoutY="178.0">
          <image>
             <Image url="@detail/bgShuffle.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="129.0" fitWidth="128.0" layoutX="33.0" layoutY="180.0">
+      <ImageView fitHeight="129.0" fitWidth="128.0" layoutX="33.0" layoutY="178.0">
          <image>
             <Image url="@detail/bgShuffle.png" />
          </image>
@@ -45,7 +45,7 @@
             <Font name="Segoe UI Black" size="18.0" />
          </font>
       </Button>
-        <GridPane fx:id="cardGrid" hgap="10" vgap="10" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+        <GridPane fx:id="cardGrid" hgap="10" vgap="10" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
             <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
             </padding>

@@ -143,7 +143,7 @@ public class DrawsController {
                 row += 2;
             }
         }
-        cardGrid.setAlignment(Pos.CENTER);
+        cardGrid.setAlignment(Pos.TOP_LEFT);
     }
 
     @FXML
