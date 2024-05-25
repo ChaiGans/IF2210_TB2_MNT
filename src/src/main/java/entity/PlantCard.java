@@ -29,7 +29,7 @@ abstract public class PlantCard extends Card {
     }
 
     public void setAge(int age) {
-        this.harvestAge =age;
+        this.currentAge =age;
     }
 
     public void decrementAge(int age) {
