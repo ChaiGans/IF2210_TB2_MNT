@@ -37,8 +37,8 @@ public class Hands {
     }
 
     public void addCard(Card card) {
-        if (active < 6) {
-            int index = findNullIndex();
+        int index = findNullIndex();
+        if (active < 6 && index != -1) {
             this.cards.set(index, card);
             active++;
         } else {
