@@ -26,7 +26,7 @@
                         </Text>
                      </children>
                   </StackPane>
-                           <StackPane fx:id="ShowEnemy" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#ShowEnemy" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #99582a; -fx-background-radius: 10;">
+                           <StackPane fx:id="ShowEnemy" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#ShowEnemy" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #312D27; -fx-background-radius: 10;">
                                <children>
                                    <Label text="Enemy's Field" textFill="#ffe6a7">
                                        <font>
@@ -38,7 +38,7 @@
                                    </Label>
                                </children>
                            </StackPane>
-                           <StackPane fx:id="CurrentButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#ShowCurrent" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #312D27; -fx-background-radius: 10;">
+                           <StackPane fx:id="CurrentButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#ShowCurrent" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #99582a; -fx-background-radius: 10;">
                                <children>
                                    <Label text="My Field" textFill="#ffe6a7">
                                        <font>

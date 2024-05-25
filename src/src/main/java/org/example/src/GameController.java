@@ -54,12 +54,12 @@ public class GameController {
 
     public void setCurrentView(int newCurrentView) {
         if (newCurrentView == 1) {
-            ShowEnemy.setStyle("-fx-background-color: #99582a; -fx-background-radius: 10;");
-            CurrentButton.setStyle("-fx-background-color: #312D27; -fx-background-radius: 10;");
+            ShowEnemy.setStyle("-fx-background-color: #312D27; -fx-background-radius: 10;");
+            CurrentButton.setStyle("-fx-background-color: #99582a; -fx-background-radius: 10;");
             UIUpdateService.getInstance().updateRealGrid();
         } else if (newCurrentView == 2) {
-            CurrentButton.setStyle("-fx-background-color: #99582a; -fx-background-radius: 10;");
-            ShowEnemy.setStyle("-fx-background-color: #312D27; -fx-background-radius: 10;");
+            CurrentButton.setStyle("-fx-background-color: #312D27; -fx-background-radius: 10;");
+            ShowEnemy.setStyle("-fx-background-color: #99582a; -fx-background-radius: 10;");
             UIUpdateService.getInstance().updateEnemyGrid();
         }
         this.currentView = newCurrentView;
@@ -172,8 +172,8 @@ public class GameController {
         GameController.getInstance().
         counterLabel.setText(String.valueOf(counter));
         currentView = 1;
-        ShowEnemy.setStyle("-fx-background-color: #99582a; -fx-background-radius: 10;");
-        CurrentButton.setStyle("-fx-background-color: #312D27; -fx-background-radius: 10;");
+        ShowEnemy.setStyle("-fx-background-color: #312D27; -fx-background-radius: 10;");
+        CurrentButton.setStyle("-fx-background-color: #99582a; -fx-background-radius: 10;");
         UIUpdateService.getInstance().updateRealGrid();
         UIUpdateService.getInstance().updateHandsGrid();
         UIUpdateService.getInstance().updateStoreHandsGrid();
@@ -195,15 +195,15 @@ public class GameController {
     @FXML
     public void ShowEnemy(MouseEvent event){
         currentView = 2;
-        CurrentButton.setStyle("-fx-background-color: #99582a; -fx-background-radius: 10;");
-        ShowEnemy.setStyle("-fx-background-color: #312D27; -fx-background-radius: 10;");
+        CurrentButton.setStyle("-fx-background-color: #312D27; -fx-background-radius: 10;");
+        ShowEnemy.setStyle("-fx-background-color: #99582a; -fx-background-radius: 10;");
         UIUpdateService.getInstance().updateEnemyGrid();
     }
     @FXML
     public void ShowCurrent(MouseEvent event){
         currentView = 1;
-        ShowEnemy.setStyle("-fx-background-color: #99582a; -fx-background-radius: 10;");
-        CurrentButton.setStyle("-fx-background-color: #312D27; -fx-background-radius: 10;");
+        ShowEnemy.setStyle("-fx-background-color: #312D27; -fx-background-radius: 10;");
+        CurrentButton.setStyle("-fx-background-color: #99582a; -fx-background-radius: 10;");
         UIUpdateService.getInstance().updateRealGrid();
     }
 

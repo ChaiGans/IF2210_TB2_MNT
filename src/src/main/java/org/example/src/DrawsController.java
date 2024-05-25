@@ -111,13 +111,15 @@ public class DrawsController {
     }
 
     public void shuffle(){
-        int handCardCount = PlayerManager.getInstance().getCurrentPlayer().getHands().getCardCount();
-        int initialSize = 6 - handCardCount;
-        final int size = Math.min(initialSize, 4);
-        System.out.println("Maunya sejumlah"+size);
-        System.out.println("Player ini jumlah kartu deck :"+PlayerManager.getInstance().getCurrentPlayer().getDeck().getCurrentDeckCardCount());
-        draws = PlayerManager.getInstance().getCurrentPlayer().shuffleDeal(size);
-        updateCardGrid(draws);
+        if (PlayerManager.getInstance().getCurrentPlayer().getDeck().getCurrentDeckCardCount() < 40) {
+            int handCardCount = PlayerManager.getInstance().getCurrentPlayer().getHands().getCardCount();
+            int initialSize = 6 - handCardCount;
+            final int size = Math.min(initialSize, 4);
+            System.out.println("Maunya sejumlah"+size);
+            System.out.println("Player ini jumlah kartu deck :"+PlayerManager.getInstance().getCurrentPlayer().getDeck().getCurrentDeckCardCount());
+            draws = PlayerManager.getInstance().getCurrentPlayer().shuffleDeal(size);
+            updateCardGrid(draws);
+        }
     }
     public void updateCardGrid(List<Card> draws) {
         cardGrid.getChildren().clear();
