@@ -1,4 +1,4 @@
-# IF2210_TB2_MNT
+![image](https://github.com/user-attachments/assets/14613e84-9554-4324-a6c4-7cd86f3364de)# IF2210_TB2_MNT
 
 <h1 align="center"> Tugas Besar 2 IF2210 Pemrograman Berorientasi Objek</h1>
 
@@ -42,3 +42,8 @@ Program ini juga dilengkapi dengan kemungkinan adanya serangan beruang yang meng
 1. Ekstrak zip pengumpulan, akan didapatkan 3 file jar pada bin yaitu src-1.0-SNAPSHOT-shaded.jar (program utama), Plugin-JSON-Loader-1.0-SNAPSHOT.jar (plugin), dan Plugin-XML-Loader-1.0-SNAPSHOT.jar (plugin).
 2. Masuk ke dalam folder hasil ekstraksi zip pengumpulan dan jalankan perintah java -jar "src-1.0-SNAPSHOT-shaded.jar" dan ini perintah tersebut bisa disesuaikan tergantung dari lokasi jar file java -jar "src-1.0-SNAPSHOT-shaded.jar"
 3. Bisa juga dijalankan dengan cara yang lebih gampang yaitu dengan mendouble-click pada file jar nya.
+
+## Lampiran / Clip Permainan
+![image](https://github.com/user-attachments/assets/12e1fd07-04ad-4361-8045-23689557959d)
+![image](https://github.com/user-attachments/assets/394004c0-866c-414d-ad1f-1d1be4aed630)
+
