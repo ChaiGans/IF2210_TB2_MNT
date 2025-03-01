@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/14613e84-9554-4324-a6c4-7cd86f3364de)# IF2210_TB2_MNT
+# IF2210_TB2_MNT
 
 <h1 align="center"> Tugas Besar 2 IF2210 Pemrograman Berorientasi Objek</h1>
 
@@ -46,4 +46,3 @@ Program ini juga dilengkapi dengan kemungkinan adanya serangan beruang yang meng
 ## Lampiran / Clip Permainan
 ![image](https://github.com/user-attachments/assets/12e1fd07-04ad-4361-8045-23689557959d)
 ![image](https://github.com/user-attachments/assets/394004c0-866c-414d-ad1f-1d1be4aed630)
-
